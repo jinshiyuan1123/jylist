@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>{$media.title}</title>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+
+</head>
+
+<body>
+
+
+
+
+
+  
+
+ <script type="text/javascript">
+
+	//调用微信JS api 支付
+	function jsApiCall()
+	{
+		
+		WeixinJSBridge.invoke(
+			'getBrandWCPayRequest',
+			{$jspay},
+			function(res){
+				//WeixinJSBridge.log(res.err_msg+"\n");
+				if(res.err_msg.indexOf('ok')>0){
+						window.location.href='{:U("Home/User/index",array("paytype"=>1))}';
+				}
+				//alert(res.err_code+"\n"+res.err_desc+"\n"+res.err_msg);
+			}
+		);
+	}
+
+	function callpay()
+	{
+
+		if (typeof WeixinJSBridge == "undefined"){
+		    if( document.addEventListener ){
+		        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+		    }else if (document.attachEvent){
+		        document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+		        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+		    }
+		}else{
+		    jsApiCall();
+		}
+	}
+	callpay();
+	</script>
+
+
+
+
+
+
+</body>
+
+</html>

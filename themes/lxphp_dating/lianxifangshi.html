@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>{$media.title}</title>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+</head>
+
+<body>
+  
+  <div class="hd_main">
+      <div class="siliao_header">
+         联系方式
+          <a  href="javascript:history.go(-1);" class="fl" id="ddd"><img src="images/zuojian.png"  style="width:11px;">返回</a>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+
+      <div class="lianxifangshi">
+        <ul>
+             		<li><div>昵称</div><i class="dianhua">13799548127</i><div class="fr hot"></div></li>
+             		<li><div>年龄</div><input type="text" placeholder="请填写您的QQ号码" class="lianxifangshi_input"><div class="fr hot"></div></li>
+                    <li><div>微博</div><input type="text" placeholder="请填写您的微博账号" class="lianxifangshi_input"><div class="fr "></div></li>
+                    <li><div>微信</div><input type="text" placeholder="请填写您的微信账号" class="lianxifangshi_input"><div class="fr hot"></div></li>
+                    <li><div>陌陌</div><input type="text" placeholder="请填写您的陌陌账号" class="lianxifangshi_input"><div class="fr hot"></div></li>
+         </ul>     	
+      </div>
+      <a href="" class="jichubaoc">保存</a>
+      <br><br><br><br>
+	      
+  </div>
+	  <script type="text/javascript">
+           $(".lianxifangshi ul li .fr").click(function(){
+            var index=$(this).index();
+            $(this).toggleClass("hot");    
+           })
+	  </script>
+	  
+	  
+	  
+	  
+
+
+
+
+</body>
+
+</html>

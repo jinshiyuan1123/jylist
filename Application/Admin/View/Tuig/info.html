@@ -1,0 +1,36 @@
+<h3>推广记录</h3>
+<div>代理：<span>{$agentInfo.user_login}</span>&nbsp;&nbsp;<img src="{$agentInfo.avatar}" width="35" /></div>
+<admin:form url="/index.php?s=/Admin/Tuig/tglist/uid/{$agentUid}.html" method="post" id="form">
+
+<admin:tabletool search="false" filter="true">
+	<input name="agentUid" type="hidden" value="{$agentUid}"/>
+  	时间   ：<admin:text name="stime" value="{$stime}" len="250" datatype="*" class="u-time" /> - <admin:text name="etime" value="{$etime}" len="250" datatype="*" class="u-time" /> 
+
+  </admin:tabletool><!-- 关注人数,取消关注人数, -->
+       <admin:table id="table" show="粉丝人数,购买vip人数,购买vip总金额,充值人数,充值总金额">
+      <tr>
+		<!--
+        <td>
+        	{$count.0|default="0"}
+        </td>
+         <td>
+        	{$count.1|default="0"}
+        </td>
+		-->
+        <td>{$count.2|default="0"}</td>
+        <td>{$count.3|default="0"}</td>
+        <td>{$psum.3|default="0"}</td>
+        <td>{$count.4|default="0"}</td>
+        <td>{$psum.4|default="0"}</td>
+      </tr>
+  </admin:table>
+       
+        
+ 
+</admin:form>
+<script>
+    Do.ready('base', function () {
+        //表单综合处理
+        $('#form').duxFormPage({form:false});
+    }); 
+</script>

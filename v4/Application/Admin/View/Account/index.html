@@ -1,0 +1,37 @@
+<h3>{$name}值记录列表</h3>
+<admin:panel >
+	
+	<admin:tabletool filter="true" keyword="{$pageMaps.keyword}">
+		<admin:select name="gender"  item="==性别==,男,女" value="0,1,2" selected="$pageMaps['gender']" />
+																 <!--3 收礼物变动 4被关注女 5邀请好友男 201购买VIP获得-->
+  		<admin:select name="type"  item="==类型==,收礼物,被关注,邀请好友,购买VIP" value="0,3,4,5,201" selected="$pageMaps['type']" />
+  		
+  		
+  	</admin:tabletool>
+	
+	
+	<admin:table id="table" show="编号,用户id,用户昵称,性别,{$name}值,变动详情,时间" class="m-table-border">
+		<foreach name="list" item="vo">
+			<tr>					
+				<td>{$vo.id}</td>
+				<td>{$vo['uid']}</td>
+				<td>{$niceName[$vo['uid']]}</td>
+				<td><if condition="$vo['sex'] eq 1" >男<elseif condition="$vo['sex'] eq 2" />女</if></td>
+				<td>{$vo.jifen}</td>
+				<td>{$vo.desc}</td>				
+				<td>{$vo.time|date="Y-m-d H:i:s",###}</td>				
+			</tr>
+		</foreach>
+	</admin:table >
+	<admin:tablefoot />
+</admin:panel>
+
+
+<script>
+	Do.ready('base',function() {
+		//左下角的选择操作      
+		$('#selectAction').change(function() {
+			var type = $(this).val();
+		});
+	});
+</script>

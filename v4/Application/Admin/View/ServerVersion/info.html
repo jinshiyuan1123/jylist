@@ -1,0 +1,21 @@
+<h3>{$name}版本记录</h3>
+<admin:panel >
+  <admin:form url="{:U()}" method="post" id="form"  class="m-form-horizontal" >
+    <admin:formrow title="包名" tip="版本包名"  >
+      <admin:text name="package_name"  value="{$info.package_name}" len="20" datatype="*"  />
+    </admin:formrow>
+    <admin:formrow title="版本" tip="版本号码"  >
+      <admin:text name="version_num"  value="{$info.version_num}" len="250" datatype="*"  />
+    </admin:formrow>
+    <admin:formrow title="版本说明" tip="版本说明"  >
+	  <admin:textarea name="version_intro" class="u-editor" rows="10" cols="30" >{$info.version_intro|html_out}</admin:textarea>
+    </admin:formrow>
+    <admin:formsubmit/>
+    <admin:text name="id" type="hidden"  value="{$info.id}"  />
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base',function() {
+	$('#form').duxForm();
+});
+</script> 

@@ -1,0 +1,37 @@
+ <!--{if condition="!$list1"}-->
+ 
+   <li class="cb zanwu"  >
+			 </li>
+<!--{/if}-->
+ 
+ 
+ <!--{foreach name="list1" item="vo" }-->
+			
+              <li class="cb"> 
+                 <div class="fl"  onclick="window.location.href='{:U('Show/index',array('uid'=>$vo[idmd5]))}'"><img src="{$vo.avatar}"></div>
+                 <div class="fl"  onclick="window.location.href='{:U('Show/index',array('uid'=>$vo[idmd5]))}'" style="margin-top: 3px;">
+                    <p class="<!--{if condition="$vo.user_rank gt 0"}--><!--{else /}-->heise<!--{/if}-->">{$vo.user_nicename}<!--{if condition="$vo.user_rank gt 0"}--><span>VIP{$vo.user_rank}</span><!--{/if}--></p>
+                    <p>{$vo.age|default='22'}岁&nbsp;<!--{if condition="$vo['area']"}-->{$vo.area}<!--{else /}-->{$area}<!--{/if}-->&nbsp;{$vo.astro}
+	  <!--{if condition="$vo.sex eq 2"}-->
+<span>			
+<img src="themes/<?php echo C('TPL_NAME'); ?>/images/meilizhi_02.png"alt="" class="meili_img" ><i class="meili">{$vo.jifen}</i></span>
+<!--{else /}-->
+<span><img src="themes/<?php echo C('TPL_NAME'); ?>/images/caifuzhi.png"alt="" class="caifu_img" ><i class="caifu">{$vo.jifen}</i></span>
+ <!--{/if}-->
+</p>
+                    <p>{$vo.monolog}</p>
+                 </div>
+                 <div class="fr">
+                    <p><img src="themes/<?php echo C('TPL_NAME'); ?>/images/fujin1.png" alt="">{$vo.km} km</p>
+					 
+					  <!--{if condition="$vo.iszhd eq 1"}-->
+					   <a href="javascript:;" class="ydzh">已招呼</a>
+					  <!--{else /}-->
+                     <a href="javascript:sendmsg('{$vo.id}');" class="dzh{$vo.id}">打招呼</a>
+					  <!--{/if}-->
+                 </div>
+              </li>
+			  
+			  	<!--{/foreach}-->
+				
+				

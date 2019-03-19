@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+		<title>{$media.title}</title>
+		<link rel="stylesheet" type="text/css" href="css/css.css">
+		<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+	</head>
+
+	<body>
+		<div class="hd_main"   style="background: #fff;">		
+			<div class="fujinderen_header">
+				修改密码
+				<div class="fl" id="ddd">
+					<a href="{:U('Home/User/UserSet')}" style="color: white;" >
+						<img src="images/zuojian.png" style="width:11px;">返回
+					</a>
+				</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			
+			<div class="zhuce_b zhuce_b_a" style="margin-top:20px;">					
+				<div class="baikuang">
+					<input type="text" id="mob" disabled="true" value="{$list.user_login}" placeholder="请输入手机号" maxlength="11" style="color:#999">
+				</div>
+				
+				<div class="baikuang">
+					<input type="text" name="captcha" id="pass" placeholder="请输入图片验证码" style="color:#999;">
+					<img src="{:U('Home/Site/verifyCode')}" height="24" onclick=this.src="{:U('Home/Site/verifyCode')}" style="cursor: pointer;display: none;" width="80" alt="" class="fr yzm_03">
+				</div>
+
+				<div class="baikuang">
+					<input type="text" id="yzm" name="yzm" placeholder="请输入验证码" style="color:#999">
+					<input type="button" id="btn" class="btn_yzm_03 fr" value="获取验证码">
+				</div>
+								
+				<a href="javascript:;" id="ljreg">下 一 步</a>
+			</div>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+	
+		$('#pass').focus(function(){	
+			$(".yzm_03").css({"display":"block"})			
+		});
+		
+	</script>
+	
+	<script type="text/javascript">
+		//  验证码60倒计时
+		var wait=60;
+		document.getElementById("btn").disabled = false; 
+		function time(o) {
+	    	if (wait == 0) {
+        		o.removeAttribute("disabled");           
+       			o.value="获取验证码";
+        		wait = 60;
+	    	} else {
+        		o.setAttribute("disabled", true);
+        		o.value="重新发送(" + wait + ")";
+        		wait--;
+        		setTimeout(function() {
+            		time(o)
+        		},1000)
+	    	}
+    	}
+		
+		
+		//点击发送验证码
+		document.getElementById("btn").onclick=function(){
+			if($('#pass').val() == ""){
+				alert("请先填写图片验证码");
+				return false;
+			}
+						
+			var o = this;
+			$.post("{:U('Ajax/getvcodebymob')}",{mob:$("#mob").val(),captcha:$("#pass").val(),type:1},function(data){
+				if(data.status==1){
+					time(o);
+				}else{
+					alert(data.msg);
+				}
+			},'json')
+		}
+		
+		
+		
+		//提交
+		$('#ljreg').click(function(){
+			var yzm = $('input[name="yzm"]').val();
+				
+			$.ajax({
+				type:"post",
+				url:"{:U('Home/User/changepwd')}",
+				data:"&yzm="+yzm,
+				success:function(str){
+					if(str == 1 ){
+						window.location.href="{:U('Home/Public/resetpwd')}";
+					}else{
+						alert(eval(str));
+					}					
+				}
+			});			
+		});
+	</script>
+</html>

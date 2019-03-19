@@ -1,0 +1,3 @@
+<!--{foreach name="list" item="vo" }-->
+<li onclick='showgift({$vo.gift_id});'><div class="liwu_img"><img src="{$vo.images|default='__PUBLIC__/img/mrtx.jpg'}" alt=""></div><div><p>{$vo.gift_name}</p><p><span>{$vo.price}</span>{$config.money_name}</p></div></li>
+<!--{/foreach}-->

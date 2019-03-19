@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+		<title>{$media.title}</title>
+		<link rel="stylesheet" type="text/css" href="css/css.css">
+		<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+	</head>
+     <style type="text/css">
+           .fx_header {
+              position: fixed;
+              top: 0px;
+                }
+ 
+     </style>
+
+
+	<body>
+
+		<div class="hd_main" style="background: #fff;">
+			<div style="height:40px;display:none ;" class="appdiv fx_header_new"></div>
+	<!--#include file="app_share.html"-->
+			<div class="fujinderen_header">
+				修改密码
+				<div class="fl" id="ddd"><a href="{:U('getpwd')}" style="color: white;" ><img src="images/zuojian.png" style="width:11px;">返回</a></div>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			
+			
+			<div class="zhuce_b zhuce_b_a" style="margin-top:20px;">
+				<div class="baikuang">
+					<input type="password" id="mob1" placeholder="请输入新密码" maxlength="11" style="color:#999" >
+				</div>
+				<div class="baikuang">
+					<input type="password" id="mob2" placeholder="再次输入新密码" maxlength="11" style="color:#999" >
+				</div>
+				<a href="javascript:;" id="ljreg">确 定</a>
+			</div>	
+		</div>
+	</body>
+	<script type="text/javascript">
+		$('#ljreg').click(function(){
+			var pwd1 = $('#mob1').val();
+			var pwd2 = $('#mob2').val();
+			$.ajax({
+				type:"post",
+				url:"{:U('Home/Public/resetpwd')}",
+				data:'pwd1='+pwd1+'&pwd2='+pwd2,
+				success:function(msg){
+					if(msg == 1){
+						alert('恭喜您设置新密码成功~');
+						window.location.href="{:U('Home/Public/login')}";
+					}else{
+						alert(eval(msg));
+					}
+				}
+			});
+   		});
+	</script>
+</html>

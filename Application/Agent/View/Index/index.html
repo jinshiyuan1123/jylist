@@ -1,0 +1,42 @@
+<div class="g-grid">
+  <div class="g-col-2-1  g-col-last">
+    <div class="m-panel">
+      <div class="panel-header"> <i class="u-icon-bar-chart-o"></i> 程序信息 </div>
+      <div class="m-table-mobile">
+        <table class="m-table">
+          <tbody>
+            <tr>
+              <td>站点名称</td>
+              <td>{:C('SITE_TITLE')}</td>
+            </tr>
+            <tr>
+              <td>网站域名：</td>
+              <td><a href="http://{$_SERVER.SERVER_NAME}" target="_blank">http://{$_SERVER.SERVER_NAME}</a></td>
+            </tr>
+            <tr>
+              <td>&#26356;&#22810;&#31934;&#21697;&#28304;&#30721;</td>
+              <td>交友团队</td>
+            </tr>
+			 <tr>
+              <td>升级信息</td>
+              <td>QQ: 278869155 </td>
+            </tr>
+            <tr>
+              <td>PHP版本</td>
+              <td>{:phpversion()}</td>
+            </tr>
+            <tr>
+              <td>数据驱动</td>
+              <td>{:C('DB_TYPE')}</td>
+            </tr>
+            <tr>
+              <td>附件上传目录：</td>
+              <td>{:APP_PATH}upload</td>
+            </tr>
+           
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

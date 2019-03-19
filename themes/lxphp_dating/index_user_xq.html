@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+		<title>{$media.title}</title>
+		<link rel="stylesheet" type="text/css" href="css/css.css">
+		<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+	</head>
+    <style type="text/css">
+       .fx_header {
+              position: fixed;
+              top: 0px;
+                }
+   
+    </style>
+
+
+	<body>
+	
+
+		<div class="hd_main">
+		<div style="height:40px;display:none ;" class="appdiv fx_header_new"></div>
+	<!--#include file="app_share.html"-->
+			<a href="{:U('Home/Gift/index')}" class="shangchen" style="top: 20%;"><img src="images/shangcenruk.png" alt=""></a>
+			<div class="touxiang_bj">
+				<img src="images/uesr_bj_0{$info.sex}.jpg" class="touxiang_bj_img">
+				<div class="uesr_tx">
+
+					<img src="{$info.avatar|default='__PUBLIC__/img/mrtx.jpg'}" alt="" class="uesr_tx_a">
+					<a href="{:U('Wechat/index',array('uid'=>$info[idmd5]))}">
+						<span class="gentalianx"><img src="images/user_03_06.png" alt="">跟TA聊天</span>
+					</a>
+				</div>
+
+				<div class="uesr_zl">
+					<p class="uesr_zl1p">{$info.user_nicename|default='昵称未设置'}</p>
+					<p class="uesr_zl2p">地区:&nbsp;&nbsp;{$area}&nbsp;&nbsp;&nbsp;年龄:&nbsp;&nbsp;{$age}岁</p>
+					<p class="uesr_zl3p">生日:&nbsp;{$pinfo.birthday}&nbsp;性别:<!--{if condition="$info.sex eq 2"}-->女<!--{else /}-->男<!--{/if}--></p>
+					 <p class="uesr_zl4p"><img src="{$info.rank_icon}">{$info.rank_name}<a href="javascript:gz('{$info.id}');" class="gz"><?php if($User_subscribe==1) echo '已关注'; elseif($User_subscribe==2) echo '相互关注'; else echo '关注TA';?></a></p>
+				</div>
+				<div class="uesr_table">
+					<table onmousedown="0" onmousemove="0" border="0">
+						<tr>
+							<td><img src="images/user_03_16.png" alt=""></td>
+							<td><img src="images/user_03_0{$info.sex}.png" alt=""></td>
+							<td><img src="images/user_03_20.png" alt=""></td>
+							<td><img src="images/user_03_11.png" alt=""></td>
+							<td><img src="images/user_03_18.png" alt=""></td>
+						</tr>
+						<tr>
+							<td>{$userCount.fansnum|default='0'}</td>
+							<td>{$info.jifen|default='0'}</td>
+							<td>{$userCount.photonum|default='0'}</td>
+							<td>{$userCount.sumgift|default='0'}</td>
+							<td>{$userCount.zan|default='0'}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<!--{if condition="$giftlist"}-->
+			<div class="new_songli">
+				<div class="new_songli_div">收礼</div>
+				<a href="{:U('giftlist',array('uid'=>$info[idmd5]))}" class="luanbo"><img src="images/youjianhei.png" alt=""></a>
+				<div class="new_songli_ulli">
+					<ul class="cb">
+						<!--{foreach name="giftlist" key="key" item="vo" }-->
+							<li><div class="wuyu"><div class="paihang">{$key+1}</div><img src="{$vo.gift_image}" alt="" class="liwu"> <div class="shulian">×{$vo.giftnum}</div></div></li>
+						<!--{/foreach}-->
+					</ul>
+				</div>
+			</div>
+			<!--{/if}-->
+
+			<!--{if condition="$simiphoto"}-->
+			<div class="new_simizhao">
+				<div class="new_simizhao_div">私密照</div>
+				<div class="new_simizhao_ulli">
+					<ul>
+						<!--{foreach name="simiphoto" item="vo" }-->
+						<!--{if condition="$allowsmz"}-->
+						<li><a href="{:U('photo',array('pid'=>$vo[idmd5]))}"><img src="{$vo.thumbfiles}" alt=""></a></li>	
+						<!--{else /}-->
+							<li><a href="javascript:alertbox1('url');"><img src="images/user_03_28.png" alt=""></a></li>							
+							<!--{/if}-->
+						<!--{/foreach}-->
+					</ul>
+				</div>
+				<a href="<!--{if condition="$allowsmz"}-->{:U('photolist',array('uid'=>$info[idmd5],'phototype' => 1 ))}<!--{else /}-->javascript:alertbox1('url');<!--{/if}-->" class="simizhao_luanbo"><img src="images/youjianhei.png" alt=""></a>
+			</div>
+			
+			<!--{/if}-->
+			
+			<!--{if condition="$photoarr"}-->
+			<div class="new_simizhao">
+				<div class="new_simizhao_div">公开照</div>
+				<div class="new_simizhao_ulli">
+					<ul>
+						<!--{foreach name="photoarr" item="vo" }-->
+						<li>
+						<a href="{:U('photo',array('pid'=>$vo[idmd5]))}">
+						<img src="{$vo.thumbfiles}" alt="">
+						<span>
+						<img src="images/user_03_32.png" alt="">
+						{$vo.hits}&nbsp;&nbsp;
+						</span>
+						</a>
+						</li>
+						<!--{/foreach}-->
+					</ul>
+				</div>
+				<a href="{:U('photolist',array('uid'=>$info[idmd5],'phototype' => 0))}" class="simizhao_luanbo"><img src="images/youjianhei.png" alt=""></a>
+			</div>
+			
+			<!--{else /}-->
+			<div class="new_simizhao">
+					<div class="new_simizhao_div">公开照</div>
+				<div class="new_simizhao_ulli">
+					<ul>						
+						
+							<li><a href="javascript:alertbox('用户暂未上传照片');"><img src="__PUBLIC__/img/no_picture.gif" alt=""></a></li>
+														
+							
+					</ul>
+				</div>
+				<a href="javascript:alertbox('用户暂未上传照片');" class="simizhao_luanbo"><img src="images/youjianhei.png" alt=""></a>
+			</div>
+
+			<!--{/if}-->
+			<!--{if condition="isset($miyu)&&$miyu"}-->
+			<div class="neixinduba_div">
+				<p class="new_nxindubai">交友密语</p>
+				<!--{foreach name="miyu" key="k" item="v"}-->
+				<div class="new_neixinduba">{$k}：{$v}</div>
+				<!--{/foreach}-->
+				
+			</div>
+            <!--{/if}-->
+			<div class="neixinduba_div">
+				<p class="new_nxindubai">内心独白</p>
+				<div class="new_neixinduba">{$pinfo.monolog|default="暂无"}</div>
+
+			</div>
+			<div class="neixinduba_div">
+				<p class="new_nxindubai">ta的联系方式</p>
+				<div class="lianxifangshi_new">
+					<ul>
+						<li class="cb">
+							<div class="fl">手机号码 : </div>
+							<div class="fr">
+								<!--{if condition="$uinfo.user_rank gt 0"}-->
+								<!--{if condition="$lxfs_config.mob eq 'hot'"}-->{$pinfo.mob|default="用户未公开"}
+								<!--{else /}-->用户未公开
+								<!--{/if}-->
+								<!--{else /}-->****<a href="{:U('User/VipCenter')}">VIP可见</a>
+								<!--{/if}-->
+							</div>
+						</li>
+						<li class="cb">
+							<div class="fl">微信号码 : </div>
+							<div class="fr">
+								<!--{if condition="$uinfo.user_rank gt 0"}-->
+								<!--{if condition="$lxfs_config.weixin eq 'hot'"}-->{$pinfo.weixin|default="用户未公开"}
+								<!--{else /}-->用户未公开
+								<!--{/if}-->
+								<!--{else /}-->****<a href="{:U('User/VipCenter')}">VIP可见</a>
+								<!--{/if}-->
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+            <p><a href="{:U('Wechat/index',array('uid'=>$info[idmd5]))}" class="laheta" style="background:#F33; width:96%; color:#FFF; margin:0 auto;">跟TA聊天</a></p>
+			<p class="laheta_p"><a href="javascript:;" onclick="lahei();" class="laheta"><!--{if condition="$lahei eq 0"}-->拉黑TA<!--{else /}-->已拉黑<!--{/if}--></a></p>
+			
+			  <a href="{:U('Gift/index',array('uid'=>$info['idmd5']))}" class="sonhua"  id="ad1"  >
+       <img src="images/songh.png" alt="">
+       <div>送礼</div>
+     </a>
+    
+<script src="js/user_xq_ad.js"></script>
+<script>
+
+var ad1=new AdMove("ad1"); 
+ad1.Run(); 
+
+
+function nishuo() {
+$(".new_neixinduba").html("");
+				}
+
+function nishuo1() {
+					
+}
+
+function lahei(){
+	var touid = '{$info.id}';
+	$.post("{:U('Ajax/lahei')}",{touid:touid},function(data){
+		if(data.status==1){
+			$(".laheta").html(data.info);
+		}else{
+			alertbox(data.info);
+		}
+	},'json')
+}
+  
+  function paysm(){
+  	var url = "{:U('photolist',array('uid'=>$info[idmd5],'phototype' =>1,'pay'=>1))}";
+	$.get(url,{ajax:1},function(data){
+		if(data.status==1){
+			window.location.href=url;
+		}else if(data.url==-1){
+			alertbox(data.info,'立即充值',"{:U('User/Vipcenter',array('type'=>1))}");
+		}else{
+			alert('操作失败，请联系管理员。');
+		}
+		//console.data;
+	},'json')
+	
+  }
+  
+  function alertbox1(url){
+  	alertbox('您和ta的亲密度不够（当前{$User_qmd}。需要{$photo_config.0}），没有权限查看此用户私密照哦~,您还可以付费{$photo_config.1}{$config.money_name}查看。','付费查看',"javascript:paysm();");
+  }
+ </script>
+			<!--#include file="footer.html"-->
+		</div>
+	</body>
+</html>

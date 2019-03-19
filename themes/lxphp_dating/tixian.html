@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>{$media.title}</title>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+</head>
+<style type="text/css">
+  .fx_header {
+              position: fixed;
+              top: 0px;
+                }
+</style>
+
+<body>
+
+
+  
+  <div class="hd_main" style="background: #fff;">
+  <div style="height:40px;display:none ;" class="appdiv fx_header_new"></div>
+  <!--#include file="app_share.html"-->
+      <div class="fujinderen_header">
+         提现
+         <a  href="javascript:history.go(-1);" class="fl" id="ddd"><img src="images/zuojian.png"  style="width:11px;">返回</a>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <p class="tixianyuer">余额: <span>30000</span><img src="images/jinqian.png" alt="">   </p>
+      <p class="tixianyuer2">最低提现金额<span>30</span>元(1元=1000金钱)</p>
+      <div class="tixianqundao cb">
+      
+      	<a  class="hot"><img src="images/wxzf.png" alt=""><img src="images/hot1.png"></a>
+      	<a ><img src="images/zfb.png" alt=""><img src="images/hot1.png"></a>
+      	<a ><img src="images/sjzf.png" alt=""><img src="images/hot1.png"></a>
+     
+      </div>
+       <!-- 切换 -->
+      <div>
+         <div class="tixianqundao_nav">
+         	<p class="tishi1">系统会自动发红包到您的微信，请注意查收</p>
+         	<input type="text" class="input_tixian" placeholder="请输入提现金额" >
+         	<input type="button" class="input_button_new "  value="申请提现">
+
+         </div>
+      	 <div class="tixianqundao_nav" style="display:none">
+      	 	<p class="tishi1">请正确填写支付宝账号，避免提现出现问题</p>
+         	<input type="text" class="input_tixian" placeholder="请输入支付宝账号" >
+         	<input type="text" class="input_tixian mt10" placeholder="请输入收款人姓名" >
+         	<input type="text" class="input_tixian mt10" placeholder="可提现金额30元" >
+         	<input type="button" class="input_button_new "  value="申请提现">
+      	 </div>
+         <div class="tixianqundao_nav" style="display:none">
+         	<p class="tishi1">请正确填写手机号码，避免话费充值出现问题</p>
+         	<input type="text" class="input_tixian" placeholder="请输入需要充值的手机号码" >
+         	<div class="huaifei">
+         		<ul class="cb">
+         			<li class="hot">30元</li>
+         			<li>50元</li>
+         			<li>100元</li>
+         			<li>200元</li>
+         			<li>300元</li>
+         			<li>500元</li>
+         		</ul>
+         	</div>
+         	<input type="button" class="input_button_new "  value="充值话费">
+         </div>
+      </div>
+        <!-- 切换 -->
+      <br><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+	      
+  </div>
+<script type="text/javascript">
+	 $(".tixianqundao a").click(function(){
+	 var index= $(this).index();
+    $(".tixianqundao a").removeClass("hot").eq(index).addClass("hot"); 
+    $(".tixianqundao_nav").hide().eq(index).show();
+     })
+    $(".huaifei ul li").click(function(){
+	 var index= $(this).index();
+    $(".huaifei ul li").removeClass("hot").eq(index).addClass("hot"); 
+     })
+</script>
+
+</body>
+
+</html>

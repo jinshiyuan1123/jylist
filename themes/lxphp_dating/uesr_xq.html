@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>{$media.title}</title>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+</head>
+
+<body>
+  <div class="hd_main">
+  <a href="" class="shangchen" style="top: 20%;"><img src="images/shangcenruk.png" alt=""></a>
+      <div class="touxiang_bj">
+        <img src="images/uesr_bj_02.jpg" class="touxiang_bj_img">
+        <div class="uesr_tx">
+        
+          <img src="{$info.avatar}" alt="" class="uesr_tx_a">
+          <a href="{:U('Wechat/index',array('uid'=>$info[id]))}">
+          <span class="gentalianx"><img src="images/user_03_06.png" alt="">跟TA聊天</span>
+          </a>
+        </div>
+         
+         <div class="uesr_zl">
+            <p class="uesr_zl1p">{$info.user_nicename}</p>
+            <p class="uesr_zl2p">地区:&nbsp;&nbsp;{$area}&nbsp;&nbsp;&nbsp;年龄:&nbsp;&nbsp;{$age}岁</p>
+            <p class="uesr_zl3p">生日:&nbsp;&nbsp;{$pinfo.birthday}</p>
+            <p class="uesr_zl4p"><img src="images/mingx.png"><img src="images/mingx.png"><img src="images/mingx.png">超级明星<a href="javascript:gz('{$info.id}');" class="gz"><?php echo $User_subscribe?'已关注':'关注TA';?></a></p>
+         </div>
+          <div  class="uesr_table">
+             <table onmousedown="0" onmousemove="0" border="0">
+               <tr>
+                 <td><img src="images/user_03_16.png" alt=""></td>
+                 <td><img src="images/user_03_22.png" alt=""></td>
+                 <td><img src="images/user_03_20.png" alt=""></td>
+                 <td><img src="images/user_03_11.png" alt=""></td>
+                 <td><img src="images/user_03_18.png" alt=""></td>
+               </tr>
+               <tr>
+                 <td>1111111</td>
+                 <td>131313</td>
+                 <td>232323</td>
+                 <td>2322323</td>
+                 <td>232323</td>
+               </tr>
+             </table>
+
+          </div>
+      </div>
+     
+
+     <div class="uesr_nav">
+       <ul class="uesr_nav_nav">
+         <li  class="cb">
+           <div class="fl">QQ号码</div>
+           <div class="fr">1254678</div>
+         </li>
+         <li  class="cb">
+           <div class="fl">手机号码</div>
+           <div class="fr">1254678</div>
+         </li>
+         <li  class="cb">
+           <div class="fl">微博号码</div>
+           <div class="fr">***VIP可见</div>
+         </li>
+         <li  class="cb">
+           <div class="fl">微信号码</div>
+           <div class="fr">***VIP可见</div>
+         </li>
+         <li class="cb" >
+           <div class="fl">陌陌号码</div>
+           <div class="fr">***VIP可见</div>
+         </li>
+       </ul>
+     </div>
+
+     <!-- 用户列表 -->
+      <div class="index_lise">
+      <li> <a href="" class="simi">
+        <img src="images/user_03_28.png" alt="">
+        <i>30</i>
+        <p>查看TA的私密照</p>
+      </a></li>
+	   <li>
+      <a href=""><img src="images/moban_lise_03.jpg " alt=""><span><img src="images/user_03_32.png" style="width: 18px;position: relative;top: -2px; margin-right: 4px;">302</span></a>
+</li>
+
+      
+     
+      </div><br><br><br><br><br><br><br><br>
+     
+
+        <!--#include file="footer.html"-->
+
+
+
+  </div>
+
+
+
+</body>
+
+</html>

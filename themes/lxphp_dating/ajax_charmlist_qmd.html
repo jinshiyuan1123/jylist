@@ -1,0 +1,100 @@
+<!--{if condition="$data eq 111" }-->		
+	<div class="zanwushuju">
+    	<img src="images/zanwushuju.png" alt="">
+    	<p>您的亲密度榜暂时没有数据</p>
+    </div> 
+<!--{else /}-->	
+	<!--{foreach name="list" item="vo"  key="key" }-->
+		<!--{if condition="$vo['hehe'] eq 1" }-->   <!--  自己甲方  fromuid  -->
+			<li class="cb">
+				<div class="jin fl paihang_yi">
+					<!--{if condition="$vo['order']==1" }-->
+						<img src="themes/<?php echo C('TPL_NAME'); ?>/images/paihan_03.png" alt="">
+					<!--{elseif condition="$vo['order']==2" /}-->		
+						<img src="themes/<?php echo C('TPL_NAME'); ?>/images/paihan_06.png" alt="">
+					<!--{elseif condition="$vo['order']==3" /}-->	
+						<img src="themes/<?php echo C('TPL_NAME'); ?>/images/paihan_09.png" alt="">
+					<!--{else /}-->	
+						{$vo.order}
+					<!--{/if}-->
+
+
+				</div>
+				<div class="fl  paihang_er">
+					<div class="fl paihang_er_touxian">
+						<a href="{:U('Home/Show/index',array('uid'=>$result[$vo['touid']]['idmd5']))}"> <!-- 头像  -->
+							<img src="{$result[$vo['touid']]['avatar']|default='__PUBLIC__/img/mrtx.jpg'}" alt="">
+						</a>
+					</div>
+					<div class="fl">
+						<!--{if condition="$result[$vo['touid']]['user_rank'] eq 1" }-->
+							<p class="name_vip cb">
+								<i class="fl">{$result[$vo['touid']]['user_nicename']} </i>								
+									<span class="fl vip_logo"></span>    <!-- VIPlogo -->								
+								<img src="{$result[$vo['touid']]['rank_icon']}" alt="" class="fl name_vip_dengji">  <!-- 等级 -->
+							</p>
+						<!--{else /}-->	
+							<p class="name_vip_no cb">
+								<i class="fl">{$result[$vo['touid']]['user_nicename']} </i>								
+								<img src="{$result[$vo['touid']]['rank_icon']}" alt="" class="fl name_vip_dengji">  <!-- 等级 -->
+							</p>
+						<!--{/if}-->
+						<div class="paihang_er_iok">
+							<img src="themes/<?php echo C('TPL_NAME'); ?>/images/qingmiduxin.png" alt="">{$vo.qmd}&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="{:U('Home/Gift/index',array('uid'=>$result[$vo['touid']]['idmd5']))}"><!-- 送礼 -->
+								<img src="themes/<?php echo C('TPL_NAME'); ?>/images/user_03_11.png" alt="">
+							</a>	
+							{$vo.sumgift|default = 0}							
+						</div>
+					</div>
+				</div>
+				<a href="{:U('Home/Show/index',array('uid'=>$result[$vo['touid']]['idmd5']))}" class="fr paihang_a"><img src="themes/<?php echo C('TPL_NAME'); ?>/images/youjianhei.png"></a>
+			</li>
+		<!--{elseif condition="$vo['hehe'] eq 2" /}-->  <!--  自己甲方  touid  -->
+			
+			<li class="cb">
+				<div class="jin fl paihang_yi">
+					<!--{if condition="$vo['order']==1" }-->
+						<img src="themes/<?php echo C('TPL_NAME'); ?>/images/paihan_03.png" alt="">
+					<!--{elseif condition="$vo['order']==2" /}-->		
+						<img src="themes/<?php echo C('TPL_NAME'); ?>/images/paihan_06.png" alt="">
+					<!--{elseif condition="$vo['order']==3" /}-->	
+						<img src="themes/<?php echo C('TPL_NAME'); ?>/images/paihan_09.png" alt="">
+					
+						{$vo.order}
+					<!--{/if}-->
+				</div>
+				<div class="fl  paihang_er">
+					<div class="fl paihang_er_touxian">
+						<a href="{:U('Home/Show/index',array('uid'=>$result[$vo['fromuid']]['idmd5']))}">
+							<img src="{$result[$vo['fromuid']]['avatar']|default='__PUBLIC__/img/mrtx.jpg'}" alt="">
+						</a>
+					</div>
+					<div class="fl">
+						<!--{if condition="$result[$vo['fromuid']]['user_rank'] eq 1" }-->						
+							<p class="name_vip cb">
+								<i class="fl">{$result[$vo['fromuid']]['user_nicename']}</i>								
+								<span class="fl vip_logo"></span>								
+								<img src="{$result[$vo['fromuid']]['rank_icon']}" alt="" class="fl name_vip_dengji">
+							</p>
+						<!--{else /}-->	
+							<p class="name_vip_no cb">
+								<i class="fl">{$result[$vo['fromuid']]['user_nicename']}</i>								
+								<img src="{$result[$vo['fromuid']]['rank_icon']}" alt="" class="fl name_vip_dengji">
+							</p>
+						<!--{/if}-->
+						<div class="paihang_er_iok">
+							<img src="themes/<?php echo C('TPL_NAME'); ?>/images/qingmiduxin.png" alt="">{$vo.qmd}&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="{:U('Home/Gift/index',array('uid'=>$result[$vo['fromuid']]['idmd5']))}"><!-- 送礼 -->
+								<img src="themes/<?php echo C('TPL_NAME'); ?>/images/user_03_11.png" alt="">
+							</a>
+							{$vo.sumgift|default = 0}
+						
+						</div>
+					</div>
+				</div>
+				<a href="{:U('Home/Show/index',array('uid'=>$result[$vo['fromuid']]['idmd5']))}" class="fr paihang_a"><img src="themes/<?php echo C('TPL_NAME'); ?>/images/youjianhei.png"></a>
+			</li>
+		<!--{/if}-->
+	<!--{/foreach}-->
+<!--{/if}-->

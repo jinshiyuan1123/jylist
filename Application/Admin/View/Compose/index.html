@@ -1,0 +1,97 @@
+<h3>{$name}私信列表</h3>
+<admin:panel >
+	<admin:tabletool filter="true" keyword="{$pageMaps.keyword}">
+		<input name="keyword" type="hidden" value="{$pageMaps.keyword}"/>
+		<admin:select name="isread"  item="==阅读状态==,已阅读,未阅读" value="0,1,-1" selected="$pageMaps['isread']" />		
+		<admin:select name="ishello"  item="==私信类型==,招呼消息,聊天消息" value="0,1,-1" selected="$pageMaps['ishello']" />
+	</admin:tabletool>
+	
+	
+	
+	
+	<admin:table id="table" show="选择,编号,发送私信用户,接收私信用户|120,私信内容|400,发送时间|220,对方查看状态|120,接入客服|150,对方查看时间|220,操作|120" class="m-table-border">
+		<foreach name="list" item="vo">
+			<tr class="content"  data-fromuid='{$vo.fromuid}' data-touid='{$vo.touid}'>
+				<td><input type="checkbox" name="id[]" value="{$vo.msgid}" /></td>
+				<td>{$vo.msgid}</td>
+				<td class="uid{$vo.fromuid}">{$userNicename[$vo['fromuid']]}({$userNicename['sex'][$vo['fromuid']]})<font color="red">{$userNicename['ismj'][$vo['fromuid']]}</font></td>
+				<td class="uid{$vo.touid}">{$userNicename[$vo['touid']]}({$userNicename['sex'][$vo['touid']]})<font color="red">{$userNicename['ismj'][$vo['touid']]}</font></td>
+				<td class="content1">{$vo.content}
+				<div  class="showbox">
+					<ul class="ulbox">
+					
+						
+					
+						
+					</ul>
+				</div>
+				</td>			
+				<td>{$vo.sendtime|date="Y-m-d H:i:s",###}</td>
+				<td>
+					<if condition="$vo['isread'] eq 1 "><span style="color: red;" > 已阅读 </span>
+					<elseif condition="$vo['isread'] eq 0 " /><span style=" color:  darkcyan;"> 未阅读 </span>							
+					</if>
+				</td>
+				
+				<td>
+					<span style=" color:  darkcyan;"> {$vo.kfname}</span>							
+					
+				</td>
+				<td>
+					<if condition="$vo['redtime']" >{$vo.redtime|date="Y-m-d H:i:s",###}
+					<else />
+					</if>
+				</td>
+				<td>
+				<?php if($userNicename['ismj'][$vo['touid']]=='马甲' ||$userNicename['ismj'][$vo['fromuid']]=='马甲') { ?>
+					<a class="u-btn u-btn-primary  u-btn-small" href="{:U('Compose/wechat',array('msgid'=>$vo['msgid'],'adminid'=>$loginUserInfo['user_id'],'noread'=>$vo['noread']))}" target="_blank" data="{$vo.msgid}">接入对话</a>
+				<?php } ?>
+					<a class="u-btn u-btn-danger  u-btn-small del" href="javascript:;" data="{$vo.msgid}">删除</a>
+				</td>
+			</tr>
+		</foreach>
+	</admin:table>
+	<admin:tablefoot action="true" item="删除" value="1" />
+</admin:panel>
+<style>
+	.content1{ position: relative;}
+	.showbox{ position: absolute;  bottom: -500px; z-index:100; height:500px; overflow:auto; left: -100%; border: 1px solid #ccc; background: #fff; padding: 10px; min-width: 1000px; display: none}
+</style>
+<script>
+	Do.ready('base',function() {
+		
+		$('#selectAction').change(function() {
+			var type = $(this).val();
+		});
+		//表格处理
+		$('#table').duxTable({
+			actionUrl : "{:U('batchAction')}",//批量操作
+			deleteUrl : "{:U('del')}",//单条删除
+			actionParameter : function(){
+				return {'class_id' : $('#selectAction').next('#class_id').val()};
+			}
+		});
+	});
+	// mod by mangosteen 20160516
+	$(".content").hover(function(){
+		var fromuid = $(this).attr("data-fromuid");
+		var touid = $(this).attr("data-touid");
+		var o = $(this);
+		$.post("__URL__/listsx",{fromuid:fromuid,touid:touid},function(data){
+			o.find(".showbox ul").html('');			
+			$.each(data,function(index,val){
+					var funame = $(".uid"+val.fromuid).last().html();
+					var tuname = $(".uid"+val.touid).last().html();
+					var isread = val.isread==1?'<font color="#dedede">已阅</font>':'未读';
+					var body = '<li><font color="darkcyan">'+funame+'->'+tuname+'</font> '+val.content+isread+'('+val.ktime+')</li>';
+					o.find(".showbox ul").append(body);
+			})			
+		},'json')
+		o.find(".showbox").show();
+
+	},function(){
+		var o = $(this);
+		o.find(".showbox").hide();
+
+	});
+</script>

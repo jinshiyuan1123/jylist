@@ -1,0 +1,22 @@
+<h3>特权提示设置</h3>
+<admin:panel >
+  <admin:form url="{:U('site')}" method="post" id="form" class="m-form-horizontal" >
+       
+       <admin:formrow title="购买VIP会员-特权介绍" tip="购买VIP会员-特权介绍内容，字数不可超过50个一行，多个请回车" >
+      <admin:textarea name="buyvipintro" rows="10" class="u-editor" width="full">{$info.buyvipintro}</admin:textarea>
+    </admin:formrow>
+    
+	
+	 <admin:formrow title="充值{$config.money_name}-特权介绍" tip="充值{$config.money_name}-特权介绍内容，字数不可超过50个一行，多个请回车" >
+      <admin:textarea name="buycoinintro" rows="10" class="u-editor" width="full">{$info.buycoinintro}</admin:textarea>
+    </admin:formrow>
+
+    
+    <admin:formsubmit/>
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base', function() {
+	$('#form').duxFormPage();
+});
+</script> 

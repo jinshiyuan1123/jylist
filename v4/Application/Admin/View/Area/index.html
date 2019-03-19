@@ -1,0 +1,34 @@
+<h3>城市列表</h3>
+<admin:panel >
+<admin:tabletool filter="true" keyword="{$keyword}">
+  <select name="rootid" class="form-element">
+    <option value="0">=选择城市=</option>
+    <foreach name="groupList" item="vo"> <option value="{$vo.areaid}" 
+      <if condition="$rootId == $vo['areaid']"> selected="selected" </if>
+      >{$vo.areaname}{$vo.spreadname}
+      </option>
+    </foreach>
+  </select>
+</admin:tabletool>
+
+<admin:table id="table" show="编号|80,父级ID,城市名称,城市级别名称,显示顺序,操作|190">
+  <foreach name="list" item="vo">
+    <tr>
+      <td>{$vo.areaid}</td>
+	  <td>{$vo.rootid}</td>
+      <td>{$vo.areaname}</td>
+	  <td>{$vo.spreadname}</td>
+      <td>{$vo.orders}</td>
+      <td><a class="u-btn u-btn-primary u-btn-small" href="{:U('index',array('rootid'=>$vo['areaid']))}">下一级</a> <a class="u-btn u-btn-primary u-btn-small" href="{:U('edit',array('areaid'=>$vo['areaid']))}">修改</a> <a class="u-btn u-btn-danger u-btn-small del" href="javascript:;" data="{$vo.areaid}">删除</a></td>
+    </tr>
+  </foreach>
+</admin:table>
+<admin:tablefoot action="false" />
+</admin:panel>
+<script>
+Do.ready('base',function() {
+	$('#table').duxTable({
+		deleteUrl: "{:U('del')}"
+	});
+});
+</script>

@@ -1,0 +1,74 @@
+<h3>{$name}列表</h3>
+<admin:panel >
+	<admin:tabletool filter="false"  url="index.php?s=/Admin/Tuig/ulist/" keyword="{$pageMaps.keyword}" >
+		<input name="keyword" type="hidden" value="{$pageMaps.keyword}"/>
+		<admin:select name="status"  item="还未审核,已拒绝,已通过" value="0,2,1" selected="$status" />
+	</admin:tabletool>
+
+	<admin:table id="table" show="编号,代理帐号,头像,微信,推荐人ID,上次登录时间,操作|300" class="m-table-border">
+		<foreach name="list" item="vo">
+			<tr>	
+				<td>{$vo.id}</td>
+				<td>{$vo.user_login}</td>
+				<td><img src="{$vo.avatar}" width="50" /></td>
+				<td>{$vo.weixin}</td>
+				<td>{$vo.parent_id}</td>
+				<!-- <td>{$vo.tuiguang}</td> -->
+				<td>{$vo.last_login_time|date="Y-m-d H:i:s",###}</td>
+				<td>
+					<a class="u-btn u-btn-primary" href="{:U('tglist',array('uid'=>$vo['id']))}">查看业绩</a>
+					&nbsp;
+					<a class="u-btn u-btn-primary u-btn-small" href="{:U('Admin/Account/money')}">查看提现</a>
+				</td>
+			</tr>
+		</foreach>
+		
+	</admin:table >
+	<admin:tablefoot />
+</admin:panel>
+
+
+<script type="text/javascript">
+	Do.ready('base',function() {
+		//左下角的选择操作      
+		$('#selectAction').change(function() {
+			var type = $(this).val();
+		});
+	});
+
+	//通过
+	$('.doAccept').click(function(){
+		var id = $(this).attr('data');
+		var obj = $(this);
+		$.ajax({
+			type:"post",
+			url:"{:U('')}",
+			data:{acceptId:id},
+			dataType:'json',
+			success:function(msg){
+				if(msg == 1){
+					obj.html("已通过");
+				}
+			}
+			
+		});
+	});
+
+	//拒绝
+	$('.doReject').click(function(){
+		var id = $(this).attr('data');
+		var obj = $(this);
+		$.ajax({
+			type:"post",
+			url:"{:U('')}",
+			data:{rejectId:id},
+			dataType:'json',
+			success:function(msg){
+				if(msg == 1){
+					obj.html("已拒绝");
+				}
+			}
+			
+		});
+	});
+</script>

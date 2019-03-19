@@ -1,0 +1,66 @@
+<h3>详细资料</h3>
+<admin:form url="{:U()}" method="post" id="form">
+  <div class="g-main-body">
+  
+  <include file="header" />
+  
+    <div class=" m-form-horizontal">
+      <admin:panel >
+        <admin:formrow title="生日" tip="用户生日"  >
+          <admin:text name="birthday" type="text" value="{$info.birthday}" len="50"  />
+       </admin:formrow>
+       
+         <admin:formrow title="星座" tip="用户星座"  >
+            <select name="astro">
+            <volist name="Constellation"  key="k" id="vo"><option value="{$k}" <if condition="$info.astro eq $k">selected</if> >{$vo}</option></volist>
+           
+              </select>
+       </admin:formrow>
+        
+        
+        		<foreach name="profile" key="key" item="val">
+        		  <admin:formrow title="{$val.name}" tip="{$val.name}"  >
+				
+							<select name="{$key}" class="{$key}" >
+								<option value="0" >请选择</option>
+								<foreach name="val.info" key="k" item="vo" >
+			 		        		<option value="{$k}" <if condition="$info[$key]==$k">selected</if> >{$vo}</option> 				 		        		
+			 		       		</foreach> 
+			 		   		</select>
+					
+						  </admin:formrow>
+				</foreach> 
+        
+        
+        
+          <admin:formrow title="内心独白" tip="用户内心独白" >
+           <admin:textarea name="monolog"  rows="5" >{$info.monolog}</admin:textarea>
+          </admin:formrow>
+        
+        <admin:formrow title="手机号码" tip="用户手机号码"  >
+            <admin:text name="mob" type="text" value="{$info.mob}" len="50"  />
+          </admin:formrow>
+          
+         <admin:formrow title="QQ" tip=""  >
+            <admin:text name="qq" type="text" value="{$info.qq}" len="50"  />
+          </admin:formrow>
+          
+           <admin:formrow title="weixin" tip=""  >
+            <admin:text name="weixin" type="text" value="{$info.weixin}" len="50"  />
+          </admin:formrow>
+          
+            <admin:formrow title="weibo" tip=""  >
+            <admin:text name="weibo" type="text" value="{$info.weibo}" len="50"  />
+          </admin:formrow>
+          
+           <admin:formrow title="momo" tip=""  >
+            <admin:text name="momo" type="text" value="{$info.momo}" len="50"  />
+          </admin:formrow>
+        
+     
+        <admin:formsubmit/>
+      </admin:panel>
+    </div>
+  </div>
+  <admin:text name="uid" type="hidden" value="{$info.id}" />
+</admin:form>

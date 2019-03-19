@@ -1,0 +1,86 @@
+<h3>{$name}列表</h3>
+<admin:panel >
+	<admin:tabletool filter="true" keyword="{$pageMaps.keyword}">
+		<input type="hidden" name="keyword" value="{$pageMaps.keyword}" />
+																<!--0待审核 1通过 -->
+  		<admin:select name="flag"  item="==状态==,待审核,通过,未通过" value="0,-1,1,2" selected="$pageMaps['flag']" />
+	</admin:tabletool>
+	<admin:table id="table" show="选择,编号,照片ID,评论照片,评论人,评论内容,审核状态,该评论的点赞数,评论时间,操作|200" class="m-table-border">
+		<foreach name="list" item="vo">
+			<tr>
+				<td><input type="checkbox" name="id[]" value="{$vo.id}" /></td>			
+				<td>{$vo.id}</td>
+				<td>{$vo.photoid}</td>
+				<td><img src="{$image[$vo['photoid']]}" style="width: 120px;height: 80px;" /></td>
+				<td>{$result[$vo['uid']]}  ({$vo['uid']})</td>
+				<td>{$vo.content}</td>				
+				<td>
+					<if condition="$vo['flag'] eq 1 "><span style="color: darkcyan;"> 已通过 </span>
+					<elseif condition="$vo['flag'] eq 0 " /><span style=" color: crimson ;"> 待审核 </span>
+					<elseif condition="$vo['flag'] eq 2 " /><span style=" color: red ;"> 未通过 </span>
+					</if>
+				</td>
+				<td>{$vo.zan}</td>							
+				<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+				<td>
+					<if condition="$vo['flag'] eq 0 ">
+						<span>
+							<a class="u-btn u-btn-primary u-btn-small" dataType="1" uid="{$vo['uid']}" data="{$vo['id']}"> 通过   </a>
+							<a class="u-btn u-btn-primary u-btn-small" dataType="2" uid="{$vo['uid']}" data="{$vo['id']}"> 不通过   </a>
+						</span>
+					</if>
+					<a class="u-btn u-btn-danger  u-btn-small del" href="javascript:;" data="{$vo.id}">删除</a>
+				</td>
+			</tr>
+		</foreach>
+	</admin:table>
+	<admin:tablefoot action="true" item="删除,不通过,通过" value="3,2,1" />
+</admin:panel>
+<script>
+	Do.ready('base', function() {
+		$('#selectAction').change(function() {
+			var type = $(this).val();
+		});
+		//表格处理
+		$('#table').duxTable({
+			actionUrl: "{:U('Admin/CommentManage/batchAction')}", //批量操作
+			deleteUrl: "{:U('Admin/CommentManage/del')}", //单条删除
+			actionParameter: function() {
+				return {
+					'class_id': $('#selectAction').next('#class_id').val()
+				};
+			}
+		});
+	});
+
+
+
+
+
+	$(".u-btn-primary").click(function(){
+		var obj = $(this);
+		var id = obj.attr('data');
+		var type = obj.attr('dataType');
+		var uid = obj.attr('uid');
+		var index = obj.parent().index();	
+		index = index - 4;
+		
+		$.ajax({
+			type: "post",
+			url: "{:U('Admin/CommentManage/single')}",
+			data: {id:id,type:type,uid:uid},
+			dataType:'json',
+			success: function(msg) {
+				if(msg.status == 1){
+					if(type == 1){
+						obj.parents('tr').find('td').eq(index).html('<span style=" color: darkcyan ;"> 已通过 </span>');					
+					}
+					if(type == 2){
+						obj.parents('tr').find('td').eq(index).html('<span style=" color: red ;"> 未通过 </span>');
+					}
+					obj.parent('span').remove();
+				}				
+			}
+		});
+	});
+</script>

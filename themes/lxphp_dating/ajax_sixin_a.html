@@ -1,0 +1,17 @@
+<!--{if condition="$list"}-->
+	  <!--{foreach name="list" item="vo" }-->
+           <li class="cb" onclick="window.location.href='{:U('Wechat/index',array('uid'=>$vo[uid],'noread'=>$vo['list2arr']['noread']))}'">
+             <div class="fl"><img src="{$vo.avatar|default='__PUBLIC__/img/mrtx.jpg'}" alt=""></div>
+             <div class="fl">
+               <p class="<!--{if condition="$vo.user_rank gt 0"}-->huiyuan_vip<!--{else /}-->huiyuan<!--{/if}-->">{$vo.user_nicename|default='昵称未填'}<!--{if condition="$vo.user_rank gt 0"}--><span>VIP{$vo.user_rank}</span><!--{/if}--><i>{$vo.list2arr.sendtime|date="m-d H:i",###}</i></p>
+               <p class="sixin_pl"><span><!--{if condition="$vo['list2arr']['type'] eq 2"}-->[语音]<!--{else /}-->{$vo.list2arr.content}<!--{/if}--></span><?php if($vo['list2arr']['isread']==0 && $vo['list2arr']['fromuid']!=$uinfo['id']) { ?><i>未读</i><?php } ?></p>
+             </div>
+           </li>
+		    <!--{/foreach}-->
+			
+			   <!--{else/}-->
+  <li class="cb zanwu"  >
+			 </li>
+<!--{/if}-->
+      
+          

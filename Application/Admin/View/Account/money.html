@@ -1,0 +1,76 @@
+<h3>列表</h3>
+<admin:panel >
+ 
+ <admin:tabletool filter="true" keyword="{$pageMaps.keyword}">
+ 
+  	
+  	<admin:select name="type"  item="==类型==,微信,支付宝,话费充值" value="0,1,2,3" selected="$pageMaps['type']" />
+    <admin:select name="status"  item="=请选择=,成功,审核中" value="0,1,2" selected="$pageMaps['status']" />
+  </admin:tabletool>
+  <admin:table id="table" show="选择|30,编号,用户名|100,提现金额,{$config.jifen_name}\{$config.jifen_name_nv},{$config.money_name}余额,类型,支付宝账号,收款人,手机号,描述,状态,创建时间,操作|180">
+    <foreach name="list" item="vo">
+      <tr>
+        <td>
+        	<input type="checkbox" name="id[]" value="{$vo.id}" />
+        </td>
+        <td>{$vo.id}</td>
+        <td>{$vo.user_login}</td>
+        <td style="color: red">{$vo.fee}</td>
+        <td>{$vo.jifen}</td>
+        <td class="u{$vo.uid}">{$vo.money}（<a href="javascript:clearmoney({$vo.uid});">直接清零</a>）</td>
+        <td>{$type[$vo['type']]}</td>
+        <td>{$vo.zfb_account}</td>
+        <td>{$vo.zfb_lxr}</td>
+        <td>{$vo.mob}</td>
+        
+        <td>{$vo.body}</td>
+        <td>{$status[$vo['status']]}</td>
+		<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+        <td>
+        <if condition="$vo['status'] eq 2">
+         <a class="u-btn u-btn-primary  u-btn-small"   href="javascript:if(confirm('确定要通过吗？'))location.href='{:U('tixian',array('id'=>$vo['id'],'status'=>1))}';">通过</a>
+        <a class="u-btn  u-btn-danger u-btn-small"   href="javascript:if(confirm('确定失败吗？'))location.href='{:U('tixian',array('id'=>$vo['id'],'status'=>0))}';">失败</a>
+        </if>
+        <a class="u-btn u-btn-primary  u-btn-small" href="{:U('moneyEdit',array('id'=>$vo['id']))}">查看</a>
+        </td>
+      </tr>
+    </foreach>
+  </admin:table>
+  <admin:tablefoot />
+</admin:panel>
+<script type="text/javascript" charset="utf-8">
+	Do.ready('base',function() {
+		//移动操作
+		$('#selectAction').change(function() {
+			var type = $(this).val();
+			if(type == 3){
+				$(this).after($('#class_id').clone());
+			}else{
+				$(this).nextAll('select').hide();
+			}
+		});
+		//表格处理
+		$('#table').duxTable({
+			actionUrl : "{:U('batchAction')}",
+			deleteUrl: "{:U('del')}",
+			actionParameter : function(){
+				return {'class_id' : $('#selectAction').next('#class_id').val()};
+			}
+		});
+		
+	});
+	
+ function clearmoney(uid){
+	   if(confirm('确定要清零吗？'))
+		$.post("__URL__/clearmoney",{uid:uid},function(data){
+			if(data.status==1){
+				$(".u"+uid).html('0');
+			}
+		},'json')
+		}
+</script>
+
+
+
+
+

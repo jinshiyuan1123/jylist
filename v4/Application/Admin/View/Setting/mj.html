@@ -1,0 +1,60 @@
+<h3>马甲设置</h3>
+<admin:panel >
+  <admin:form url="{:U('site')}" method="post" id="form" class="m-form-horizontal" >
+   
+	 <admin:formrow title="开启马甲招呼" tip="开启自动招呼功能，招呼推送到微信消息。默认图文消息，推送失败则改为模板消息。" >
+     <admin:radio name="openmj"  item="关闭,招呼男,招呼女,招呼全部" value="0,1,2,3" checked="$info['openmj']" />
+    </admin:formrow>	
+	
+<!--<admin:formrow title="马甲打招呼" tip="注册多久后开始打招呼" >
+      <admin:text name="regbegin"  value="{$info.regbegin}" len="250" width="mini" />  -  <admin:text name="regend"  value="{$info.regend}" len="250" width="mini" /> 分钟
+    </admin:formrow>-->
+    
+	<!--
+	 <admin:formrow title="马甲打招呼2" tip="用户登录多久内开始不断自动打招呼" >
+     <admin:text name="loginbegin"  value="{$info.loginbegin}" len="250" width="mini" />  -  <admin:text name="loginend"  value="{$info.loginend}" len="250" width="mini" /> 分钟
+    </admin:formrow>
+	-->
+    
+	 <admin:formrow title="打招呼间隔时间" tip="马甲打招呼间隔时间" >
+     <admin:text name="mjzhpl"  value="{$info.mjzhpl}" len="250" width="mini" />  +随机1-5分钟
+    </admin:formrow>
+	
+	<!-- 马甲自动踩个人主页功能 -->
+	<admin:formrow title="开启马甲踩个人主页" tip="开启自动踩个人主页功能，状态推送到微信消息。默认图文消息，推送失败则改为模板消息。" >
+     <admin:radio name="openmjhp"  item="关闭,踩男,踩女,踩全部" value="0,1,2,3" checked="$info['openmjhp']" />
+    </admin:formrow>
+
+
+	<!--
+	<admin:formrow title="马甲踩个人主页2" tip="用户登录多久内开始不断自动踩个人主页" >
+     <admin:text name="mjhploginbegin"  value="{$info.mjhploginbegin}" len="250" width="mini" />  -  <admin:text name="mjhploginend"  value="{$info.mjhploginend}" len="250" width="mini" /> 分钟
+    </admin:formrow>
+	-->
+
+	<admin:formrow title="踩个人主页间隔时间" tip="马甲踩个人主页间隔时间" >
+     <admin:text name="mjmppl"  value="{$info.mjmppl}" len="250" width="mini" />  +随机1-5分钟
+    </admin:formrow>
+	
+  <!-- 
+  马甲送礼等待需求后开发
+    <admin:formrow title="马甲送礼" tip="马甲送礼的礼物编号" >
+      <admin:text name="gzhcode"  value="{$info.gzhcode}" len="250" width="mini" />  -  <admin:text name="gzhcode"  value="{$info.gzhcode}" len="250" width="mini" /> 
+    </admin:formrow>
+    
+       <admin:formrow title="马甲送礼" tip="马甲送礼这个时间内送礼给（男）" >
+      <admin:text name="gzhcode"  value="{$info.gzhcode}" len="250" width="mini" />  -  <admin:text name="gzhcode"  value="{$info.gzhcode}" len="250" width="mini" /> 分钟
+    </admin:formrow>
+	-->
+	
+	
+	
+    
+    <admin:formsubmit/>
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base', function() {
+	$('#form').duxForm();
+});
+</script> 

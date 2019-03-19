@@ -1,0 +1,54 @@
+<h3>列表</h3>
+<admin:panel >
+ 
+ <admin:tabletool filter="true" keyword="{$pageMaps.keyword}">
+ 
+  	
+  <!--	<admin:select name="type"  item="==类型==,后台操作,分享文章送,关注送,分享好友送,提现,摇一摇" value="0,-1,1,2,3,4,5" selected="$pageMaps['type']" />-->
+    <admin:select name="status"  item="成功,付款中,失败,超时" value="1,2,3,4" selected="$pageMaps['status']" />
+  </admin:tabletool>
+  <admin:table id="table" show="选择|30,编号,金额,描述,状态,创建时间,操作|130">
+    <foreach name="list" item="vo">
+      <tr>
+        <td>
+        	<input type="checkbox" name="id[]" value="{$vo.id}" />
+        </td>
+        <td>{$vo.id}</td>        
+        <td>{$vo.fee}</td>
+        <td>{$vo.desc}</a></td>
+        <td>{$status[$vo['status']]}</a></td>
+		<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+        <td>
+        <a class="u-btn u-btn-primary  u-btn-small" href="{:U('buildsk',array('id'=>$vo['id']))}">查看</a>
+        </td>
+      </tr>
+    </foreach>
+  </admin:table>
+  <admin:tablefoot />
+</admin:panel>
+<script type="text/javascript" charset="utf-8">
+	Do.ready('base',function() {
+		//移动操作
+		$('#selectAction').change(function() {
+			var type = $(this).val();
+			if(type == 3){
+				$(this).after($('#class_id').clone());
+			}else{
+				$(this).nextAll('select').hide();
+			}
+		});
+		//表格处理
+		$('#table').duxTable({
+			actionUrl : "{:U('batchAction')}",
+			deleteUrl: "{:U('del')}",
+			actionParameter : function(){
+				return {'class_id' : $('#selectAction').next('#class_id').val()};
+			}
+		});
+	});
+</script>
+
+
+
+
+

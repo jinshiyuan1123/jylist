@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+		<title>{$media.title}</title>
+		<link rel="stylesheet" type="text/css" href="css/css.css">
+		<script src="js/jquery-1.8.0.min.js"></script>
+	</head>
+	<style type="text/css">
+           .fx_header {
+              position: fixed;
+              top: 0px;
+                }
+ 
+     </style>
+
+	<body>
+	
+		<div class="hd_main">
+		<div style="height:40px;display:none ;" class="appdiv fx_header_new"></div>
+  <!--#include file="app_share.html"-->
+		 <div class="fujinderen_header">
+				新手教程
+				<a href="javascript:history.go(-1);" class="fl" id="ddd"><img src="images/zuojian.png" style="width:11px;">返回</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			
+		   
+		
+	
+			
+			<!--{volist name="lists" id="vo"}-->
+				<div class="t2">
+					<div class="item">
+						<div class="head">
+							<span class="tit">{$vo.title}</span>
+						</div>
+						<div class="body hide">
+							<p>{$vo.content}</p>
+							
+						</div>
+					</div>
+			<!--{/volist}--> 
+				
+				<div class="pages">	{$page}</div>
+				
+			</div>
+<!--#include file="footer.html"-->
+			<script type="text/javascript">
+				/*
+				var demo = document.getElementById("demo");
+				var demo1 = document.getElementById("demo1");
+				var demo2 = document.getElementById("demo2");
+				demo2.innerHTML = document.getElementById("demo1").innerHTML;
+				*/
+				
+				var sex = '{$sex}';
+				if(!sex) alertbox("部分新手教程需要登录后显示。");
+				function Marquee() {
+					if (demo.scrollLeft - demo2.offsetWidth >= 0) {
+						demo.scrollLeft -= demo1.offsetWidth;
+					} else {
+						demo.scrollLeft++;
+					}
+				}
+				//var myvar = setInterval(Marquee, 30);
+			</script>
+
+			<script>
+				$('.item .head').click(function() {
+					if ($(this).hasClass('active')) {
+						$(this).removeClass('active');
+						$(this).parent().find('.body').addClass('hide');
+					} else {
+						$(this).addClass('active');
+						$(this).parent().find('.body').removeClass('hide');
+					}
+				});
+			</script>
+			<!--左右滚动-->
+		</div>
+	</body>
+</html>

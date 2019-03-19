@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>{$media.title}</title>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+</head>
+
+<body>
+  
+  <div class="hd_main">
+     <div class="yq_header">
+     <img src="images/nuv_02.jpg" alt="">
+       <p class="header_yiP"><span>苏州</span>附近快约美女<i>（美女众多！）</i></p>
+       <p class="header_erP">您的附近<span>单身美女</span>还有<i>200</i>个人待约</p>
+     </div>
+     <!-- 女的 -->
+     <div class="yq_center_1 divgao">
+        <div class="yq_center_a divgao1"><img src="images/erwm_03.jpg" alt=""></div>
+     </div>
+     <!-- 女的 -->
+     <!-- 男的 -->
+     <div class="yq_center_2 divgao" style="display:none">
+     	<div class="yq_center_b divgao2"><img src="images/erwm_03.jpg" alt=""></div>
+     </div>
+      <!-- 男的 -->
+	      
+  </div>
+
+
+</body>
+<script type="text/javascript">
+	var pimuheight = $(window).height();
+    var yq_headerheight = $(".yq_header").height();
+    var yq_centerheight = pimuheight-yq_headerheight;
+    $(".divgao").css('height',yq_centerheight);
+    var yq_center_awidth1 = $(".yq_center_b").width();
+    var yq_center_awidth = $(".yq_center_a").width();
+    $(".divgao1").css('height',yq_center_awidth);
+    $(".divgao2").css('height',yq_center_awidth1);
+
+
+
+
+</script>
+
+</html>

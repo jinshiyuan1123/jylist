@@ -1,0 +1,58 @@
+<style type="text/css">
+	.yijian{
+		width: 80px;
+		border: none;
+		padding:0px 10px ;
+		color: white;
+		background-color: deepskyblue;
+		line-height: 25px;" 
+		cursor: pointer;
+	}
+</style>
+
+<h3>关注列表</h3>
+<admin:panel >
+	<admin:tabletool keyword="{$pageMaps.keyword}"></admin:tabletool>
+	<admin:table id="table" show="编号|200,用户ID,关注人|250,被关注的人|250,关注时间,被关注的人是否查看,操作|150" class="m-table-border">
+		<foreach name="list" item="vo">
+			<tr>
+				<td>{$vo.id}</td>
+				<td>{$niceName[$vo['fromuid']]}  ({$vo['fromuid']})</td>
+				<td>{$niceName[$vo['touid']]}   ({$vo['touid']})</td>
+				<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+				<td>
+					<if condition="$vo['touser_isread'] eq 1" ><span style="color: red;"> 已查看 </span> 
+					<elseif condition="$vo['msg_type'] eq 0" /><span style="color: darkgreen;"> 未查看 </span> 
+					</if>
+				</td>
+				<td>
+					<a class="u-btn u-btn-danger  u-btn-small del" href="javascript:;" data="{$vo.id}">删除</a>
+					<if condition="$abc[$vo['fromuid']][$vo['touid']]['hehe'] eq 1" >
+						<input type="button" class="yijian" onclick="yijian({$vo['fromuid']},{$vo['touid']})" value="一键关注" />
+					</if>
+				</td>
+			</tr>
+		</foreach>
+	</admin:table>
+	<admin:tablefoot />
+</admin:panel>
+<script>
+	Do.ready('base',function() {
+		//表格处理
+		$('#table').duxTable({
+			deleteUrl: "{:U('del')}",
+		});
+	});
+	
+	function yijian(fromuid,touid){
+		
+		$.ajax({
+			type:"post",
+			url:"{:U('Home/Ajax/guanzhu')}",
+			data:{fromuid:touid,touid:fromuid},
+			success:function(){
+				window.location.href = "{:U('index')}";
+			}
+		});
+	}
+</script>

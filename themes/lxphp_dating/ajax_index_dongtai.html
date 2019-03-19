@@ -1,0 +1,56 @@
+<!--{foreach name="list" item="vo"  key="key" }-->
+	<?php if(count($vo)>1){ ?>
+        <div class="dongtai_a cb">
+            <div class="dongtai_a_tx fl"><a href="{:U('Home/Show/index',array('uid'=>$vo[0]['idmd5']))}"><img src="{$vo.0.avatar|default='__PUBLIC__/img/mrtx.jpg'}" alt=""></a></div>
+            <div class="fl dongtai_a_pl">
+              	<p class="<!--{if condition = "$vo['0']['user_rank'] eq 0"}-->dt_name<!--{else /}-->dt_name_vip<!--{/if}-->">- {$vo.0.user_nicename|default='昵称未填写'}<span></span></p>
+              	<p class="dt_pl">{$vo.0.title|default='天若有情'}</p>
+              	<div class="tusspian_p_ulLi">
+              	   	<ul class="cb">
+						<!--{foreach name="vo" key="k" item="vo1"  }-->
+	              	   		<li><div><a href="{:U('Home/Show/photo',array('pid'=>$vo1['pidmd5']))}" class="w_dengyu_h"><img src="{$vo1.thumbfiles}" alt=""></a></div></li>
+						<!--{/foreach}-->              	   	 
+              	   	</ul>
+              	</div>
+              	<p class="address">{$area}</p>
+              	<p class="dt_date">{$vo.0.timeline|date='Y-m-d',###}</p>
+              	<!--{if condition="isset($commentlist[$key])" }-->               
+	          	  	<div class="dt_pl_new">
+     		            <!--{foreach name="commentlist[$key]" item="val"  }-->
+	              			<!--{if condition="$val['user_rank'] eq 1" }-->
+		                		<p class="dt_pl_novip"><i>{$val['user_nicename']}：</i>{$val['content']}</p>
+		                	<!--{else /}-->	
+		                		<p class="dt_pl_vip"><i>{$val['user_nicename']}：</i>{$val['content']}</p>			                		
+		                	<!--{/if}-->
+              			<!--{/foreach}-->      	              	
+		            </div>
+	           	<!--{/if}-->
+            </div>
+        </div>
+	<?php }else{ ?>    
+         <div class="dongtai_a cb">
+            <div class="dongtai_a_tx fl"><a href="{:U('Home/Show/index',array('uid'=>$vo[0]['idmd5']))}"><img src="{$vo.0.avatar|default='__PUBLIC__/img/mrtx.jpg'}" alt=""></a></div>
+            <div class="fl dongtai_a_pl">
+               	<p class="<!--{if condition = "$vo['0']['user_rank'] eq 0"}-->dt_name<!--{else /}-->dt_name_vip<!--{/if}-->">- {$vo.0.user_nicename|default='昵称未填写'}<span></span></p>
+              	<p class="dt_pl">{$vo.0.title|default='天若有情'}</p>
+              	<div class="tusspian_p"><a href="{:U('Home/Show/photo',array('pid'=>$vo[0]['pidmd5']))}"><img src="{$vo.0.thumbfiles}" alt="" class="tupian_yi"></a></div>
+          		<p class="address">{$area}</p>
+          	  	<p class="dt_date">{$vo.0.timeline|date='Y-m-d',###}</p>
+          	  	
+          	  	<!--{if condition="isset($commentlist[$key])" }-->
+         
+          	  	<div class="dt_pl_new">
+     		              <!--{foreach name="commentlist[$key]" item="val"  }-->
+	              			<!--{if condition="$val['user_rank'] eq 1" }-->
+		                		<p class="dt_pl_novip"><i>{$val['user_nicename']}：</i>{$val['content']}</p>
+		                	<!--{else /}-->	
+		                		<p class="dt_pl_vip"><i>{$val['user_nicename']}：</i>{$val['content']}</p>			                		
+		                	<!--{/if}-->
+              			<!--{/foreach}-->      
+              	
+	            </div>
+	            	<!--{/if}-->
+            </div>
+        </div>
+	<?php } ?>	
+<!--{/foreach}-->

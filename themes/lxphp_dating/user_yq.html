@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+		<title>{$media.title}</title>
+		<link rel="stylesheet" type="text/css" href="css/css.css">
+		<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+	</head>
+	<style type="text/css">
+  .fx_header {
+    position: relative;
+  }
+</style>
+
+	<body>	
+	 
+	
+	<?php if(C('open_lxzizhu_app')) {?>
+	
+	<!-- 分享header -->
+			  <div class="fx_header appdiv" style="display:none ;">
+			  	<div  class="fx_header_div cb ">
+			  		 <span><a href="/"  class="fx_header_logo fl" ><?php echo $config[site_title];?></a> </span>
+			  		 <span class="fr fx_header_sandian"><img src="images/sandian.png">
+                          <div class="fx_header_xiala" style="display:none">
+                          <ul>
+                          	<li onclick="appsare('SESSION');"><img src="images/fx_wx.png">分享给朋友</li>
+                          	<li onclick="appsare('TIMELINE');"><img src="images/fx_pyq.png">分享到朋友圈</li>
+                          	<li><img src="images/fx_xl.png">分享到微博</li>
+                          	<li><img src="images/fx_qq.png">分享到QQ</li>
+                          </ul>
+                          </div>
+			  		 </span>
+			  	</div>
+			  </div>
+			  
+			  <script type="text/javascript" src="/cordova.js"></script>			  
+			  <script type="text/javascript">
+			  
+                  $(".fx_header_sandian").click(function(){
+                  	$(".fx_header_xiala").slideToggle(500);
+                  })
+				  
+				  
+document.addEventListener("deviceready", function() {
+	$(".appdiv").show();
+	});
+				
+document.addEventListener("backbutton", this.BackKeyDownListener, false);
+function BackKeyDownListener(){
+	window.history.go(-1);
+}
+
+
+
+function appsare(type){
+	switch(type){
+		case "SESSION":
+		var type2 = navigator.weixin.Scene.SESSION
+		break;
+		case "TIMELINE":
+		var type2 = navigator.weixin.Scene.TIMELINE
+		break;
+	}
+		 navigator.weixin.share({
+        message : {
+            title :'来自{$uinfo.user_nicename}的邀请',
+            description :'{$sdesc}',
+            mediaTagName : "Media Tag Name(optional)",
+            thumb :'http://' + window.location.host +"__PUBLIC__/img/logo.jpg",
+            media : {
+                // type: weixin.Type.WEBPAGE, // webpage
+                webpageUrl : window.location.href
+            // webpage
+            }
+        },
+        scene :type2
+    }, success, error);		
+	}
+  function success(result) {
+       // alert(JSON.stringify(result));
+    }
+    function error(result) {
+       //alert(JSON.stringify(result));
+    }
+
+				  
+				  
+             </script>
+             <!-- 分享header -->
+		<?php } ?>
+	
+		<div class="hd_main">
+			<div class="yq_header">
+				<img src="images/nuv_02.jpg" alt="">
+				<p class="header_yiP"><span>{$address}</span><!--{if condition="$info['sex'] eq 1"}-->附近快约美女<!--{else /}-->同城交友~<!--{/if}--><i>（<!--{if condition="$info['sex'] eq 1"}-->美女众多！<!--{else /}-->还可以领红包哦~<!--{/if}-->）</i></p>
+				<p class="header_erP">您的附近<span>单身<!--{if condition="$info['sex'] eq 1"}-->美女<!--{else /}-->帅哥<!--{/if}--></span>还有<i>{$num}</i>个人待约</p>
+			</div>
+			
+			<!-- 女的 -->
+			<!--{if condition="$info['sex'] eq 1"}-->
+				<div class="yq_center_1 divgao"><div class="yq_center_a divgao1"><img src="{$ewmimg}" alt=""></div></div>
+			<!--{/if}-->
+			
+			
+			<!-- 男的 -->
+			<!--{if condition="$info['sex'] eq 2"}-->
+				<div class="yq_center_2 divgao"><div class="yq_center_b divgao2"><img src="{$ewmimg}" alt=""></div></div>
+			<!--{/if}-->
+		</div>
+		<div class="dangmu" <!--{if condition="$info[id] neq $uinfo[id]"}--> style="display: none"<!--{/if}--> >
+     	<div class="heihei"></div>
+     	<img src="images/fenx.png">
+     </div>
+     <script type="text/javascript">
+       var pimuheight = $(window).height();
+		var yq_headerheight = $(".yq_header").height();
+		var yq_centerheight = pimuheight - yq_headerheight;
+		$(".divgao").css('height', yq_centerheight);
+		var yq_center_awidth1 = $(".yq_center_b").width();
+		var yq_center_awidth = $(".yq_center_a").width();
+		$(".divgao1").css('height', yq_center_awidth);
+		$(".divgao2").css('height', yq_center_awidth1);
+		 $(".dangmu").click(function(){
+           $(".dangmu").hide();  
+      })
+
+     </script>
+		
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript">	
+		$(function(){
+	 	 	$.get("{:U('MyYq',array('uid'=>$uinfo[id]))}",{ajax:1},function(data){
+	  	
+	  	});
+	 	})
+var imgurl = '{$uinfo.avatar|default="__PUBLIC__/img/mrtx.jpg"}';	
+var imgsss = /^http/;		
+if (!imgsss.test(imgurl)) {
+				var fullimgurl = 'http://' + window.location.host + imgurl;
+			} else {
+				var fullimgurl = imgurl;
+			}		
+		//var links = window.location.href;	
+var stitle = '来自{$uinfo.user_nicename}的邀请';
+var fulllink = window.location.href;
+var sdesc = '{$sdesc}';	
+
+wx.config({
+    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    appId: '{$appid}', // 必填，公众号的唯一标识
+    timestamp: '{$timestamp}', // 必填，生成签名的时间戳
+    nonceStr: '{$nonceStr}', // 必填，生成签名的随机串
+    signature: '{$signature}',// 必填，签名，见附录1
+    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+});
+		
+		
+		
+		wx.ready(function(){
+//alert(window.location.href)
+
+wx.onMenuShareTimeline({
+    title: stitle, // 分享标题
+    link: fulllink, // 分享链接  window.location.href
+    imgUrl:fullimgurl, // 分享图标
+    success: function () { 
+        // 用户确认分享后执行的回调函数
+		//alert(1111);
+		//fxfunc('all');
+    },
+    cancel: function () { 
+        // 用户取消分享后执行的回调函数
+		//alert("您取消了分享");
+		//alert(window.location.href)
+    }
+});
+
+
+
+wx.onMenuShareAppMessage({
+    title: stitle, // 分享标题
+    desc: sdesc, // 分享描述
+    link: fulllink, // 分享链接  window.location.href
+    imgUrl: fullimgurl, // 分享图标
+    type: 'link', // 分享类型,music、video或link，不填默认为link
+    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+    success: function () { 
+        // 用户确认分享后执行的回调函数
+		//fxfunc('one');
+    },
+    cancel: function () { 
+	//alert(stitle);
+	//alert(window.location.href)
+	//alert("您取消了分享");
+        // 用户取消分享后执行的回调函数
+    }
+});
+    // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+});
+
+ var ua = navigator.userAgent.toLowerCase(); 
+  if (/iphone|ipad|ipod/.test(ua)) {
+        $(".fx_header").css('padding-top',15)
+  } 
+				
+	</script>
+
+	</body>
+	
+
+</html>

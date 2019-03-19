@@ -1,0 +1,46 @@
+<h3>赠送列表</h3>
+<admin:panel >
+	<admin:tabletool filter="true" keyword="{$pageMaps.keyword}">
+		<admin:select name="touser_isread" item="==类型==,阅读状态,其他" value="0,1,2" selected="$pageMaps['touser_isread']" />
+	</admin:tabletool>
+	<admin:table id="table" show="选择,编号|50,送礼人|150,收礼人|150,礼物ID|150,礼物|150,礼物价格|150,礼物数量|150,赠送时间,收礼人是否查看,操作|120" class="m-table-border">
+		<foreach name="list" item="vo">
+			<tr>
+                            <td><input type="checkbox" name="id[]" value="{$vo.giftlist_id}" /></td>
+				<td>{$vo.giftlist_id}</td>
+				<td>{$niceName[$vo['fromuid']]}</td>
+				<td>{$niceName[$vo['touid']]}</td>
+                                <td>{$vo.gift_id}</td>
+                                <td><img src="{$vo.gift_image}" style="width: 90px;height: 60px;border: none;" /></td>
+                                <td>{$vo.gift_price}</td>
+                                <td>{$vo.giftnum}</td>
+				<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+				<td>
+					<if condition="$vo['touser_isread'] eq 1" ><span style="color: red;"> 已查看 </span> 
+					<elseif condition="$vo['touser_isread'] eq 0" /><span style="color: darkgreen;"> 未查看 </span> 
+					</if>
+				</td>
+				<td>
+					<a class="u-btn u-btn-danger  u-btn-small del" href="javascript:;" data="{$vo.giftlist_id}">删除</a>
+				</td>
+			</tr>
+		</foreach>
+	</admin:table>
+	<admin:tablefoot action="true" item="删除" value="1" />
+</admin:panel>
+<script>
+	Do.ready('base',function() {
+		//左下角的选择操作      
+		$('#selectAction').change(function() {
+			var type = $(this).val();
+		});
+		//表格处理
+		$('#table').duxTable({
+			actionUrl : "{:U('batchAction')}",//批量操作
+			deleteUrl: "{:U('del')}",
+			actionParameter : function(){
+				return {'class_id' : $('#selectAction').next('#class_id').val()};
+			}
+		});
+	});
+</script>

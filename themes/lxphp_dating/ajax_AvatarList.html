@@ -1,0 +1,10 @@
+  <!--{foreach  name="list" item="vo" }-->
+	   
+	   <li  class="box"><a href="{:U('saveAvatar',array('photoid'=>$vo['photoid']))}" class="w_dengyu_h">
+	   <img src="{$vo.thumbfiles}" alt="">
+	   <!--{if condition="$vo['isavatr'] eq 1"}--><i class="dangqian">当前头像</i><!--{/if}-->
+	   <!--{if condition="isset($vo['dshPhoto'])&&$vo['dshPhoto'] eq 1"}--><i class="dangqian">头像审核中</i><!--{/if}-->
+	    <!--{if condition="isset($vo['dshPhoto'])&&$vo['dshPhoto'] eq 2"}--><i class="dangqian">审核未通过</i><!--{/if}-->
+	   </a></li>
+	 
+	   <!--{/foreach}-->

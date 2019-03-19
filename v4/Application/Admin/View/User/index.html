@@ -1,0 +1,190 @@
+<h3>{$name}列表</h3>
+<admin:panel >
+  <admin:tabletool filter="true" url="index.php?s=/Admin/User/index/sort/{$sort}" keyword="{$pageMaps.keyword}"> 	
+  	
+  	<if condition="$sort" >
+  		<admin:select name="level"  item="==马甲类别==,普通马甲,高级马甲" value="0,1,2" selected="$pageMaps['level']" />
+  	</if>	
+  	<if condition="!$sort" >
+  	 <admin:select name="vip"  item="==会员等级==,vip,普通会员" value="0,1,2" selected="$pageMaps['vip']" />
+  	</if>	
+  	
+  	<!--  省份筛选     -->
+    <select name="provinceid" id="provinceid" class="form-element " >
+      <option value="0">==省份==</option>
+      <volist name="province" id="vo">
+        <option  value="{$vo.areaid}">{$vo.areaname}</option>
+      </volist>
+    </select>
+    
+    <!--  城市筛选     -->
+    <select name="cityid" id="cityid" class="form-element " >
+      <option value="0">==城市==</option>
+      <volist name="city" id="vo">
+        <option <if condition="$vo['areaid'] eq $info['cityid']">selected</if>  value="{$vo.areaid}">{$vo.areaname}</option>
+      </volist>
+    </select>
+    
+    <admin:select name="sex"  item="==性别==,男,女" value="0,1,2" selected="$pageMaps['sex']" />
+  	<admin:select name="status"  item="==状态==,正常,未验证,禁止" value="0,1,2,3" selected="$pageMaps['status']" />
+  </admin:tabletool>
+  <admin:table id="table" show="选择|30,编号|30,子用户查看,性别,昵称,头像,{$config.jifen_name}/{$config.jifen_name_nv},{$config.money_name},地区,微信OPENID,是否已关注,手机,最后登陆,注册时间,马甲,VIP,状态|60,操作|300">
+    <foreach name="list" item="vo">
+      <tr>
+        <td>
+        	<input type="checkbox" name="id[]" value="{$vo.id}" />
+        </td>
+        <td>{$vo.id}</td>
+       <!-- <td><a href="javascript:;" >{$vo.user_login}</a></td>-->
+        <td><a href="{:U('',array('pid'=>$vo['id']))}" >子用户查看({$vo.fscount})</a></td>
+		<td><a href="javascript:;" > 
+		<if condition="$vo['sex'] eq 1">
+		男
+		<elseif condition="$vo['sex'] eq 2" />
+		女
+		<elseif condition="$vo['sex'] eq 3" />
+		其他
+		</if>
+		</a></td>
+        <td><a href="javascript:;" >{$vo.user_nicename}</a></td>
+        <td>
+        <if condition="$vo['avatar']">
+		<img src="{$vo.avatar}" width="40">
+		<else />
+		
+		</if>
+          <!--<if condition="$vo['status']"> <span class="u-badge u-badge-success">发布</span>
+            <else />
+            <span class="u-badge u-badge-danger">草稿</span> </if>-->
+        </td>
+		<td>{$vo.jifen}</td>
+		<td>{$vo.money}</td>
+		<td>{$vo.province_name|default="未知"}{$vo.city_name}</td>
+		
+		<td>{$vo.weixin}</td>
+		<td>
+		<if condition="$vo['subscribe']">
+			是
+		<else />
+			否
+		</if>
+		</td>
+		<td>{$vo.user_login}</td>
+		 <td>{$vo.last_login_time|date="Y-m-d H:i:s",###}</td>
+		  <td>{$vo.create_time|date="Y-m-d H:i:s",###}</td>
+		      <td>
+		<if condition="$vo['ismj'] eq 1"><span style="color:#6636c9;">普通马甲</span><elseif condition="$vo['ismj'] eq 2"/><span style="color:red;">高级马甲</span><else/>普通会员 </if>
+        </td>
+		 <td>
+		<if condition="$vo['vip'] eq 1"><span style="color:red;">VIP(剩{$vo.vipData}天)</span><else/> </if>
+        </td>
+        <td>
+		
+          <if condition="$vo['user_status'] eq 1"> <span class="u-badge u-badge-success">正常</span>
+            <elseif condition="$vo['user_status'] eq 2" />
+			  <span class="u-badge u-badge-danger">未验证</span>
+			<else />
+            <span class="u-badge u-badge-danger">禁止登陆</span> </if>
+        </td>
+     
+        
+        <td>
+        <a class="u-btn u-btn-primary  u-btn-small" href="{:U('edit',array('id'=>$vo['id']))}">管理</a>
+       
+        <a class="u-btn u-btn  u-btn-small tj" href="javascript:;" data="{$vo.id}"><eq name="vo.type" value="1">撤销推荐<else/>推荐</eq></a>
+        <a class="u-btn u-btn  u-btn-small add" href="javascript:;" dataType="1"  data="{$vo.id}">+财富值</a>
+        <a class="u-btn u-btn  u-btn-small add" href="javascript:;" dataType="2"  data="{$vo.id}">+余额</a>
+		 <a class="u-btn u-btn-danger  u-btn-small del" href="javascript:;" data="{$vo.id}">删除</a>
+		</td>
+      </tr>
+    </foreach>
+  </admin:table>
+  <admin:tablefoot action="true" item="删除,推荐" value="1,2" />
+</admin:panel>
+<script type="text/javascript" charset="utf-8">
+	Do.ready('base',function() {
+		//移动操作
+		$('#selectAction').change(function() {
+			var type = $(this).val();
+			if(type == 3){
+				$(this).after($('#class_id').clone());
+			}else{
+				$(this).nextAll('select').hide();
+			}
+		});
+		//表格处理
+		$('#table').duxTable({
+			actionUrl : "{:U('batchAction')}",
+			deleteUrl: "{:U('del')}",
+			actionParameter : function(){
+				return {'class_id' : $('#selectAction').next('#class_id').val()};
+			}
+		});
+	});
+	
+	//加财富值or加余额
+	$(function(){
+		$('.add').click(function(){
+			var mtype = $(this).attr('dataType');
+			var uid = $(this).attr('data');
+			var type = 10;
+			var desc = '后台添加';
+			var moeny=prompt("请输入金额！");
+		  if(moeny){
+		   	$.post("{:U('Admin/User/sendaccount')}",{mtype:mtype,type:type,moeny:moeny,desc:desc,uid:uid},function(data){
+		    	if(data=='操作成功！'){
+		    		alert(data);
+		    		history.go(0);
+		    	}
+	    	})
+		  }			
+		})
+	})
+	//推荐
+	$(function(){
+		$('.tj').click(function(){
+			var id = $(this).attr('data');
+			var obj = $(this);
+			
+			$.ajax({
+				type:"post",
+				url:"{:U('Admin/User/tuijian')}",
+				data:{id:id},
+				dataType:'json',
+				success:function(msg){
+					if(msg == 1){
+						obj.html("推荐");
+					}
+					
+					if(msg == 2){
+						obj.html('撤销推荐');
+					}
+				}
+				
+			});
+		});
+	})
+	
+	//筛选地区
+	$(function(){
+		$('#provinceid').change(function(){
+			var url = "{:U('Home/Ajax/ajax_get_city')}";
+	    var provinceid =  $(this).val();
+	    if(!provinceid) return false;
+			$.post(url,{provinceid:provinceid},function(json){
+				html = '<option value="0">==城市==</option>';
+				if(json){					
+					$.each(json, function(idx, item) {
+						html += '<option value="'+item.areaid+'">'+ item.areaname + '</option>';
+					});	               
+					$("#cityid").html(html);
+				}	
+			},'json');
+		})	
+	})
+</script>
+
+
+
+
+

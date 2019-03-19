@@ -1,0 +1,75 @@
+<h3>{$name}虚拟礼物</h3>
+<admin:form url="{:U()}" method="post" id="form">
+	<div class="g-main-body">
+		<div class="g-main-content m-form-horizontal">
+			<admin:panel>
+
+				<admin:formrow title="礼物名称" tip="虚拟礼物的名称">
+					<admin:text name="gift_name" value="{$info.gift_name}" len="50" datatype="*" width="large" />
+				</admin:formrow>
+				
+				
+				<admin:formrow title="礼物价格" tip="虚拟礼物的价格">
+					<admin:text name="price" value="{$info.price}" len="20"  width="large" />({$config.money_name})
+				</admin:formrow>
+				
+				<admin:formrow title="返利点（女）" tip="送出该礼物后女性用户可获得的{$config.money_name}返利(请填写固定值。不填按系统设置:金额的{$config.gift_fld_nv}%)">
+					<admin:text name="rebate" value="{$info.rebate}" len="20"  width="large" />
+				</admin:formrow>
+				
+				<admin:formrow title="亲密度" tip="送出该礼物后双方可获得的亲密度(请填写固定值。不填按系统设置：{$config.gift_qmd})">
+					<admin:text name="qmd" value="{$info.qmd}" len="20"  width="large" />
+				</admin:formrow>
+				
+				<admin:formrow title="{$config.jifen_name_nv}/{$config.jifen_name}" tip="女方收到该礼物可获得的{$config.jifen_name_nv}点数或男方送出该礼物可提升的{$config.jifen_name}点数(请填写固定值。不填按系统设置:金额的{$config.gift_def}%)">
+					<admin:text name="jifen" value="{$info.jifen}" len="250" width="large" />
+				</admin:formrow>
+				
+				<admin:formrow title="礼物描述" tip="">
+					<admin:text name="desc" value="{$info.desc}" len="1000" width="large" />
+				</admin:formrow>
+				
+				<admin:formrow title="状态" tip="商品的上架状态">				
+					<admin:radio name="status" item="上架,已下架" value="1,0" checked="$info['status']" isset="1" />					
+				</admin:formrow>
+				
+				<admin:text name="gift_id" type="hidden" value="{$info.gift_id}" />
+				
+				<admin:formsubmit/>
+			</admin:panel>
+		</div>
+	</div>
+	<div class="g-main-sidebar">
+		<admin:panel title="商品主图片" icon="plus" padding="true">
+			<div class="u-thumbnail">
+				<if condition="empty($info['images'])">
+					<img id="pic_url" src="__PUBLIC__/admin/images/placeholder.jpg" width="270" alt="">
+				<else/>
+					<img id="pic_url" src="{$info.images}" width="270" alt="">
+				</if>
+			</div>
+			<admin:text name="images" type="text" value="" len="250" width="medium" id="main_image" />
+				<a class="u-btn u-btn-primary" data="image" href="javascript:;" id="upload">上传</a>
+			<admin:text id="pic_thumb_url" name="images" type="hidden" value="{$info.images}" />
+		</admin:panel>
+	</div>
+</admin:form>
+<script>
+	Do.ready('base', function() {
+		//表单综合处理
+		$('#form').duxFormPage();
+		//上传缩略图
+		$('#upload').duxFileUpload({
+			type: 'jpg,png,gif,bmp',
+			slt: '1',
+			complete: function(data) {
+				$('#pic_url').attr('src', data.original);
+				$('#pic_thumb_url').val(data.url);
+			}
+		});
+		$("#main_image").blur(function() {
+			$("#pic_thumb_url").val($(this).val());
+		});
+		
+	});
+</script>

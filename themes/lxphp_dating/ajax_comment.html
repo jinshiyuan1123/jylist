@@ -1,0 +1,20 @@
+
+<!--{if condition="$commentList"}-->
+	<!--{foreach name="commentList" item="vo"  key="key" }-->
+	 	<li class="cb">
+			<div class="pinglun_yuansu cb">
+			  	<div class="fl"><img src="{$vo.avatar|default='__PUBLIC__/img/mrtx.jpg'}" alt="" class="fl"  >
+			  		<!--{if condition="$vo['user_rank'] eq 1"}-->
+			  			<i class="fl">{$vo.user_nicename|default='昵称未填写'} <span class="vip_logo"></span></i>
+			  		<!--{else/}-->
+			  			<i class="fl no_vip">{$vo.user_nicename|default='昵称未填写'}</i>
+			  		<!--{/if}-->
+			  	</div>
+			  	<div class="fr">{$vo.time|default="1秒前"} <img src="themes/<?php echo C('TPL_NAME'); ?>/images/zan.png" data="{$vo.id}" class="dzan" alt=""><em class="numZan">{$vo.zan}</em></div>
+			</div>
+			<p class="pinglun_yu">{$vo.content}</p>
+	  	</li>
+	<!--{/foreach}-->
+<!--{else/}-->
+ 	<p class="pinglue_new">暂无，ta很期待你的评论哦~</p>
+<!--{/if}-->

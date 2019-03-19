@@ -1,0 +1,114 @@
+body { background-color:#c3cdda; background-image:url(../images/m-login-bg.jpg); background-position: top center; background-repeat:repeat;}
+.m-login {	text-align: center;  position:absolute; left:50%; top:45%; margin-left:-560px; margin-top:-120px; border-radius:5px; padding-bottom:15px; color:#666;}
+.m-login .login-head { background-color:#f0f0f0; height:50px;line-height:50px; padding-left:10px; font-size:16px; border-bottom:1px solid #ebebeb; border-radius:5px 5px 0px 0px; text-align:center; color:#909090; text-shadow:#fff 1px 1px 0px;}
+.m-login .login-model { margin-top:20px; }
+.m-login .login-model .row { width:300px; margin-left:auto; margin-right:auto; height:45px; border:1px solid #e1e1e1 ;border-radius:5px 5px 0px 0px; overflow:hidden;background-color:#FFF}
+.m-login .login-model .row-b1 { border-top:0px; border-radius: 0px 0px 5px 5px; }
+.m-login .login-model input {width:240px;  height:45px; line-height:50%; line-height:45px\9;  border:0px; vertical-align:middle; font-size:14px; padding-left:50px; padding-right:10px; overflow:hidden;background-repeat:no-repeat; background-position:10px center}
+.m-login .login-model .login-user { background-image:url(../images/m-login-user.jpg); }
+.m-login .login-model .login-pwd { background-image:url(../images/m-login-pwd.jpg); }
+.m-login .login-button { width:300px; margin-left:auto; margin-right:auto; margin-top:10px;}
+.m-login .u-login-btn { padding:0px; margin:0px; background-color:#e85a82; width:261px; height:50px; line-height:50px; border:0px; font-size:14px; text-align:center; color:#FFF; border-radius: 5px;text-shadow:#e85a82 -1px -1px 0px; }
+.m-login .u-login-btn:hover { border-bottom:5px solid #EF7094; }
+.m-login .login-status { margin-left:auto; margin-right:auto; line-height:35px; font-size:12px; text-align:center;}
+.m-login .login-copyright { line-height:25px; padding-top:10px; font-size:10px; text-align:center; color:#999; display:none}
+.m-login .login-copyright a { color:#999}
+
+
+
+
+
+/*new*/
+.new_logo {
+	line-height: 80px;
+    font-size: 50px;
+    color: #fff;
+    font-family: "幼圆;"
+   }
+   .new_logo img {
+   	width: 70px;
+   	vertical-align:middle;
+   	position: relative;
+    top: -3px;
+   }
+   .new_logo p {
+   	font-size: 21px;
+   	line-height: 20px;
+   	text-align: center;
+   }
+   .new_logo1 {
+   	font-size: 34px;
+   	color: #fff;
+   	margin-top: 48px;
+   }
+   .form_div ul li {
+    float: left;
+    margin: auto 10px;
+    width: 260px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 30px;
+    overflow: hidden;
+   }
+.form_div    {
+	margin-top: 160px;
+    }
+.form_div ul li input {width:190px;  height:50px;    color: #fff; line-height:50%; line-height:45px\9;background-color: rgba(255, 255, 255, 0);  border:0px; vertical-align:middle; font-size:14px; padding-left:60px; padding-right:10px; overflow:hidden;background-repeat:no-repeat; background-position:21px center}
+.form_div ul li .login-user { background-image:url(../images/roog.png); }
+.form_div ul li .login-pwd { background-image:url(../images/name.png); }
+.form_div ul li .yzm {
+	background-image:url(../images/yz.png);
+	    width: 120px;
+    float: left;
+    padding-right: 0px;
+}
+.form_div ul li .yzm_img {
+	margin-top: 11px;
+	border: #f03b57 solid 1px;
+	border-radius: 3px;
+	width: 63px;
+	height: 25px;
+	    float: left;
+}
+body, html {
+    height: 100%;
+}
+
+@media only screen and (max-width: 1150px) {
+.m-login {
+    text-align: center;
+    border-radius: 5px;
+    padding-bottom: 15px;
+    color: #666;
+        position: inherit;
+            margin-left: inherit;
+    margin-top: inherit;
+}
+.new_logo {
+    line-height: 80px;
+    font-size: 40px;
+    color: #fff;
+    font-family: "幼圆;";
+}
+.new_logo1 {
+    font-size: 20px;
+    color: #fff;
+    margin-top: 25px;
+}
+.form_div {
+    margin-top: 60px;
+}
+.form_div ul li {
+    float: initial;
+    margin: auto;
+    width: 260px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 30px;
+    overflow: hidden;
+    margin-top: 18px;
+}
+
+
+
+}

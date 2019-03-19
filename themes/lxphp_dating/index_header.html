@@ -1,0 +1,173 @@
+ <div class="new-gonggao" style="display: none">
+                <img src="images/user_07.png" alt="" class="laba">
+                <div id="demo" class="qimo8">
+                    <div class="qimo">
+                        <div id="demo1"><ul><li><a href="{:U('Public/gongGao',array('id'=>$gg['content_id']))}"> {$gg.title}</a> </li></ul></div>
+                        <div id="demo2"></div>
+                    </div>
+                </div>
+                <img src="images/xx.png" alt="" class="xx_hide">
+</div>
+
+
+<!--
+<a href="{:U('Home/User/UpPhoto')}" class="shangchen shangchen1" style="top: 20%;  display: block;"><img src="images/shangchuang_index.png" alt=""></a>
+
+
+
+<a href="{:U('Home/Ranking/Charmlist',array('type' => 4))}" class="shangchen shangchen1" style="top: 35%;  display: block;"><img src="images/paihang.png" alt=""></a>
+
+ <a href="{:U('Home/Gift/index')}" class="shangchen" style="top: 35%;"><img src="images/shangcenruk.png" alt=""></a>-->
+ 
+ 
+      <div class="index_header cb" style="  overflow: hidden;">
+         <div class="fl" id="ddd" onclick="getLocation();"><img src="images/fujin.png" alt="">{$area}</div>
+         <span  class="fr shuaxuan">条件刷选<img src="images/shouyejiantou.png" alt=""></sapn>
+      </div>
+
+        <div class="dangchuan">
+        <div class="heipin"></div>
+<form action="__SELF__" method="post" id="form">
+          <div class="shuaxuan_dangchu">
+            <p class="kandao">想看到的用户</p>
+            <div class="nnnn dedede">    
+			<span <!--{if condition="$sex lt 1"}--> class="hot" <!--{/if}--> >全部</span>          
+              <span <!--{if condition="$sex eq 1"}--> class="hot" <!--{/if}-->>男</span>
+			  <span <!--{if condition="$sex eq 2"}--> class="hot" <!--{/if}-->>女</span>              
+            </div>
+            <p class="kandao">所在地区筛选</p>
+             <form name="dequ">
+             <div class="dequ">
+			 
+              <select id="s1">
+			    <!--{foreach name="province" item="vo" }-->
+			     
+            <option <!--{if condition="$vo['areaid'] eq $areaarr['provinceid']"}--> selected="selected" <!--{/if}--> value="{$vo.areaid}">{$vo.areaname}</option>
+        
+				<!--{/foreach}-->
+			  </select>
+              <select id="s2">
+			  	
+				 <!--{foreach name="city" item="vo" }-->			     
+            <option <!--{if condition="$vo['areaid'] eq $areaarr['cityid']"}--> selected="selected" <!--{/if}--> value="{$vo.areaid}">{$vo.areaname}</option>        
+				<!--{/foreach}-->
+				
+			  </select>
+              </div>
+             </form>
+             <p class="kandao">对方年龄筛选</p>
+             <div class="nianli">
+               <ul>
+                 <li <!--{if condition="$age lt 1"}-->class="hot" <!--{/if}-->>不限</li>
+                 <li <!--{if condition="$age eq 1"}--> class="hot" <!--{/if}-->>18-25岁</li>
+                 <li <!--{if condition="$age eq 2"}--> class="hot" <!--{/if}-->>26-35岁</li>
+                 <li <!--{if condition="$age eq 3"}--> class="hot" <!--{/if}-->>36-40岁</li>
+                 <li <!--{if condition="$age eq 4"}--> class="hot" <!--{/if}-->>40-50岁</li>
+                 <li <!--{if condition="$age eq 5"}--> class="hot" <!--{/if}-->>50岁以上</li>
+               </ul>
+             </div>
+             <br>
+			 <input name="sex" id="sex" value="{$sex}" type="hidden"/>
+			
+			 <input name="provinceid" id="provinceid" value="{$areaarr.provinceid}" type="hidden"/>
+			 <input name="cityid" id="cityid" value="{$areaarr.cityid}" type="hidden"/>
+			 <input name="age" id="age" value="{$age}" type="hidden"/>
+             <div class="nianli"><a href="javascript:;" class="guangbi_be">取消</a><a href="javascript:$('#form').submit();">确认</a></div>
+          </div>
+		  </form>
+      </div> 
+     
+ <script type="text/javascript">
+      $(".shuaxuan").click(function(){
+        $(".shangchen1").hide(100);
+        $(".dangchuan,.heipin").show(0)
+
+      })
+       $(".guangbi_be").click(function(){
+        $(".dangchuan,.heipin").hide(0);
+        $(".shangchen1").show(200);
+
+      })
+
+     $(".dedede span").click(function(){
+      var index= $(this).index();
+      $(".dedede span").removeClass("hot").eq(index).addClass("hot");
+	  if(index==0) index--;
+	  $("#sex").val(index); 
+      })
+     $(".nianli ul li").click(function(){
+      var index= $(this).index();
+      $(".nianli ul li").removeClass("hot").eq(index).addClass("hot"); 
+	   if(index==0) index--;
+	   $("#age").val(index); 
+      })
+	  
+	  $('#s1').change(function(){
+			var url = "{:U('Home/Ajax/ajax_get_city')}";
+		    var provinceid =  $(this).val();
+		    if(!provinceid) return false;
+			$("#provinceid").val(provinceid);
+			$("#cityid").val('0');
+			$.post(url,{provinceid:provinceid},function(json){
+				html = '<option value="0">请选择</option>';
+				if(json){					
+					$.each(json, function(idx, item) {
+						html += '<option value="'+item.areaid+'">'
+								+ item.areaname + '</option>';
+					});
+	               
+					$("#s2").html(html);
+				}
+		
+				
+			},'json');
+			
+			
+		})
+				
+		$('#s2').change(function(){
+		 	 var cityid =  $(this).val();
+		    if(!cityid) return false;
+			$("#cityid").val(cityid);
+			
+		 })
+		 
+		   var demo = document.getElementById("demo");
+                var demo1 = document.getElementById("demo1");
+                var demo2 = document.getElementById("demo2");
+                demo2.innerHTML = document.getElementById("demo1").innerHTML;
+
+                function Marquee() {
+                    if (demo.scrollLeft - demo2.offsetWidth >= 0) {
+                        demo.scrollLeft -= demo1.offsetWidth;
+                    } else {
+                        demo.scrollLeft++;
+                    }
+                }
+                var myvar = setInterval(Marquee, 30);
+				var id = '{$gg.content_id}';
+                $(".xx_hide").click(function(){
+                	$(".new-gonggao").hide(200);					
+					$.post("{:U('Ajax/ggisread')}",{id:id},function(data){
+						
+					},'json')
+                })
+		var showgg = "<?php echo cookie('gg'); ?>";	
+		if(showgg!=id) $(".new-gonggao").show();
+      </script>
+      <script type="text/javascript">
+var ss = 0;
+$(window).scroll(function(){
+  var sss = ss;  
+var s=document.body.scrollTop;
+    ss = s;
+if(sss>s){
+  $(".index_header").attr('id','piaofu');
+}else{
+    $(".index_header").attr('id','');
+}
+if(s<200){
+  $(".index_header").attr('id','');
+}
+});
+</script>

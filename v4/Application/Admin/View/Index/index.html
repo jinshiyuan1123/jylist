@@ -1,0 +1,172 @@
+<div class="g-grid">
+  <div class="g-col-4-1">
+    <div class="m-panel s-panel-info">
+      <div class="panel-header">
+        <div class="f-cb">
+          <div class="f-fl"><i class="u-icon-th-list u-font-5x"></i></div>
+          <div class="f-fr f-tar">
+            <h3><?php echo D('DuxCms/Category')->countList(); ?></h3>
+            <p>栏目总数</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="g-col-4-1">
+    <div class="m-panel s-panel-danger">
+      <div class="panel-header">
+        <div class="f-cb">
+          <div class="f-fl"> <i class="u-icon-file-text u-font-5x"></i> </div>
+          <div class="f-fr f-tar">
+            <h3><?php echo D('DuxCms/Content')->countList(); ?></h3>
+            <p>内容总数</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="g-col-4-1">
+    <div class="m-panel s-panel-success">
+      <div class="panel-header">
+        <div class="f-cb">
+          <div class="f-fl"> <i class="u-icon-tags u-font-5x"></i> </div>
+          <div class="f-fr f-tar">
+            <h3><?php echo D('DuxCms/Tags')->countList(); ?></h3>
+            <p>TAG总数</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="g-col-4-1 g-col-last">
+    <div class="m-panel s-panel-warning">
+      <div class="panel-header">
+        <div class="f-cb">
+          <div class="f-fl"> <i class="u-icon-comments u-font-5x"></i> </div>
+          <div class="f-fr f-tar">
+            <h3><?php echo D('DuxCms/Fragment')->countList(); ?></h3>
+            <p>碎片总数</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="g-grid">
+  <div class="g-col-2-1">
+    <div class="m-panel">
+      <div class="panel-header"> <i class="u-icon-bars"></i> 环境信息 </div>
+      <div class="m-table-mobile">
+        <table class="m-table">
+          <tbody>
+            <tr>
+              <td>系统环境</td>
+              <td>{:PHP_OS}/<?php echo $_SERVER['SERVER_SOFTWARE'] ; ?></td>
+            </tr>
+            <tr>
+              <td>服务器地址:</td>
+              <td>{$_SERVER.SERVER_ADDR}:{$_SERVER.SERVER_PORT}</td>
+            </tr>
+            <tr>
+              <td>服务器时间</td>
+              <td>{:date('Y-m-d H:i:s')} {:date_default_timezone_get()}</td>
+            </tr>
+            <tr>
+              <td>脚本超时时间</td>
+              <td><?php echo get_cfg_var("max_execution_time") ; ?> 秒</td>
+            </tr>
+            <tr>
+              <td>上传大小</td>
+              <td><?php echo get_cfg_var("upload_max_filesize")?get_cfg_var("upload_max_filesize"):"不允许上传文件" ; ?></td>
+            </tr>
+            <tr>
+              <td>被屏蔽的函数:</td>
+              <td><?php echo get_cfg_var("disable_functions")?get_cfg_var("disable_functions"):"无" ; ?></td>
+            </tr>
+            <tr>
+              <td>URL路径：</td>
+              <td>__ROOT__/</td>
+            </tr>
+          <td>物理路径：</td>
+            <td>{:dirname(THINK_PATH)}</td>
+          </tr>
+            </tbody>
+          
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="g-col-2-1  g-col-last">
+    <div class="m-panel">
+      <div class="panel-header"> <i class="u-icon-bar-chart-o"></i> 程序信息 </div>
+      <div class="m-table-mobile">
+        <table class="m-table">
+          <tbody>
+            <tr>
+              <td>站点名称</td>
+              <td>{:C('SITE_TITLE')}</td>
+            </tr>
+            <tr>
+              <td>网站域名：</td>
+              <td><a href="http://{$_SERVER.SERVER_NAME}" target="_blank">http://{$_SERVER.SERVER_NAME}</a></td>
+            </tr>
+            <tr>
+              <td>程序版本</td>
+              <td>{:DUX_VER} ({:DUX_TIME})</td>
+            </tr>
+            <tr>
+              <td>&#26356;&#22810;&#31934;&#21697;&#28304;&#30721;</td>
+              <td>锦尚中国源码论坛 bbs.52jscn.com</td>
+            </tr>
+			 <tr>
+              <td>升级信息</td>
+              <td><a href="{$upurl}" target="_blank" id="" style="color:red">{$upmsg}</a></td>
+            </tr>
+            <tr>
+              <td>PHP版本</td>
+              <td>{:phpversion()}</td>
+            </tr>
+            <tr>
+              <td>数据驱动</td>
+              <td>{:C('DB_TYPE')}</td>
+            </tr>
+            <tr>
+              <td>附件上传目录：</td>
+              <td>{:APP_PATH}upload</td>
+            </tr>
+           
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="m-panel hide" style="display:none">
+  <div class="panel-header"> <i class="u-icon-bar-chart-o"></i> 程序支持 </div>
+  <div class="m-table-mobile">
+    <table class="m-table">
+      <tbody>
+        <tr>
+          <td>程序支持</td>
+          <td>duxcms官网 文档中心 duxcms论坛</td>
+        </tr>
+        <tr>
+          <td>开发团队</td>
+          <td>独享网络组 (DUX Group)</td>
+        </tr>
+        <tr>
+          <td>开发组成员</td>
+          <td>Life、初学者、colver、撸棒棒</td>
+        </tr>
+        <tr>
+          <td>运营支持</td>
+          <td>duxcms、大绿茶</td>
+        </tr>
+        <tr>
+          <td>支持贡献</td>
+          <td>伍艺高强、沧桑、anyfar、幸福使者、大绿茶等</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="g-main">
+  <!--by jnooo.cn-->
+   <h3 style="margin-top:-80px">列表</h3>
+  <div class="m-table-mobile"><table id="table" class="m-table "><thead><tr><th>主题</th><th>内容</th></tr></thead><tbody><tr>
+        <td>
+       文案素材示例：
+	   <br>
+	   建议自行撰写文案跟图片素材.
+        </td>
+        <td>①.同城约会聊天，好多身边朋友都在里面，真是手机时代啊～有手机就能约到喜欢的人了，祝有情人终成眷属吧[玫瑰][玫瑰][玫瑰]记得识别图中的二维码哟[害羞][害羞][害羞]
+		 <br>②.长按二维码扫一扫，就可以约饭，逛街，看电影。同城激情约啪，比陌陌还强大，三分钟速成，手机寻找爱情的时代已经来临[色]让那突如其来的艳遇走进你的生活
+		 <br>③.墙裂推荐国内成功率最高的约啪神器，不兜圈子,直来直去,快速同城见面,5分钟找到同城约会！ 真是网络改变生活啊！！ 长按图中二维码扫一扫就可加入.....</td>
+      </tr>
+	  
+	  
+	  
+   
+      <tr>
+        <td>
+       图片素材示例：
+	<br>（把下面的专属推广二维码，添加到右边的素材）
+	   <br>
+	   建议自行撰写文案跟图片素材.
+        </td>
+        <td><a href="http://rige.com.cn/sucai/erweima/1.jpg" target="_blank"> <img src="http://rige.com.cn/sucai/erweima/1.jpg" width="86" height="100"> </a>  <a href="http://rige.com.cn/sucai/erweima/2.jpg" target="_blank"> <img src="http://rige.com.cn/sucai/erweima/2.jpg" width="86" height="100"> </a>  <a href="http://rige.com.cn/sucai/erweima/3.jpg" target="_blank"> <img src="http://rige.com.cn/sucai/erweima/3.jpg" width="86" height="100"> </a></td>
+      </tr>
+      <tr>
+        <td>
+        	我的专属推广二维码(公众号):	
+        </td>
+        <td><img src="{$ewmimg}" width="330"></td>
+      </tr></tbody></table></div>
+
+  <div class="m-table-bar">
+            <div class="bar-pages">
+              <div class="m-page">
+                              </div>
+            </div>
+            <div class="f-cb"></div>
+        </div>
+            </div> </div>
+<script type="text/javascript" charset="utf-8">
+	Do.ready('base',function() {
+		//移动操作
+		$('#selectAction').change(function() {
+			var type = $(this).val();
+			if(type == 3){
+				$(this).after($('#class_id').clone());
+			}else{
+				$(this).nextAll('select').hide();
+			}
+		});
+		//表格处理
+		$('#table').duxTable({
+			actionUrl : "/index.php?s=/Admin/Tuig/batchAction.html",
+			deleteUrl: "/index.php?s=/Admin/Tuig/del.html",
+			actionParameter : function(){
+				return {'class_id' : $('#selectAction').next('#class_id').val()};
+			}
+		});
+	});
+	
+	
+</script>
+</div>
+
+
+
+
+

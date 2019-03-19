@@ -1,0 +1,56 @@
+<h3>详情</h3>
+<admin:form url="{:U()}" method="post" id="form" >
+  <div class="g-main-body">
+    <div class="g-main-content m-form-horizontal">
+      <admin:panel >
+   
+   
+   
+       <if condition="$info['ewmurl']">
+		<img src="{$info.ewmurl}" width="150">
+		<else />
+		
+		</if>
+      
+      
+       <admin:formrow title="金额" tip="单位(元)"  >
+       <admin:text name='fee'  value="{$info.fee}" len="250"  />
+       </admin:formrow> 
+     
+       
+       <admin:formrow title="描述" tip="描述"  >
+        <admin:textarea  name="desc" rows="3">{$info.desc}</admin:textarea>
+       </admin:formrow>
+       
+        <admin:formrow title="有效期" tip="有效期(分钟)"  >
+       <admin:text name='yxq'  value="10" len="250"  />
+       </admin:formrow> 
+       
+       <admin:formrow title="创建时间" tip="创建时间"  >
+        <admin:text   value='{$time|date="Y-m-d H:i:s",###}'   />
+       </admin:formrow>
+          
+       <admin:formrow title="状态" tip="状态"  >
+       <admin:radio name="status"  item="成功,付款中,失败" value="1,2,0" checked="$info['status']" isset="2" />
+       </admin:formrow>
+        <admin:formsubmit/>
+      </admin:panel>
+    </div>
+  </div>
+  <admin:text name="id" type="hidden" value="{$info.id}" />
+</admin:form>
+<script>
+	$(function(){
+		$("#btn-submit").click(function(){
+		return checkfrom();
+		})
+		
+	})
+	
+	function checkfrom(){
+		if($("#fee").val()=='' || $("#desc").val()==''){
+			alert("金额和描述必填！");
+			return false;
+		}
+	}
+</script>

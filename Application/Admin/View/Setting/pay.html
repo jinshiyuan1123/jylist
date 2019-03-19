@@ -1,0 +1,35 @@
+<h3>支付设置</h3>
+<admin:panel >
+  <admin:form url="{:U('site')}" method="post" id="form" class="m-form-horizontal" >
+    
+       
+     	
+	<admin:formrow title="MCHID" tip="微信商户id" >
+      <admin:text name="MCHID"  value="{$info.MCHID}" len="250" />
+    </admin:formrow>
+	
+	<admin:formrow title="KEY" tip="微信商户key，微信支付设置教程：http://www.yueai.me/help/weipay.html" >
+      <admin:text name="MCKEY"  value="{$info.MCKEY}" len="250" />
+    </admin:formrow>  
+       
+     <admin:formrow title="支付宝合作身份者id" tip="合作身份者id，以2088开头的16位纯数字" >
+     <admin:text name="alipay_config_partner"  value="{$info.alipay_config_partner}" len="250" />
+    </admin:formrow>
+    <admin:formrow title="收款支付宝账号" tip="收款支付宝账号，一般情况下收款账号就是签约账号" >
+     <admin:text name="alipay_config_seller_id"  value="{$info.alipay_config_seller_id}" len="250" />
+    </admin:formrow>
+    <admin:formrow title="支付宝查询安全校验码(key)" tip="查询安全校验码(key)" >
+     <admin:text name="alipay_config_key"  value="{$info.alipay_config_key}" len="250" />
+    </admin:formrow>
+    
+       
+
+    
+    <admin:formsubmit/>
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base', function() {
+	$('#form').duxForm();
+});
+</script> 

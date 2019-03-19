@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>{$media.title}</title>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+</head>
+
+<body>
+  
+  <div class="hd_main yaoqinghaoyou">
+
+     <p class="lolo_name"><img src="images/yingdao_logo.png" alt=""><?php echo C("site_title");?></p>
+     <p class="yaoqingtouxian_tx"><img src="images/user_03_03.png" alt="" class="yaoqingtouxian"></p>
+     <p class="name_yaoqinghaoyou">把爱曲折</p>
+     <p class="kankan_yaoqinghaoyou"> 我在<?php echo C("site_title");?>上传了<br>我的照片快来看一下吧 ！</p>
+     <p class="yaoqingerwema_img"><img src="images/erwm_03.jpg" alt="" class="yaoqingerwema" ></p>
+     <p class="saosao_yaoqinghaoyou">“微信扫码/长按上面图片，识别二维码”</p>
+     <div class="dangmu">
+     	<div class="heihei"></div>
+     	<img src="images/fenx.png">
+     </div>
+
+     
+  </div>
+   <script type="text/javascript">
+      $(".dangmu").click(function(){
+           $(".dangmu").hide();  
+      })
+   </script>
+
+</body>
+
+</html>

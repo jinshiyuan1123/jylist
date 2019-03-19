@@ -1,0 +1,75 @@
+<h3>站点信息</h3>
+<admin:panel >
+  <admin:form url="{:U('site')}" method="post" id="form" class="m-form-horizontal" >
+    <admin:formrow title="站点标题" tip="网站标题栏处显示" >
+      <admin:text name="site_title"  value="{$info.site_title}" len="250" datatype="*"  />
+    </admin:formrow>
+    <admin:formrow title="站点副标题" tip="站点标题后面显示的副标题" >
+      <admin:text name="site_subtitle"  value="{$info.site_subtitle}" len="250" />
+    </admin:formrow>
+    <admin:formrow title="站点关键词" tip="搜索引擎所收录的关键词" >
+      <admin:text name="site_keywords"  value="{$info.site_keywords}" len="250" />
+    </admin:formrow>
+   
+    <admin:formrow title="站点域名" tip="当前网站的主域名，请不要填写成了网址。" >
+      <admin:text name="site_url"  value="{$info.site_url}" len="250" />
+    </admin:formrow>
+	
+    
+    <admin:formrow title="短信账号" tip="短信账号（http://www.dxton.com/申请）" >
+     <admin:text name="mobaccount"  value="{$info.mobaccount}" len="250" />
+    </admin:formrow>
+    
+    <admin:formrow title="短信密码" tip="短信密码" >
+     <admin:text name="mobpass"  value="{$info.mobpass}" len="250" />
+    </admin:formrow>
+    
+    
+	<!--
+    <admin:formrow title="多域名设置" tip="分享出去后的域名，一个域名一行，泛域名用类似：*.lxphp.com" >
+      <admin:textarea name="moredomai"  rows="5" >{$info.moredomai}</admin:textarea>
+    </admin:formrow>-->
+    
+	 <admin:formrow title="自动刷新聊天" tip="当用户开启聊天窗口时，对方如果有回复，自动刷新间隔时间,时间越短服务器消耗越大。">
+      <admin:text name="reshtime" value="{$info.reshtime}" len="250" width="mini" />（秒）
+    </admin:formrow>
+  
+	
+       <admin:formrow title="站点统计" tip="用于统计代码调用" >
+      <admin:textarea name="site_statistics"  rows="5" >{$info.site_statistics}</admin:textarea>
+    </admin:formrow>
+    
+	  
+	<admin:formrow title="注册条款">
+	  <admin:textarea name="site_tiaokuan" class="u-editor" rows="20">{$info.site_tiaokuan|html_out}</admin:textarea>
+	</admin:formrow>
+	
+	 <admin:formrow title="苹果app" tip="苹果app下载地址。生成地址：http://{$info.site_url}{:U('Home/Public/app')}" >
+      <admin:text name="app_url2"  value="{$info.app_url2}" len="250" />
+    </admin:formrow>
+    	
+	
+	 <admin:formrow title="安卓app" tip="安卓app下载地址。 生成地址：http://{$info.site_url}{:U('Home/Public/app')}" >
+      <admin:text name="app_url"  value="{$info.app_url}" len="250" />
+    </admin:formrow>
+    
+	
+	
+	
+    <!-- <admin:formrow title="首页公告" tip="首页公告" >
+      <admin:textarea name="sygg"  rows="5" >{$info.sygg}</admin:textarea>
+    </admin:formrow>
+    -->
+    
+    
+    
+    
+    <admin:formsubmit/>
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base', function() {
+	//表单综合处理
+    $('#form').duxFormPage();
+});
+</script> 

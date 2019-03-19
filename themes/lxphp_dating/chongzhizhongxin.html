@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>{$media.title}</title>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+</head>
+
+<body>
+  
+  <div class="hd_main" style="background: #FFFFFF;">
+      <div class="fujinderen_header">
+         充值中心
+         <a  href="javascript:history.go(-1);" class="fl" id="ddd"><img src="images/zuojian.png"  style="width:11px;">返回</a>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="chongzhizhongxin">
+      	<div class="fl"><a href="" class="hot">购买VIP会员</a></div>
+      	<div class="fl"><a href="">充值金钱</a></div>
+      </div>
+      <div class="chongzhizhongxin_a cb">
+         <div class="fl touxiang_new"><img src="images/moban_lise_03.jpg" alt=""></div>
+         <div class="fl huiyuan_vip_new">把爱曲折 <span>VIP</span></div>
+         <div class="fr chongzhizhongxin_vip">VIP特权余期 :<span> 0 天</span></div>
+      </div>
+      <p class="xuznze">请选择购买VIP会员的天数</p>
+        <div class="gai_vip cb">
+          <ul>
+            <li class="cb"><div class="fl"><img src="images/vip7.png">7天20元</div> <a href="" class="fr shengji">升级</a></li>
+            <li class="cb"><div class="fl"><img src="images/vip30.png">30天68元</div>7.5折 <i class="yuanjia">原价¥90</i> <a href="" class="fr shengji">升级</a></li>
+            <li class="cb"><div class="fl"><img src="images/vip90.png">90天98元</div>5.4折 <i class="yuanjia">原价¥180</i> <a href="" class="fr shengji">升级</a></li>
+            <li class="cb"><div class="fl"><img src="images/nian.png"><p class="nian_ww">1年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 128元</p><p  class="nian_ee">92%用户的选择</p></div> 7.5折 <i class="yuanjia">原价¥90</i><a href="" class="fr shengji">升级</a></li>
+          </ul>
+
+
+        </div>
+
+
+
+
+
+
+      <div class=" xuznze4" style="margin-top: 15px;">
+           <p>&nbsp;VIP特权介绍</p>
+           <p>&nbsp;会员可以设置私密相册，会员可查看私密照。</p>
+           <p>&nbsp;会员可无限量短信、查阅全部信息资料。</p>
+      </div>
+	      
+  </div>
+    
+<script type="text/javascript">
+	$(".xuznze2 ul li").click(function(){
+		var index = $(this).index();
+		$(".xuznze2 ul li").removeClass("hot").eq(index).addClass("hot"); 
+	})
+</script>
+
+
+</body>
+
+</html>

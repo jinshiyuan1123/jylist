@@ -1,0 +1,26 @@
+<h3>授权用户列表</h3>
+<admin:panel >
+	<admin:tabletool filter="false" keyword="{$keyword}"></admin:tabletool>
+
+	<admin:table id="table" show="编号|80,网站域名,网站IP,用户QQ,用户手机,安装时间,操作|130">
+	  <foreach name="list" item="vo">
+		<tr>
+		  <td>{$vo.id}</td>
+		  <td>{$vo.domain}</td>
+		  <td>{$vo.ip}</td>
+		  <td>{$vo.qq}</td>
+		  <td>{$vo.mobile}</td>
+		  <td>{$vo.install_time|date="Y-m-d H:i:s",###}</td>
+		  <td><a class="u-btn u-btn-primary u-btn-small" href="{:U('edit',array('id'=>$vo['id']))}">修改</a> <a class="u-btn u-btn-danger u-btn-small del" href="javascript:;" data="{$vo.id}">删除</a></td>
+		</tr>
+	  </foreach>
+	</admin:table>
+	<admin:tablefoot action="false" />
+</admin:panel>
+<script>
+Do.ready('base',function() {
+	$('#table').duxTable({
+		deleteUrl: "{:U('del')}"
+	});
+});
+</script>

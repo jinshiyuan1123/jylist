@@ -1,0 +1,108 @@
+  <div class="g-col-2-1">
+    <div class="m-panel">
+  	<div class="panel-header">统计表</div>
+      <div class="m-table-mobile">
+	   <div style="width:98%; height: 100%; padding: 10px; overflow: auto;" id="tongjitext">
+	   <table class="m-table">
+	   <thead>
+	   <tr align="center" style="background-color:skyblue">
+	   <td>
+	   </td>
+	   <td>男性</td>
+	   <td>女性</td>
+	   <td>总数</td>
+
+	   </tr>
+	   </thead>
+	   <tbody>
+	   <tr align="center">
+	   <td>普通会员</td>
+	   <td><a href="{:U('Admin/User/index',array('sex'=>1))}">{$info.manUser|default="0"}</a></td>
+	   <td><a href="{:U('Admin/User/index',array('sex'=>2))}">{$info.girlUser|default="0"}</a></td>
+	   <td><a href="{:U('Admin/User/index')}">{$info.UserCount|default="0"}</a></td>
+
+	   </tr>
+	      <tr align="center">
+	   <td>vip</td>
+	   <td><a href="{:U('Admin/User/index',array('sex'=>1,'vip'=>1))}">{$info.manVip|default="0"}</a></td>
+	   <td><a href="{:U('Admin/User/index',array('sex'=>2,'vip'=>1))}">{$info.girlVip|default="0"}</a></td>	   
+	   <td><a href="{:U('Admin/User/index',array('vip'=>1))}">{$info.VIPCount|default="0"}</a></td>
+	   </tr>
+	   
+	      <tr align="center">
+	   <td>当天新增(普通会员)</td>
+	   <td><a href="{:U('Admin/User/index',array('sex'=>1))}">{$info.manUserDay|default="0"}</a></td>
+	   <td><a href="{:U('Admin/User/index',array('sex'=>2))}">{$info.girlUserDay|default="0"}</a></td>
+	   <td><a href="{:U('Admin/User/index')}">{$info.UserCountDay|default="0"}</a></td>
+
+	   </tr>
+	      <tr align="center">
+	   <td>当天新增(vip)</td>
+	   <td><a href="{:U('Admin/User/index',array('sex'=>1,'vip'=>1))}">{$info.manVipDay|default="0"}</a></td>
+	   <td><a href="{:U('Admin/User/index',array('sex'=>2,'vip'=>1))}">{$info.girlVipDay|default="0"}</a></td>	   
+	   <td><a href="{:U('Admin/User/index',array('vip'=>1))}">{$info.VIPCountDay|default="0"}</a></td>
+	   </tr>
+	   
+	   <tr align="center" style="background-color:skyblue"><td>
+	   </td>
+	   <td>待审核昵称</td>
+	   <td>待审核头像</td>
+	   <td>待审核相册</td>
+
+	   </tr>
+	   <tr align="center">
+	   <td rowspan="2">待审核</td>
+	   <td><a href="{:U('Admin/Audit/AuditNickname',array('status'=>-1,'iscount'=>1))}">{$info.nicknameFlag|default="0"}</a></td>
+	   <td><a href="{:U('Admin/Audit/AuditAvatar',array('status'=>-1,'iscount'=>1))}">{$info.avatarFlag|default="0"}</a></td>
+	   <td><a href="{:U('Admin/User/userPhotoFlag',array('flag'=>-1,'iscount'=>1))}">{$info.photoFlag|default="0"}</a></td>
+
+	   </tr>
+	    <tr align="center">
+	   <td></td>
+	   <td>待审核评论：<a href="{:U('Admin/CommentManage/index',array('flag'=>-1,'iscount'=>1))}">{$info.commentFlag|default="0"}</a></td>
+	   <td>待审核内心独白：<a href="{:U('Admin/Audit/AuditMonolog',array('status'=>-1,'iscount'=>1))}">{$info.monoFlag|default="0"}</a></td>
+	   <td></td>
+	   <td></td>
+	   <td></td>
+	   </tr>
+	   
+	   <tr align="center" style="background-color:skyblue"><td>
+	   </td>
+	   <td>提现待审核</td>
+	   <td>待提现总金额</td>
+	   <td>已提现总金额</td>
+	   </tr>
+	   <tr align="center">
+	   <td>提现</td>
+	   <td><a href="{:U('Admin/Moeny/index',array('status'=>2))}">{$info.txFlag|default="0"}</a></td>
+	   <td><a href="{:U('Admin/Moeny/index',array('status'=>2))}">{$info.txFee|default="0"}</a></td>
+	   <td><a href="{:U('Admin/Moeny/index',array('status'=>1))}">{$info.txTotalFee|default="0"}</a></td>
+	   </tr>
+	  
+	    <tr align="center" style="background-color:skyblue"><td>
+	   </td>
+	   <td>vip</td>
+	   <td>充值</td>
+	   <td>总收入</td>
+	   </tr>
+	   <tr align="center">
+	   <td>收入</td>
+	   <td><a href="{:U('Admin/RechargeLog/index')}">{$info.vipMoney|default="0"}</a></td>
+	   <td><a href="{:U('Admin/RechargeLog/index')}">{$info.chongMoney|default="0"}</a></td>
+	   <td><a href="{:U('Admin/RechargeLog/index')}">{$info.MoneyCount|default="0"}</a></td>
+	   </tr>
+	    <tr align="center">
+	     <td>当天收入</td>
+	   <td><a href="{:U('Admin/RechargeLog/index')}">{$info.vipMoneyDay|default="0"}</a></td>
+	   <td><a href="{:U('Admin/RechargeLog/index')}">{$info.chongMoneyDay|default="0"}</a></td>
+	   <td><a href="{:U('Admin/RechargeLog/index')}">{$info.MoneyCountDay|default="0"}</a></td>
+	   </tr>
+
+	   </tbody>
+	   </table>
+	   </div>   
+      </div>
+    </div>
+  </div>
+
+

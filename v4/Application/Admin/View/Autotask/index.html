@@ -1,0 +1,45 @@
+<h3>自动任务列表</h3>
+<admin:panel >
+	<admin:tabletool filter="true" keyword="{$pageMaps.keyword}">
+										<!--  1 马甲招呼     2 未读私信提醒        -->
+		<input type="hidden" name="keyword" value="{$pageMaps.keyword}" />
+  		<admin:select name="type"  item="==状态==,马甲招呼,未读私信提醒" value="0,1,2" selected="0" />	
+	</admin:tabletool>
+	<admin:table id="table" show="选择,编号,昵称,内容,类型,对方昵称,评论,时间" class="m-table-border">
+		<foreach name="list" item="vo">
+			<tr>
+				<td><input type="checkbox" name="id[]" value="{$vo.id}" /></td>			
+				<td>{$vo.id}</td>
+				<td>{$niceName[$vo['uid']]}（{$vo.uid}）</td>
+				<td>{$vo.text}</td>
+				<td>
+					<if condition="$vo['type'] eq 1 ">马甲招呼
+					<elseif condition="$vo['type'] eq 2 "/>未读私信提醒
+					</if>
+				</td>
+				<td>{$niceName[$vo['touid']]}（{$vo.touid}）</td>
+				<td>{$vo.remark}</td>
+				<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+				<td><a class="u-btn u-btn-danger  u-btn-small del" href="javascript:;" data="{$vo.id}">删除</a></td>
+			</tr>
+		</foreach>
+	</admin:table>
+	<admin:tablefoot action="true" item="删除" value="1" />
+</admin:panel>
+<script>
+	Do.ready('base', function() {
+		$('#selectAction').change(function() {
+			var type = $(this).val();
+		});
+		//表格处理
+		$('#table').duxTable({
+			actionUrl: "{:U('Admin/Autotask/batchAction')}", //批量操作
+			deleteUrl: "{:U('Admin/Autotask/del')}", //单条删除
+			actionParameter: function() {
+				return {
+					'class_id': $('#selectAction').next('#class_id').val()
+				};
+			}
+		});
+	});
+</script>

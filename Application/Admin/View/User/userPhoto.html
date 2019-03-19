@@ -1,0 +1,189 @@
+<h3>相册资料</h3>
+<admin:form url="{:U()}" method="post" id="form">
+  <div class="g-main-body">
+  
+   <include file="header" />
+    <a class="u-btn u-btn-danger u-multi-upload"  onclick="fileuploadshow()">上传照片</a>
+          <input id="fileupload" type="file" multiple="multiple"  name="files[]" style="display:none;">
+    
+    
+    <div class=" m-form-horizontal">
+      <admin:panel >
+
+    
+     <admin:table id="table" show="选择|30,编号|30,标题,用户,图片,点赞数,评论数,上传时间,是否为头像,是否推荐,状态,操作|250">
+    <foreach name="list" item="vo">
+      <tr>
+        <td>
+        	<input type="checkbox" name="id[]" value="{$vo.photoid}" />
+        </td>
+        
+        
+        <td>{$vo.photoid}</td>
+   
+        <td>{$vo.title}</td>
+        <td>{$vo.user_nicename}</td>
+        <td><img src="{$vo.uploadfiles}" width="150px"/></td>
+        
+        <td>{$vo.hits}</td>
+        <td>{$vo.istop}</td>
+        <td>{$vo.timeline|date="Y-m-d H:i:s",###}</td>
+         <td>
+          <eq name="vo.isavatr" value="1">是 <else/>否 </eq>
+          </td>
+        <td> <eq name="vo.elite" value="1"> <span style="color:#2D822D;">已推荐</span> <else/> <span style="color:red;">未推荐 </span> </eq> </td>
+        <td>
+        <if condition="$vo['flag'] eq 1" ><span style="color:#2D822D;">通过</span>
+		<elseif condition="$vo['flag'] eq 2" /><span style="color:red;">未通过</span>
+		<elseif condition="$vo['flag'] eq 0" /><span style="color:red;">待审核</span>
+		</if>
+        </td>
+        
+        <td>
+        <eq name="vo.flag" value="0">
+						<a class="u-btn u-btn-primary  u-btn-small doaction" dataType="1" dataid="{$vo.photoid}" status="1" >通过</a>
+					    <a class="u-btn u-btn-primary  u-btn-small doaction" dataType="1" dataid="{$vo.photoid}" status="2" >不通过</a>
+					 </eq>
+                     <if condition="$vo['flag'] eq 1">
+						<a class="u-btn u-btn-primary  u-btn-small doaction" dataType="2" dataid="{$vo.photoid}" <eq name="vo.elite" value="1">status="4"<else/>status="3"</eq> href="javascript:;"><eq name="vo.elite" value="1">撤销推荐<else/>推荐</eq></a>
+					 </if>
+          <a class="u-btn u-btn-danger  u-btn-small del" href="javascript:;" data="{$vo.photoid}">删除</a>
+         </td>
+      </tr>
+    </foreach>
+  </admin:table>
+    <admin:tablefoot action="true" item="通过,不通过,推荐,撤销推荐,删除" value="1,2,3,4,5" />
+      
+      </admin:panel>
+    </div>
+  </div>
+  <admin:text name="id" type="hidden" value="{$info.id}" />
+</admin:form>
+
+<script src="__ROOT__/upimg/js/vendor/jquery.ui.widget.js"></script>
+
+<script src="__ROOT__/upimg/js/jquery.iframe-transport.js"></script>
+
+<script src="__ROOT__/upimg/js/jquery.fileupload.js"></script>
+
+
+<script>
+
+Do.ready('base',function() {
+	//移动操作
+	$('#selectAction').change(function() {
+		var type = $(this).val();
+	
+	});
+	//表格处理
+	$('#table').duxTable({
+		actionUrl : "{:U('batchPhotoAction')}",
+		deleteUrl: "{:U('delPhoto')}",
+		actionParameter : function(){
+			return {'class_id' : $('#selectAction').next('#class_id').val()};
+		}
+	});
+});
+
+/*jslint unparam: true */
+/*global window, $ */
+$(function () {
+    'use strict';
+    // Change this to the location of your server-side upload handler:
+
+    var  url = "{:U('Home/Form/upload',array('slt'=>1))}";
+    
+    $('#fileupload').fileupload({
+        url: url,
+        dataType: 'json',
+        done: function (e, data) {
+           if(data.result.status==1){
+        	    add_user_photo(data.result.data.original,data.result.data.url);
+        	   // $('#files').html('<img src="'+data.result.data.url+'" > <input type="hidden" name="image" value="'+data.result.data.url+'"> ');
+           }else{
+        	   alert(data.result.info);
+           }
+           
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+                'width',
+                progress + '%'
+                
+            );
+         
+        }
+    }).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
+		
+
+
+});
+
+function fileuploadshow(){
+	//$("#fileupload").show();
+	$("#fileupload").click();
+	//setTimeout( window.location.reload(true),3000);
+	}
+
+function add_user_photo(url,thumburl){
+	   var id = $('input[name="id"]').val();
+	   var gourl = '{:U("ajax_add_user_photo")}';
+	   $.post(gourl,{id:id,url:url,thumburl:thumburl},function(data){
+		   if(data.status==-1){
+			   alert(data.msg);
+		   }else{
+			   window.location.reload(true);
+		   }			
+	   },'json');
+   
+}
+
+$(function(){
+	 $('.doaction').click(function(){
+		 var type =$(this).attr('dataType');
+		 var status =$(this).attr('status');
+		 var id =$(this).attr('dataid');
+		 var url ='index.php?s=/Admin/User/operatePhoto/id/'+id+'/type/'+status+'.html';
+		 var text={1:'未通过',2:'通过',3:'撤销推荐',4:'推荐'};
+		 var changs={1:2,2:1,3:4,4:3};
+
+		 var index  = parseInt($(this).parent().index());
+		 
+		 index = type== 1? index-1 : index-2 ;
+		 
+		var  html ={1:'<span style="color:#2D822D;">通过</span>',2:' <span style="color:red;">未通过</span>',3:' <span style="color:#2D822D;">已推荐</span>',4:' <span style="color:red;">未推荐</span>'}; 
+		var obj = $(this).parents('tr').find('td').eq(index);
+		var o =$(this);
+		$.get(url,'',function(data){
+			if(data.status==1){
+				obj.html(html[status]);
+				if(status==1){
+					o.next().remove();
+					o.html(text[4]);
+					o.attr('status', 3);
+					o.attr('dataType', 2);
+				}else if(status==2){
+					o.prev().remove();
+					o.remove();
+				}else{
+					o.html(text[status]);
+					o.attr('status', changs[status]);
+				}
+				//alert('操作成功');
+			}else{
+				alert('操作失败');
+			}
+		},'json') 
+		
+		
+		 
+	 })
+	
+})
+
+
+	
+	
+</script>

@@ -1,0 +1,132 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title><?php echo ($media["title"]); ?></title>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+</head>
+<body>
+
+
+
+
+  <div class="hd_main">
+      <div class="fujinderen_header header_pf jiapt15">
+         附近&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <div class="fl" id="ddd" onclick="getLocation();"><img src="images/fujin.png" alt=""><?php echo ($area); ?></div>
+         <!--<a href="javascript:;" id="qdzh"  class="fr">群打招呼</a>-->
+      </div>
+      <div style="height:45px;" class="jiapt15"></div>
+        <!-- <div class="index_nav cb" style="  overflow: hidden;">
+				<ul class="cb">
+				<li style="width:50%"><a href="<?php echo U('Home/Index/hot');?>"><i></i>动态</a></li>
+				<li style="width:50%"><a href="<?php echo U('Home/Nearby/index');?>"><i class="hot"></i>附近</a></li>					
+				</ul>
+			</div>-->
+
+
+    <div class="kaiguan_qiehuandiv">
+            <ul class="fujin ">
+			  <!--#include file="ajax_fujinderen.html"-->
+			  
+			  
+            </ul>
+          </div>
+		  
+		  
+       <!--#include file="footer.html"-->
+<a href="javascript:;" id="qdzh" style="z-index:999; height:4rem; width:80%; background:#FF3030; color:#FFF; position:fixed; bottom:6.5rem; left:10%; text-align:center; line-height:4rem; border-radius:0.6rem; font-size:1.8rem;filter:alpha(Opacity=80);-moz-opacity:0.6;opacity: 0.6;"><img src="images/hi.png"" style="width:2.5rem;">&nbsp;群打招呼</a>
+<input name="ids" id="ids" type="hidden" value="<?php echo ($ids); ?>"/>
+
+
+  </div>
+
+
+<script>
+
+var totalheight = 0;
+				var body = '';			
+				var main = $(".fujin"); //主体元素  
+				var range = 10; //距下边界长度/单位px  
+				var elemt = 500; //插入元素高度/单位px  
+				var maxnum = 200; //设置加载最多次数  
+				var num = 2;
+				var jz = true;
+	$(window).scroll(function() {
+		if(jz==false) return false;
+					var srollPos = $(window).scrollTop(); //滚动条距顶部距离(页面超出窗口的高度) 					
+					totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+					if (($(document).height() - range) <= totalheight && num != maxnum) {
+						$("#loading").show();
+						$.getJSON("<?php echo U('Nearby/index');?>", {
+							p: num,
+							ajax: 1,
+							type:'tj'
+						}, function(data) {
+							$("#loading").hide();
+							jz = false;
+							if(!data) return false;
+							main.append(data.info);
+							$("#ids").val(data.ids);
+							jz =true;							
+						}, 'json');
+						
+						num++;
+					}
+				});		
+
+
+var sending = false;
+function sendmsg(touid){  	
+  	if(sending) return false;
+	sending = true;	
+	
+  	$.post("<?php echo U('Home/Ajax/sendmsg');?>",{touid:touid,dzh:1},function(data){
+		sending = false;
+		if(data.status==1){		
+			$(".dzh"+touid).addClass("ydzh").attr("href",'javascript:;').html('已招呼');
+		}else if(data.status==2){
+			alertbox(data.info,'购买vip',data.url);
+		}else{
+			alertmsg(data.info);
+		}
+	},'json')
+	return false;
+  }
+//群打招呼 by 橙橙科技
+$("#qdzh").click(function(){
+	var ids = $("#ids").val();
+	if(!ids) return false;
+	$.post("<?php echo U('Home/Ajax/qundzh');?>",{touid:ids,dzh:1},function(data){
+		sending = false;
+		if(data.status==1){
+			$.each(data.info,function(index,val){
+				$(".dzh"+val.id).addClass("ydzh").attr("href",'javascript:;').html('已招呼');				
+			})
+			alertmsg('群打招呼成功！');
+		}else if(data.status==2){
+			alertbox(data.info,'购买vip',data.url);
+		}else{
+			alertmsg(data.info);
+		}
+	},'json')
+})  	
+<?php if($_COOKIE['inapp']==1) {?>
+ var ua = navigator.userAgent.toLowerCase(); 
+  if (/iphone|ipad|ipod/.test(ua)) {
+        $(".jiapt15 ").css('padding-top',15)
+
+  } 
+ <?php } ?> 
+</script>
+
+</body>
+
+</html>

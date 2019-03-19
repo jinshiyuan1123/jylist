@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>{$media.title}</title>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+</head>
+
+<body>
+  
+  <div class="hd_main"  style="background: #FFFFFF;">
+      <div class="fujinderen_header">
+         充值中心
+         <a  href="javascript:history.go(-1);" class="fl" id="ddd"><img src="images/zuojian.png"  style="width:11px;">返回</a>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div class="chongzhizhongxin">
+      	<div class="fl"><a href="">购买VIP会员</a></div>
+      	<div class="fl"><a href="" class="hot">充值金钱</a></div>
+      </div>
+      <div class="chongzhizhongxin_a cb">
+         <div class="fl touxiang_new"><img src="images/moban_lise_03.jpg" alt=""></div>
+         <div class="fl huiyuan_vip_new">把爱曲折 <span>VIP</span></div>
+         <div class="fr chongzhizhongxin_vip">VIP特权余期 :<span>&nbsp;0&nbsp;<img src="images/jinqian.png"></span></div>
+      </div>
+      <p class="xuznze">请选择金钱充值额度（1元=1000金钱）</p>
+      <div class="xuznze2">
+      	 <ul class="cb">
+      	 	
+      	 	<li>50元</li>
+          <li class="hot">100元</li>
+      	 	<li>200元</li>
+          <li>500元</li>
+          <li>1000元</li>
+          <li>2000元</li>
+      	 </ul>
+      </div>
+      <div class="xuznze3">
+         充值对应100000金钱<span>(再赠送20000金钱)</span>
+         <!-- <a href="" class="fr zfyuanxin"><img src="images/wxzf.png"></a> -->
+         <a href="" class="fr zfyuanxin"><img src="images/zfb.png"></a>
+      </div>
+      <p class="xuznze">本次充值金额100元，对应金钱10000元</p>
+      <div class="xuznze4">
+           <input type="button" class="input_button_new"  value="充值">
+           <p>&nbsp;金钱特权介绍</p>
+           <p>&nbsp;交流需要消耗金钱，每条N元</p>
+           <p>&nbsp;会员通过金钱可以查阅对方的私密照片</p>
+           <p>&nbsp;VIP特权介绍</p>
+           <p>&nbsp;会员可以设置私密相册，会员可查看私密照。</p>
+           <p>&nbsp;会员可无限量短信、查阅全部信息资料。</p>
+           <br><br>
+      </div>
+	      
+  </div>
+    
+<script type="text/javascript">
+	$(".xuznze2 ul li").click(function(){
+		var index = $(this).index();
+		$(".xuznze2 ul li").removeClass("hot").eq(index).addClass("hot"); 
+	})
+</script>
+
+
+</body>
+
+</html>

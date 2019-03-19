@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>{$media.title}</title>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+
+</head>
+ <style type="text/css">
+           .fx_header {
+              position: fixed;
+              top: 0px;
+                }
+ 
+     </style>
+
+<body>
+
+  
+  <div class="hd_main">
+  <div style="height:40px;display:none ;" class="appdiv fx_header_new"></div>
+  <!--#include file="app_share.html"-->
+      <div class="fujinderen_header">
+         上传照片
+       <a  href="javascript:history.go(-1);" class="fl" id="ddd"><img src="images/zuojian.png"  style="width:11px;">返回</a>
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         
+      </div>
+        <div class=" neixinduba" style="height: 90px; min-height: 90px;max-height: 90px;" >
+        <textarea name="textarea" id="TextArea1" cols="45" rows="5" onkeyup="words_deal();" placeholder="添加照片描述，不超过50个字…"  style="height: 100px; " >{$title}</textarea>
+        <span id="textCount">50</span><img src="images/suiji.png" id="suiji">
+        </div>
+
+
+      <div class="shangchuanzhaopian">
+      上传到: <i  data="0" <!--{if condition="$type eq 0"}-->class="sheng" <!--{/if}--> ></i>公开照相册&nbsp;&nbsp;<i data="1" <!--{if condition="$type eq 1"}-->class="sheng" <!--{/if}--> ></i>私密照相册 
+      <input type="hidden" name="uptype" value="{$type|default='0'}" />
+      </div>
+      <div class="shangchuanzhaopian_b">
+         <ul class="cb upimg">
+           <li>
+              <input id="fileupload" type="file" name="files[]" multiple="multiple" style="display:none;">
+              <img src="images/shangchuan_03.jpg" alt="" onclick="fileuploadshow()" class="">
+           </li>
+  
+         </ul>
+        
+      </div>
+      <input  name="button" value="确认上传"  readonly="readonly" class="shangchuanzhaopian_a upsub" />
+      <!-- a href="javascript:;" class="shangchuanzhaopian_a upsub">确认上传</a-->
+      <div class="shangchuanzhaopian_c" >
+        <p>照片尺寸不大于1M</p>
+        <p>每天上传一张公开照可得{$config.up_photo_gk}{$config.money_name}， {$config.up_photo_gk_num}张封顶！</p>
+        <p>每天上传一张私密照可得{$config.up_photo_sm}{$config.money_name}， {$config.up_photo_sm_num}张封顶！</p>
+        <p>私密照可在个人中心->我的相册中设置访问需达到的亲密度，或对方需花费的{$config.money_name}</p>
+        <p>禁止上传淫秽色情及非自拍图片，一经发现将扣除收 益直至封停账号！</p>
+      </div>
+
+
+      <!--#include file="footer.html"-->
+	      
+  </div>
+	<script src="__ROOT__/upimg/js/vendor/jquery.ui.widget.js"></script>
+	<script src="__ROOT__/upimg/js/jquery.iframe-transport.js"></script>
+	<script src="__ROOT__/upimg/js/jquery.fileupload.js"></script>
+	<script>
+		$(function () {
+    	'use strict';
+   		 var  url = "{:U('Home/Form/upload',array('slt'=>1))}";
+   	 	$('#fileupload').fileupload({
+        url: url,
+        dataType: 'json',
+        done: function (e, data) {
+           if(data.result.status==1){
+        	   //  <li>
+           //<span class="shangchuanzhaopian_b_guanbi"><img src="images/xx.png" alt=""></span><img src="images/shangchuan_05.jpg" alt="">
+          // </li>
+        	   var html ='<li>'
+                   +'<span class="shangchuanzhaopian_b_guanbi"><img src="images/xx.png" alt=""></span><img src="'+data.result.data.url+'" alt="">'
+                   +'<input type="hidden" name="image[]" value="'+data.result.data.original+'"><input type="hidden" name="thumb_image[]" value="'+data.result.data.url+'">'
+        	       +'</li>';   
+   
+        	   $('.upimg').append(html);
+           
+           }else{
+        	   alertmsg(data.result.info);
+           }
+        },
+        progressall: function (e, data) {
+          var progress = parseInt(data.loaded / data.total * 100, 10);
+          $('#progress .progress-bar').css('width',progress + '%');
+        }
+    		}).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
+		});
+
+	</script>
+
+<script type="text/javascript">
+
+           $(".shangchuanzhaopian i").click(function(){
+            var index=$(this).index();
+           $(".shangchuanzhaopian i").removeClass("sheng").eq(index).addClass("sheng");
+              var  data = $(this).attr('data');
+              $('input[name="uptype"]').val(data);
+           
+           })
+           function fileuploadshow(){
+              $("#fileupload").click();
+            }
+            $(".shangchuanzhaopian_b ul li .shangchuanzhaopian_b_guanbi").live('click',function(){
+           
+             var frfrfr = $(this).parent();
+              frfrfr.remove();
+            })
+            
+            
+            $(function(){
+            	$('.upsub').live('click',function(){
+  
+            		var o = $(this);
+            		setDisabled(o,'上传中');
+            		  var title =  $('#TextArea1').val();
+                	  var uptype = $('input[name="uptype"]').val();
+                	  var o_image  = $('input[name="image[]"]');
+                	  var o_thumb_image  = $('input[name="thumb_image[]"]');
+                	  var  image = [];
+                	  var  thumb_image = [];
+                	  var upimg = $('.upimg li');
+                	  var o_sj =  $('#suiji');
+                	  
+                	  if(o_image.length==0){
+                		  alertmsg('请上传照片!');
+                		  unDisabled(o,'上传照片');
+                		  return false;
+                	  }
+                	  $.each(o_image, function(index, val) {
+                		  image[index] = $(this).val();												
+						});
+                	  $.each(o_thumb_image, function(index, val) {
+                		  thumb_image[index] = $(this).val();												
+						});                
+                	  $.post('{:U("Home/User/UpPhoto")}',{title:title,uptype:uptype,image:image,thumb_image:thumb_image},function(data){
+                		       if(data.status==1){
+                		    	   $.each(upimg, function(index, val) {
+                		    	      if(index>0) val.remove();											
+             						});
+                		    	   o_sj.click();
+                		    	   alertmsg(data.info);
+                		       }else{
+                		    	   alertmsg(data.info);
+                		       }
+                		       unDisabled(o,'上传照片');
+                	  },'json');
+  
+            	})
+            	
+            	$('#suiji').click(function(){
+            		  $.post('{:U("getSjTitle")}',{type:0},function(data){
+            			  if(data.status==1){
+            				  $('#TextArea1').val(data.info);
+            				  words_deal();
+            			  }
+
+            		  },'json')
+            		
+            		
+            		
+            	});
+            	
+            	
+            	
+
+            })
+            
+  
+            
+            
+            
+            
+</script>
+    
+     <script type="text/javascript">
+     words_deal();
+function words_deal()
+{
+   var curLength=$("#TextArea1").val().length;
+   if(curLength>50)
+   {
+        var num=$("#TextArea1").val().substr(0,50);
+        $("#TextArea1").val(num);
+        alertmsg("超过字数限制，多出的字将被截断！" );
+   }
+   else
+   {
+        $("#textCount").text(50-$("#TextArea1").val().length);
+   }
+}
+</script>
+    
+</body>
+
+</html>

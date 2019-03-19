@@ -1,0 +1,18 @@
+<h1>会员私信提示设置</h1>
+<admin:panel >
+  <admin:form url="{:U('Admin/Compose/setting')}" method="post" id="form" class="m-form-horizontal" >
+  
+	<h3>私信提示设置</h3>
+  
+	<admin:formrow title="私信提示" tip="设置当会员有多少条私信未读时，微信发提示信息"  >
+	<admin:text name="msg_count"  value="{$info.msg_count}" width="mini" len="3" /> 条
+	</admin:formrow>   
+
+    <admin:formsubmit/>
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base', function() {
+	$('#form').duxForm();
+});
+</script> 

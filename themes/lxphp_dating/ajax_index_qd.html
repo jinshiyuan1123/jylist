@@ -1,0 +1,22 @@
+<div class=" cb"><a class="qiandao_guanbi"><img src="themes/<?php echo C('TPL_NAME'); ?>/images/xx.png"></a></div>
+	
+	<ul class="cb qdul">
+		<!--{foreach name="money" item="vo"  key="key" }-->
+		<li <!--{if condition="$key lt $result['continue_days']" }--> class="hot" <!--{/if}-->>
+			<p>第{$key+1}天</p>
+			<p>免费{$vo}金钱</p>
+		</li>
+		<!--{/foreach}-->
+	</ul>
+	<p class="qiandao_lianxu">已连续签到<span>{$result['continue_days']|default="0"}</span>天，今日签到可得金钱:<span>{$result['today_money']}</span></p>
+	<a <!--{if condition="$result['type'] eq 1" }--> class="superman" <!--{/if}--> onclick="qiandao()" class="qiandao_yes">签到</a>
+	
+	
+	
+<script type="text/javascript">
+	//关闭签到弹窗
+	$(".qiandao_guanbi").click(function() {
+		$(".heipin").hide();
+		$(".qiandao_div").slideToggle(100);
+	})				
+</script>

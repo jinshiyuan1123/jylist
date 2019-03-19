@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+		<title>{$media.title}</title>
+		<link rel="stylesheet" type="text/css" href="css/css.css">
+		<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+	
+	</head>
+
+	<body>
+
+		<div class="hd_main">
+			<div class="fujinderen_header">
+				收货地址
+				<a href="javascript:history.go(-1);" class="fl" id="ddd"><img src="images/zuojian.png" style="width:11px;">返回</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			
+			<div class="jibenziliao">
+				<ul>
+					<li><div>收货人</div><input type="text" name="linkman" value="{$list.linkman}" placeholder="请填写您的姓名" class="jibenziliao_input_new"></li>
+					<li><div>联系电话</div><input type="text" name="tel" value="{$list.tel}" placeholder="请填写您的联系电话" class="jibenziliao_input_new"></li>
+					<li><div>所在地区</div>						
+						<select name="province" id="province">
+							<option value="0" >请选择</option>
+							<!--{foreach name="province" item="v"}-->
+        						<option value="{$v.region_id}" <!--{if condition="$list['province']==$v['region_id']"}-->selected<!--{/if}--> >{$v.region_name}</option>
+        					<!--{/foreach}-->
+	     		  		</select>
+
+						<select name="city" id="city">
+							<!--{foreach name="city" item="v"}-->
+								<option value="{$v.region_id}" <!--{if condition="$list['city']==$v['region_id']"}-->selected<!--{/if}--> >{$v.region_name}</option>
+							<!--{/foreach}-->			     			
+		        		</select>
+		        
+						<select name="region" id="region">
+							<!--{foreach name="region" item="v"}-->
+								<option value="{$v.region_id}" <!--{if condition="$list['region']==$v['region_id']"}-->selected<!--{/if}--> >{$v.region_name}</option>
+							<!--{/foreach}-->        				
+            			</select>
+					</li>
+					<li><div>详细地址</div><input type="text" name="address" value="{$list.address}" placeholder="请填写您的详细地址" class="jibenziliao_input_new"></li>
+					<input type="hidden" name="uid" value="{$list.uid}" />
+				</ul>
+			</div>
+			<!--<a href="" class="jichubaoc">保存</a>-->
+			<input type="button" name="" id="tijiao" value="保存" class="jichubaoc" style="border: none;" />
+			<!--#include file="footer.html"-->
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+	
+		//省级选择事件
+		$('#province').change(
+			function() {
+				var id = $(this).val();
+				var html = '';
+		
+				if (id != 0) {		
+					$.getJSON('{:U("Ajax/city")}', {
+						id : id
+					}, function(json) {
+						html = '<option value="0">请选择</option>';
+						$.each(json, function(idx, item) {
+							html += '<option value="'+item.region_id+'">'+ item.region_name + '</option>';
+						});                  
+						$("#city").html(html);
+					},'json');
+				} else {
+					html = '<option value="0">请选择</option>';
+				$("#city").html(html);
+			}
+		})
+		
+		
+		//市级选择事件
+    $('#city').change(
+			function(){
+				var id = $(this).val();
+				var html = '';
+		
+				if (id != 0) {	
+					$.getJSON('{:U("Ajax/city")}', {
+							id : id
+						}, function(json) {
+							html = '<option value="0">请选择</option>';
+							$.each(json, function(idx, item) {
+								html += '<option value="'+item.region_id+'">'+ item.region_name + '</option>';
+							});                   
+							$("#region").html(html);
+						},'json');
+				} else {
+					html = '<option value="0">请选择</option>';
+					$("#region").html(html);
+				}
+			})	
+	</script>
+	
+	<script>
+		$(function(){
+			$('#tijiao').click(function(){
+				setDisabled($(this),'保存中');
+				
+				var linkman = $("input[name='linkman']").val();
+				var tel = $("input[name='tel']").val();
+				var province = $("#province").val();
+				var city = $("#city").val();
+				var region = $("#region").val();
+				var address = $('input[name="address"]').val();
+				var uid = $('input[name="uid"]').val();
+				
+				$.ajax({
+					type:"post",
+					url:"{:U('Home/User/ShippingAddress')}",
+					data:{linkman:linkman,tel:tel,province:province,city:city,region:region,address:address,uid:uid},
+					dataType:'json',
+					success:function(msg){
+						unDisabled($('.jichubaoc'),'保存');
+						alert(msg);
+					}
+				});		
+			});
+		})
+	</script>
+</html>

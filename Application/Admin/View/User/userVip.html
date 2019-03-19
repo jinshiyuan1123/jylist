@@ -1,0 +1,54 @@
+<h3>升级vip</h3>
+<admin:form url="{:U()}" method="post" id="form">
+  <div class="g-main-body">
+  <include file="header" />
+  
+    <div class=" m-form-horizontal">
+      <admin:panel >
+     
+            <admin:formrow title="升级vip天数" tip="升级vip天数。输入正数为加，负数为减" >
+       <admin:text name="vipDay"  value="" /><if condition="isset($info['rankData']['rank_day'])"><span style="color:red;">(vip剩余天数:{$info.rankData.rank_day}天)</span></if>
+       </admin:formrow>
+      <admin:formsubmit/>
+      </admin:panel>
+    </div>
+  </div>
+  <admin:text name="id" type="hidden" value="{$info.id}" />
+</admin:form>
+
+
+<script>
+Do.ready('base', function () {
+    //表单综合处理
+    $('#form').duxFormPage();
+    //上传缩略图
+    $('#upload').duxFileUpload({
+        type: 'jpg,png,gif,bmp',
+        complete: function (data) {
+            $('#content_image').attr('src', data.url);
+        }
+    });
+    //提取关键词
+    $('#getKeyword').click(function () {
+        $.post('{:U("DuxCms/ContentTools/getKerword")}', {
+                title: $('#content').val(),
+                content: $('#description').val()
+            },
+            function (data) {
+                if (data.status) {
+                    $('#keywords').val(data.info);
+                } else {
+                    alert(data.info);
+                }
+            }, 'json');
+    });
+	//动态获取扩展字段
+	$('#class_id').change(function() {
+		$('#expand').load('{:U("DuxCms/AdminExpand/getField")}',{class_id:$(this).val(),content_id:$('#content_id').val()},function(){
+			$('#expand').duxFormPage({form:false});
+		});
+	});
+	$('#class_id').change();
+}); 
+
+</script>

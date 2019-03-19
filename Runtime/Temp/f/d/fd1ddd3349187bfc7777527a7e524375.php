@@ -1,0 +1,3 @@
+<?php
+//000000000300a:28:{s:10:"content_id";s:1:"8";s:8:"class_id";s:1:"8";s:5:"title";s:39:"同城秀秀即将入住微信公众号";s:8:"urltitle";s:30:"tongchengxiuxiujijiangruzhuwei";s:10:"font_color";N;s:9:"font_bold";N;s:7:"font_em";N;s:8:"position";N;s:8:"keywords";N;s:11:"description";s:0:"";s:4:"time";s:10:"1464601920";s:5:"image";s:0:"";s:3:"url";s:0:"";s:8:"sequence";s:1:"0";s:6:"status";s:1:"0";s:8:"copyfrom";s:6:"本站";s:5:"views";s:1:"2";s:7:"taglink";N;s:3:"tpl";s:0:"";s:4:"site";s:1:"1";s:5:"wxurl";s:0:"";s:12:"actionstatus";s:1:"0";s:3:"zan";s:1:"0";s:10:"index_time";s:1:"0";s:8:"cat_time";s:1:"0";s:6:"fx_num";s:1:"0";s:6:"yd_url";s:0:"";s:3:"sex";s:1:"0";}
+?>

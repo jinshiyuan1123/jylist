@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+		<title>{$media.title}</title>
+		<link rel="stylesheet" type="text/css" href="css/css.css">
+		<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+
+	</head>
+	<style type="text/css">
+           .fx_header {
+              position: fixed;
+              top: 0px;
+            }
+			.mt82{
+				padding-left:20px;
+				height:30px;
+				line-height:30px;
+			}
+			.mt82 input{
+				width: 96%;
+			}
+     </style>
+
+	<body onload="words_deal()">
+		
+		<div class="hd_main">
+		<div style="height:40px;display:none ;" class="appdiv fx_header_new"></div>
+  <!--#include file="app_share.html"-->
+			<div class="fujinderen_header">
+				申请加入推广联盟
+				<a href="javascript:history.go(-1);" class="fl" id="ddd"><img src="images/zuojian.png" style="width:11px;">返回</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+
+
+			<div class="mt22 mt82">
+				姓名：
+			</div>
+			<div class="mt82">
+				<input type="text" id="realName" name="realName" value="{$unionArr.realname}" />
+			</div>
+			<div class="mt82">
+				联系电话：
+			</div>
+			<div class="mt82">
+				<input type="text" id="realTel" name="realTel" value="{$unionArr.tel}" />
+			</div>
+			<div class="mt82">
+				申请说明：
+			</div>
+			<div class="neixinduba">
+				<textarea name="textarea" id="TextArea1" cols="45" rows="5" onkeyup="words_deal();" placeholder="填写申请信息，越详细成功率越高(500字为限)...">{$unionArr.intro}</textarea>
+				<span id="textCount">500</span>
+			</div>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;申请成为推广人员，成功推广会员注册即可得奖励，请在此申请加入推广联盟…</p>
+			<p class="shenghezhong">
+			<!--{if condition="isset($unionStatus)"}-->
+			{$unionStatus}
+			<!--{/if}-->
+			</p>
+			<input name="button" value="保存" class="baocui" onclick="words_deal()"   style="width: 90%;border-radius: 4px;margin-top: 0px;">
+
+			<!--#include file="footer.html"-->
+		</div>
+	</body>
+	<script type="text/javascript">
+		//提交
+		$(function() {
+			$('.baocui').live('click', function() {
+				var o = $(this);
+				setDisabled(o, '保存中');
+				var realName = $('#realName').val();
+				var realTel = $('#realTel').val();
+				var textIntro = $('#TextArea1').val();
+
+				$.post('{:U()}', {
+					realname:realName,
+					tel:realTel,
+					intro: textIntro,
+
+				},function(data) {
+					if(data.status == 0) { //提示 在审中
+						$('.shenghezhong').html(data.info);
+					}else if( data.status == 1 ){ //成功
+						$('.shenghezhong').html('*审核中…');
+					}else{ //跳出错误信息
+						alert(data.info);
+					}
+					unDisabled(o, '保存');
+				}, 'json')
+			});
+		});
+	
+		function words_deal() {
+			var curLength = $("#TextArea1").val().length;
+			if (curLength > 500) {
+				var num = $("#TextArea1").val().substr(0, 500);
+				$("#TextArea1").val(num);
+				alertmsg("超过字数限制，多出的字将被截断！");
+			} else {
+				$("#textCount").text(500 - $("#TextArea1").val().length);
+			}
+		}
+	</script>
+</html>

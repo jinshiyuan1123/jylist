@@ -1,0 +1,69 @@
+<h3>{$name}保险公司</h3>
+<admin:form url="{:U()}" method="post" id="form">
+  <div class="g-main-body">
+    <div class="g-main-content m-form-horizontal">
+      <admin:panel >
+   
+       <admin:formrow title="uid" tip="用户uid"  >
+        <admin:text name="uid"  value=" {$info.uid}" len="20" datatype="*"  /> 
+       </admin:formrow>
+       <admin:formrow title="变动积分" tip="变动积分"  >
+       <admin:text name="jifen"  value="{$info.jifen}" len="250"  />
+       </admin:formrow> 
+       <admin:formrow title="变动金钱" tip="变动金钱"  >
+       <admin:text name="money"  value="{$info.money}" len="250"  />
+       </admin:formrow>  
+       <admin:formrow title="变动类型" tip="变动类型" >
+        <select name="type" class="form-element">
+            <option value="1">关注</option>
+            <option value="2">邀请</option>
+            <option value="3">发送失败转余额</option>
+            <option value="4">摇一摇变动</option>
+            <option value="5">分享文章</option>
+            <option value="6">签到</option> 
+              </select>
+       </admin:formrow>   
+       <admin:formrow title="描述" tip="描述"  >
+        <admin:textarea name="desc" rows="3">{$info.desc}</admin:textarea>
+       </admin:formrow>
+        
+        <admin:formsubmit/>
+      </admin:panel>
+    </div>
+  </div>
+  <admin:text name="id" type="hidden" value="{$info.id}" />
+</admin:form>
+<script>
+    Do.ready('base', function () {
+        //表单综合处理
+        $('#form').duxFormPage();
+        //上传缩略图
+        $('#upload').duxFileUpload({
+            type: 'jpg,png,gif,bmp',
+            complete: function (data) {
+                $('#content_image').attr('src', data.url);
+            }
+        });
+        //提取关键词
+        $('#getKeyword').click(function () {
+            $.post('{:U("DuxCms/ContentTools/getKerword")}', {
+                    title: $('#content').val(),
+                    content: $('#description').val()
+                },
+                function (data) {
+                    if (data.status) {
+                        $('#keywords').val(data.info);
+                    } else {
+                        alert(data.info);
+                    }
+                }, 'json');
+        });
+		//动态获取扩展字段
+		$('#class_id').change(function() {
+			$('#expand').load('{:U("DuxCms/AdminExpand/getField")}',{class_id:$(this).val(),content_id:$('#content_id').val()},function(){
+				$('#expand').duxFormPage({form:false});
+			});
+		});
+		$('#class_id').change();
+    }); 
+</script>

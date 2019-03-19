@@ -1,0 +1,219 @@
+<h3>运营设置</h3>
+<admin:panel >
+  <admin:form url="{:U('site')}" method="post" id="form" class="m-form-horizontal" >
+
+
+    <admin:formrow title="广告显示设置" tip="开启则内容页总是展示广告 否则分享后才展示广告" >
+      <admin:radio name="set_ad"  item="开启,关闭" value="1,0" checked="$info['set_ad']" />
+    </admin:formrow>
+  
+  <admin:formrow title="文章页展开全文" tip="文章页展开全文开关，开启则显示展示全文。" >
+      <admin:radio name="open_content_qwkg"  item="开启,关闭" value="1,0" checked="$info['open_content_qwkg']" />
+    </admin:formrow>
+	
+  <admin:formrow title="开始扣量" tip="注册后几天开始扣量，关闭可以设置99999" >
+      <admin:text name="kl_day"  value="{$info.kl_day}" len="250" />
+    </admin:formrow>
+  <admin:formrow title="扣量时间(小时)" tip="例如1,2,7,20分别表示1点，2点，7点和晚上8点扣量,下面的扣量秒段必须填写才有生效" >
+      <admin:text name="kl_hour"  value="{$info.kl_hour}" len="250" />
+    </admin:formrow>
+  <admin:formrow title="扣量时间(秒段)" tip="多个用逗号隔开。例如设置2,则是每分钟的10-20秒内所有浏览不计算佣金，上面的扣量时间不填写的话，每分钟都扣量。" >
+      <admin:text name="kl_time"  value="{$info.kl_time}" len="250" />
+    </admin:formrow>
+ 
+  <admin:formrow title="检查绑定手机" tip="强制填写手机号，获取归属地。文章分享有带区域的只有匹配归属地内手机才计算分享费用。防作弊限制不变。" >
+      <admin:radio name="is_check_bind"  item="开启,关闭" value="1,0" checked="$info['is_check_bind']" />
+    </admin:formrow> 
+	
+   <admin:formrow title="用户发布文章佣金" tip="给发布文章的用户佣金额度,0表示关闭此功能" >
+      <admin:text name="user_money"  value="{$info.user_money}" len="250" />
+    </admin:formrow> 
+  
+    <admin:formrow title="开启新手教程" tip="开启新手教程后，问题反馈将被替换成新手教程" >
+      <admin:radio name="is_noob"  item="开启,关闭" value="1,0" checked="$info['is_noob']" />
+    </admin:formrow>
+
+	
+    <admin:formrow title="会员点击不计算佣金" tip="会员点击不计算佣金" >
+      <admin:radio name="is_get_hy"  item="开启,关闭" value="1,0" checked="$info['is_get_hy']" />
+    </admin:formrow>
+    
+     <admin:formrow title="微信群分享点击不计算佣金" tip="微信群分享点击不计算佣金" >
+      <admin:radio name="is_get_wxq"  item="开启,关闭" value="1,0" checked="$info['is_get_wxq']" />
+    </admin:formrow>
+	 <admin:formrow title="微信提现/注销" tip="用户中心微信提现/注销按钮开关转换" >
+      <admin:radio name="wxtx_or_zx"  item="开启,关闭" value="1,0" checked="$info['wxtx_or_zx']" />
+    </admin:formrow>
+	<admin:formrow title="内容换一换" tip="开启内容页换一换功能，开启后不显示漂浮广告" >
+      <admin:radio name="random_or_ad"  item="开启,关闭" value="1,0" checked="$info['random_or_ad']" />
+    </admin:formrow>  
+  
+     <admin:formrow title="下级提现成功上级是否分成" tip="0表示不分成,请填写0-100之前的数，如填5， 则下级提现时将5%分成给上级" >
+      <admin:text name="is_get_sxjfc"  value="{$info.is_get_sxjfc}" len="250" />
+    </admin:formrow>
+  
+    <admin:formrow title="关注送红包" tip="关注赠送红包，金额自定义,红包不能在0点到8点之间发。0表示关闭。发送失败会存入到用户余额" >
+      <admin:text name="gzshbval"  value="{$info.gzshbval}" len="250" />
+    </admin:formrow>
+	
+	<admin:formrow title="关注送红包描述" tip="随红包发送的描述文字" >
+      <admin:text name="hbbody"  value="{$info.hbbody}" len="250" />
+    </admin:formrow>
+	
+	 <admin:formrow title="红包发送失败" tip="红包发送失败是否改为自动转账发送,用于0-8时之间。发送失败会存入到用户余额" >
+      <admin:radio name="hbkqzz"  item="开启,关闭" value="1,0" checked="$info['hbkqzz']" />
+    </admin:formrow>
+	
+	<admin:formrow title="关注送现金" tip="关注送现金数量,0表示关闭" >
+      <admin:text name="gzsxj"  value="{$info.gzsxj}" len="250" />
+    </admin:formrow>
+    
+    <admin:formrow title="关注送金钱" tip="关注送金钱数量,0表示关闭，存入用户账户，可提现。" >
+      <admin:text name="gzsmoney"  value="{$info.gzsmoney}" len="250" />
+    </admin:formrow>
+	
+	 <admin:formrow title="关注送积分" tip="关注送积分数量,0表示关闭" >
+      <admin:text name="gzjfnum"  value="{$info.gzjfnum}" len="250" />
+    </admin:formrow>
+    
+	<!--<admin:formrow title="上级获取奖励条件" tip="1.关注即送2.有分享行为后送3.验证手机+分享后送" >
+      <admin:radio name="parent_condition"  item="关注,分享,验证手机+分享" value="1,2,3" checked="$info['parent_condition']" isset="1"/>
+    </admin:formrow>
+	-->
+    <admin:formrow title="邀请送积分" tip="邀请关注后送积分,0表示关闭" >
+      <admin:text name="fjfnum"  value="{$info.fjfnum}" len="250" />
+    </admin:formrow>
+    
+     <admin:formrow title="邀请送金钱" tip="邀请关注后送金钱,0表示关闭，存入用户账户，可提现。" >
+      <admin:text name="fjinq"  value="{$info.fjinq}" len="250" />
+    </admin:formrow>
+    
+      <admin:formrow title="邀请地区" tip="邀请这个地区内的用户享受以下金额待遇,多个地区逗号隔开,可以是省份也可以是城市,0表示关闭。" >
+      <admin:text name="yqarea"  value="{$info.yqarea}" len="250" />
+    </admin:formrow>
+    
+    
+    <admin:formrow title="邀请地区金额" tip="邀请这个地区内的用户享受此金额待遇,0表示关闭。" >
+      <admin:text name="yqareaje"  value="{$info.yqareaje}" len="250" />
+    </admin:formrow>
+    
+    <admin:formrow title="分享文章送红包" tip="分享文章送红包,最低1元,红包不能在0点到8点之间发。0表示关闭。" >
+      <admin:text name="fx_content_hb"  value="{$info.fx_content_hb}" len="250" />
+    </admin:formrow>
+    
+     <admin:formrow title="分享文章佣金" tip="分享文章送金钱。存入用户账户，可提现。0表示关闭。" >
+      <admin:text name="fx_content_jq"  value="{$info.fx_content_jq}" len="250" />
+    </admin:formrow>
+    
+     <admin:formrow title="分享文章上一级佣金" tip="分享文章上级送金钱。存入用户账户，可提现。0表示关闭。只朋友圈分享有效" >
+      <admin:text name="fx_content_jq_pid"  value="{$info.fx_content_jq_pid}" len="250" />
+    </admin:formrow>
+    
+       <admin:formrow title="分享文章上二级佣金" tip="分享文章上级送金钱。存入用户账户，可提现。0表示关闭。只朋友圈分享有效" >
+      <admin:text name="fx_content_jq_pid_2"  value="{$info.fx_content_jq_pid_2}" len="250" />
+    </admin:formrow>
+    
+       <admin:formrow title="分享文章上三级佣金" tip="分享文章上级送金钱。存入用户账户，可提现。0表示关闭。只朋友圈分享有效" >
+      <admin:text name="fx_content_jq_pid_3"  value="{$info.fx_content_jq_pid_3}" len="250" />
+    </admin:formrow>
+    
+    <admin:formrow title="分享文章被浏览佣金" tip="分享文章被浏览送金钱。存入用户账户，可提现。0表示关闭。" >
+      <admin:text name="fxview"  value="{$info.fxview}" len="250" />
+    </admin:formrow>
+    
+      <admin:formrow title="分享文章被浏览上一级佣金" tip="分享文章被浏览送金钱。存入用户账户，可提现。0表示关闭。" >
+      <admin:text name="fxview_jq_pid_1"  value="{$info.fxview_jq_pid_1}" len="250" />
+    </admin:formrow>
+    
+    <admin:formrow title="分享文章被浏览上二级佣金" tip="分享文章被浏览送金钱。存入用户账户，可提现。0表示关闭。" >
+      <admin:text name="fxview_jq_pid_2"  value="{$info.fxview_jq_pid_2}" len="250" />
+    </admin:formrow>
+    <admin:formrow title="分享文章被浏览上三级佣金" tip="分享文章被浏览送金钱。存入用户账户，可提现。0表示关闭。" >
+      <admin:text name="fxview_jq_pid_3"  value="{$info.fxview_jq_pid_3}" len="250" />
+    </admin:formrow>
+    
+   <admin:formrow title="分享文章被浏览提醒" tip="分享的文章被浏览提醒开关。" >
+       <admin:radio name="notify_ll"  item="开启,关闭" value="1,0" checked="$info['notify_ll']" />
+    </admin:formrow>
+    
+	  <admin:formrow title="每日分享" tip="每日分享不得超过此设置值，超过后，分享佣金为0。浏览还是会产生佣金" >
+      <admin:text name="ererydayfx"  value="{$info.ererydayfx}" len="250" />
+    </admin:formrow>
+	
+	 <admin:formrow title="分享给单人" tip="分享给单个好友佣金。这里区分分享到朋友圈。" >
+      <admin:text name="shareone"  value="{$info.shareone}" len="250" />
+    </admin:formrow>
+    
+     <admin:formrow title="有效浏览次数" tip="一个人分享这篇文章有效浏览次数，超过此数不计佣金。" >
+      <admin:text name="bigview"  value="{$info.bigview}" len="250" />
+    </admin:formrow>
+    
+     <admin:formrow title="IP浏览有效" tip="3小时内，一个ip 浏览同一个用户的文章 有效次数，超过此数不计佣金。" >
+      <admin:text name="ipviews"  value="{$info.ipviews}" len="250" />
+    </admin:formrow>
+	
+	
+	
+	
+    <admin:formrow title="支付宝提现金额" tip="支付宝起提金额（元）。0为关闭" >
+       <admin:text name="txqi"  value="{$info.txqi}" len="250" />
+      
+    </admin:formrow>
+    
+     <admin:formrow title="自动提现金额" tip="自动微信提现起提金额（元）。0为关闭微信提现" >
+       <admin:text name="wxtx"  value="{$info.wxtx}" len="250" />      
+    </admin:formrow>
+	
+	
+	<admin:formrow title="自动提现限制" tip="自动提现第二次以上必须是以下佣金方可提现。0为不限制。" >
+       <admin:text name="wxtxxz"  value="{$info.wxtxxz}" len="250" />      
+    </admin:formrow>
+	
+	
+	
+	 <admin:formrow title="微信提现审核值" tip="微信自动提现佣金超过这个数，必须审核，人工发放。0为不限制" >
+      <admin:text name="txshjr"  value="{$info.txshjr}" len="250" />
+    </admin:formrow>
+	
+	
+	 <admin:formrow title="微信提现通道" tip="红包发放12点到8点自动改为企业支付发放。" >
+      <admin:radio name="txtype"  item="红包,企业支付" value="1,0" checked="$info['txtype']" />
+    </admin:formrow>
+	
+	
+	
+    <admin:formrow title="摇一摇概率" tip="摇一摇概率设置，多个用逗号" >
+	<admin:textarea name="yaolv" rows="5" >{$info.yaolv}</admin:textarea>
+    </admin:formrow>
+	
+	 <admin:formrow title="摇一摇奖项" tip="奖项设置，多个用逗号，对应上面的概率设置" >
+	 <admin:textarea name="yaojx" rows="5" >{$info.yaojx}</admin:textarea>
+    </admin:formrow>
+    
+     
+	<admin:formrow title="摇一摇消耗" tip="摇一摇消耗积分个数" >
+      <admin:text name="yaojf"  value="{$info.yaojf}" len="250" />
+    </admin:formrow>
+	
+	<admin:formrow title="摇一摇中奖" tip="摇一摇中奖后，上家获得积分数量" >
+      <admin:text name="yaopjifen"  value="{$info.yaopjifen}" len="250" />
+    </admin:formrow>
+    
+    
+	
+	 <admin:formrow title="引导关注url" tip="引导关注URL" >
+	 <admin:textarea name="subscribeurl" rows="5" >{$info.subscribeurl}</admin:textarea>
+    </admin:formrow>
+    
+     <admin:formrow title="公告" tip="用户中心滚动公告" >
+	 <admin:textarea name="newsubscribeurl" rows="5" >{$info.newsubscribeurl}</admin:textarea>
+    </admin:formrow>
+    
+    <admin:formsubmit/>
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base', function() {
+	$('#form').duxForm();
+});
+</script> 

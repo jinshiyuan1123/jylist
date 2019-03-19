@@ -1,0 +1,38 @@
+<h3>{$name}列表</h3>
+<admin:panel >	
+	<if condition="$type eq 1" >
+		<admin:tabletool filter="true"  url="index.php?s=/Admin/JinqianLog/index/type/1" keyword="{$pageMaps.keyword}" >
+									<!--1送礼 2邀请 3礼物返利,4购买VIP返利,6充值返利 7私密照支出  8私密照返利  10后台添加  101提现 401充值--> 
+			<input name="keyword" type="hidden" value="{$pageMaps.keyword}"/>
+			<admin:select name="flag"  item="==类型==,注册,送礼,邀请,礼物返利,购买VIP返利,充值返利 ,私密照支出 ,私密照返利,后台添加,新手任务,提现,充值" value="0,5,1,2,3,4,6,7,8,10,11,101,401" selected="$pageMaps['falg']" />
+		</admin:tabletool>
+	<else /> 
+		<admin:tabletool url="index.php?s=/Admin/JinqianLog/index/type/{$type}" keyword="{$pageMaps.keyword}" ></admin:tabletool>	
+	</if>
+	
+
+	<admin:table id="table" show="编号,用户id,用户昵称,金额,变动详细,变动时间" class="m-table-border">
+		<foreach name="list" item="vo">
+			<tr>	
+				<td>{$vo.id}</td>
+				<td>{$vo['uid']}</td>
+				<td>{$niceName[$vo['uid']]}</td>
+				<td>{$vo.money}</td>
+				<td>{$vo.desc}</td>
+				<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+			</tr>
+		</foreach>
+		
+	</admin:table >
+	<admin:tablefoot />
+</admin:panel>
+
+
+<script>
+	Do.ready('base',function() {
+		//左下角的选择操作      
+		$('#selectAction').change(function() {
+			var type = $(this).val();
+		});
+	});
+</script>

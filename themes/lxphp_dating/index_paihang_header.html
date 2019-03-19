@@ -1,0 +1,24 @@
+<a href="" class="shangchen"><img src="images/shangcenruk.png" alt=""></a>          
+	<div class="qingmidu_header" style="height: 80px;">
+		<a href="{:U('Home/Ranking/Charmlist',array('type' => 4))}" <!--{if condition = "$type == 4"}--> class="hot" <!--{/if}--> >周魅力榜</a>
+		<a href="{:U('Home/Ranking/Charmlist',array('type' => 3))}" <!--{if condition = "$type == 3"}--> class="hot" <!--{/if}--> >周财富榜</a>
+		<a href="{:U('Home/Ranking/Charmlist',array('type' => 2))}" <!--{if condition = "$type == 2"}--> class="hot" <!--{/if}--> >魅力榜</a>
+		<a href="{:U('Home/Ranking/Charmlist',array('type' => 1))}" <!--{if condition = "$type == 1"}--> class="hot" <!--{/if}--> >财富榜</a>
+		<a href="{:U('Home/Ranking/qinmibang')}" <!--{if condition = "!$type"}--> class="hot" <!--{/if}--> >亲密榜</a>
+		<img src="images/xialajiantou.png" alt="" class="zhangkai daojian">
+	</div>	
+	
+	<script>
+		var hanggao = 0;
+		$(".zhangkai").click(function(){
+			if( hanggao <= 0 ){
+				$(".qingmidu_header").css('height',40);
+				$(".zhangkai").removeClass('daojian');
+				hanggao++
+			}else{
+      	$(".qingmidu_header").css('height',80);
+      	$(".zhangkai").addClass('daojian');
+        hanggao--
+			}	
+		})
+	</script>

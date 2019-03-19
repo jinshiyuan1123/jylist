@@ -1,0 +1,35 @@
+<h3>运营设置</h3>
+<admin:panel >
+  <admin:form url="{:U('site')}" method="post" id="form" class="m-form-horizontal" >
+  
+   <admin:formrow title="是否开启微信提现" tip="开后前台用微信提现" >
+     <admin:radio name="open_tx_wx"  item="是,否" value="1,0" checked="$info['open_tx_wx']" />
+    </admin:formrow>
+  
+    <admin:formrow title="是否开启支付宝提现" tip="开后前台用支付宝提现" >
+     <admin:radio name="open_tx_zfb"  item="是,否" value="1,0" checked="$info['open_tx_zfb']" />
+    </admin:formrow>
+    <admin:formrow title="是否开启话费充值" tip="开后前台用户可提交话费充值" >
+     <admin:radio name="open_tx_hf"  item="是,否" value="1,0" checked="$info['open_tx_hf']" />
+    </admin:formrow>
+
+
+     <admin:formrow title="最低提现金额" tip="最低提现金额"  >
+     <admin:text name="tx_qt_money"  value="{$info.tx_qt_money}" len="50" />
+     </admin:formrow>
+     
+      <admin:formrow title="微信审核提现" tip="微信提现达到此设置转为人工发放。0为无需审核"  >
+     <admin:text name="tx_wx_money"  value="{$info.tx_wx_money}" len="50" />
+     </admin:formrow>
+       
+       
+       
+    
+    <admin:formsubmit/>
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base', function() {
+	$('#form').duxForm();
+});
+</script> 

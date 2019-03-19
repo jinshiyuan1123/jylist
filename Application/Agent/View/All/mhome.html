@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>交友总代理管理管理平台</title>
+<link rel="stylesheet" href="http://u.cqwgkyy.com/css/reset.css" type="text/css" media="screen">
+<link rel="stylesheet" href="http://u.cqwgkyy.com//css/style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="http://u.cqwgkyy.com/css/invalid.css" type="text/css" media="screen">
+
+<link rel="stylesheet" href="http://u.cqwgkyy.com/css/jquery-ui.css">
+<link rel="stylesheet" href="http://u.cqwgkyy.com/css/jquery-ui-s.css">
+<link rel="stylesheet" href="http://u.cqwgkyy.com/css/super-combobox.css" type="text/css" media="screen">
+
+<script src="http://u.cqwgkyy.com/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="http://u.cqwgkyy.com/js/jquery-migrate-1.1.1.js" type="text/javascript"></script>
+<script src="http://u.cqwgkyy.com/static/js/calendar.js"></script></head><body><div id="meizzCalendarLayer" name="meizzCalendarLayer" style="position: absolute; z-index: 9999; width: 144px; height: 193px; display: none"><iframe id="meizzCalendarIframe" scrolling="no" frameborder="0" width="100%" height="100%"></iframe></div>
+<!--[if IE 6]>
+<script src="js/DD_belatedPNG_0.0.7a.js" type="text/javascript"></script>
+<script type="text/javascript">
+DD_belatedPNG.fix('.png_bg, img, li');
+</script>
+<![endif]-->
+
+
+
+<div id="body-wrapper">
+<div id="sidebar">
+<div id="sidebar-wrapper">
+<h1 id="sidebar-title"><a href="/">交友代理管理</a></h1>
+
+<div id="profile-links">
+您好，<a href="#">{$mcode}</a>，欢迎回来<br>
+
+</div>
+
+<ul id="main-nav">
+<li>
+	<a class="nav-top-item current" href="{:U('allagent')}">统计报表</a>
+</li>
+
+<li>
+	<a class="nav-top-item" href="{:U('accadmin')}">账户管理</a>
+</li>
+
+</ul>
+</div>
+</div>
+
+<div id="main-content"><p id="page-intro">
+<a href="#">控制台</a> » 
+<a href="#">统计报表</a>
+</p><div style="font-size:20px;text-align:center;color:red;">禁止使用诱惑、色情、性暗示等推广方式。所有素材不能包含色情、约炮及国家。一经发现直接封号，不结算！！！</div>
+
+<div class="clear"></div>
+
+<form id="frm1" action="{:U()}" method="post" name="frm1">
+<p>搜索时间：
+<span style="margin-left:5px;"><input type="text" class="input_tex112" value="" onFocus="calendar(event)" name="stime" size="12"></span>
+<span style="margin-left:0px;">-<input type="text" class="input_tex112" value="" onFocus="calendar(event)" name="etime" size="12"></span>
+<input type="button" id="btnOk" value="查询" class="button" onClick="document.frm1.submit()">
+</p>
+</form>
+				
+
+
+<div class="content-box">
+<div class="content-box-header">
+<h3>列表</h3>
+<div class="clear"></div>
+</div>
+<div class="content-box-content">
+<div class="tab-content" id="main-content-table">
+<table>
+<thead>
+	<tr>
+		<th>日期</th>
+		<th>当日关注人数</th><th>当日充值</th><th>往日充值</th><th>总充值</th>	</tr>
+</thead>
+
+<!--<tfoot>
+	<tr>
+		<td colspan="5"><div class="pagination"><span id="table_apps_previous" class="previous paginate_button paginate_button_disabled">« <a>上一页</a></span>  &nbsp;<span class="paginate_active_current"><a>&nbsp;1&nbsp;</a></span> <span id="table_apps_next" class="next paginate_button paginate_button_disabled"><a>下一页</a> »</span></div></td>
+	</tr>
+</tfoot>-->
+<tbody>
+		<tr>
+		<td>{$mdate}</td>                 
+		<td>{$mc}</td><td>{$money_n}</td><td>{$money_w}</td><td>{$money_a}</td>
+	</tr></tbody>
+</table>
+</div>
+
+</div>
+</div>
+		<div id="footer">
+<small>
+© Copyright 2014  | Powered by | <a href="#">Top</a>
+</small>
+</div>
+</div>
+</div>
+
+
+<script src="js/a.js" type="text/javascript"></script>
+<script src="js/jquery-ui.js" type="text/javascript"></script>
+<script src="js/jquery-ui.datepicker.zh.js" type="text/javascript"></script>
+<script src="js/super-combobox.js" type="text/javascript"></script>
+
+</body></html>

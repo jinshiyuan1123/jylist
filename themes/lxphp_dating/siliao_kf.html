@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>{$media.title}</title>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+</head>
+
+<body onload="test()" style="background: #f6f6f6;">
+ <div style="width:1200px;margin:auto">
+  <div class="mian_new fl">
+  <div class="new_top1" >
+      <div class="siliao_header">
+        <img src="{$info.avatar}" alt="" class="siliaotouxian">{$info.user_nicename}
+         <div class="fl" id="ddd" onclick="window.history.go(-1)"><img src="images/zuojian.png" alt="">返回</div>
+         <a href="{:U('Admin/Compose/gift',array('id'=>$uinfo['id'],'uid'=>$info['idmd5']))}"  class="fr"><img src="images/linwu.png" alt="">送礼</a>
+      </div>
+      <div class="siliao_xingxi">
+        <span onclick="gz('{$info.id}','{$uinfo.id}');"><img src="images/siliao_a_06.png"  alt=""><ll class="gz"><?php echo $User_subscribe?'已关注':'关注TA';?></ll></span>
+        <span>Ta: {$info.money}</span>
+        <span><img src="images/siliao_a_09.gif" alt="">亲密度{$User_qmd|default="0"}</span>
+      </div>
+      </div>
+
+
+      <div style="height:85px;"></div>
+	  
+    
+   
+      <div class="liaotian1" id="cscsc">	
+
+      
+	   <!--{foreach name="msglist" item="vo" }-->
+	      <?php if($vo['msgid']%5==0) { ?>
+         <span class="shijian">{$vo.sendtime|date="m-d H:i",###}</span>
+		  <?php } ?>	 
+		 <?php if($vo['fromuid']==$uinfo['id']) { ?>		 
+         <div class="right cb"><img src="{$uinfo.avatar}" class="touxiang fr"><p class="fr">{$vo.content}</p></div>
+		<?php }else{ ?>	 
+         <div class="left cb"><img src="{$info.avatar}" class="touxiang fl" ><p class="fl">{$vo.content}</p></div>
+		 <?php } ?>	 
+         <!--{/foreach}-->
+
+      </div>
+     
+     
+   
+
+		
+
+
+
+     
+       <!-- 底部footer -->
+       <div class="siliao_footer1">
+                 
+                    <input type="text" name="contentKey" value="" placeholder="说点什么..." id="content" onfocus="suianbian()" onblur="test222()" />
+                  
+          <div><a href="javascript:sendmsg('{$info.id}','{$uinfo.id}');" id="ceshi"  onclick="test()" onkeyup="test222()">发送</a></div>
+                  
+       </div>
+        <!-- 底部footer -->
+		
+		
+		
+
+
+</div>
+
+<div class="fl majia_div"> 
+本马甲UID：<span>{$uinfo.id}</span>&nbsp;&nbsp;
+本马甲昵称：<span>{$uinfo.user_nicename}</span>&nbsp;&nbsp;
+本马甲性别：<span>
+
+<!--{if condition="$uinfo['sex'] eq 1"}-->
+		男
+		<!--{elseif condition="$uinfo['sex'] eq 2" /}-->
+		女
+		<!--{else /}-->
+		其他
+		<!--{/if}-->
+		</span><br>
+快捷操作：<br>
+给马甲充值<span>{$config.money_name}</span>(余<span class="ymoney">{$uinfo.money}</span>)<button id="chongzhi">充值</button><br>
+<button id="laei" onclick="lahei('{$info.id}','{$uinfo.id}');">拉黑此人</button><span class="lahei"><!--{if condition="$lahei eq 1"}-->已拉黑<!--{/if}--></span><br/>
+<button id="jinyan">禁言此人</button><span class="ymoney jinyan"><!--{if condition="isset($jyday)"}-->(已禁言{$jyday}天)<!--{/if}--></span><br/>
+快捷回复：<br>
+<input type="radio" name="type" value="0"/>公有<input type="radio" checked name="type" value="1"/>私有<button id="addReply">添加快捷回复</button><br/>
+<div class="Reply">
+<!--{foreach name="replylist" item="vo"}-->
+<p dataid="{$vo.kj_set}" datacontent="{$vo.content}">{$vo.kj_set}:{$vo.content}</p>
+<!--{/foreach}-->
+
+</div>
+
+</div>
+<div class="cb"></div>
+<div style=" text-align: left; font-size: 24px;">
+<a href="{:U('Admin/Compose/wechatcheck',array('type'=>2))}">下一招呼</a>
+<a href="{:U('Admin/Compose/wechatcheck')}">下一私聊</a>
+</div>
+
+</div>
+
+
+	
+	
+
+
+<script>
+var replylist = [];
+var contentlist = [];
+
+$(function(){
+	getReplylist();
+
+})
+
+
+function getReplylist(){
+	
+	$('.Reply p').each(function(){
+		replylist.push( $(this).attr('dataid'));
+		contentlist.push( $(this).attr('datacontent'));
+	  });
+
+}  
+
+
+ $("body").keydown(function() {
+             if (event.keyCode == "13"){
+                 sendmsg('{$info.id}','{$uinfo.id}');  
+				 test();     
+             }
+ });
+ 
+ 	function lahei(touid,fromuid){
+  	$.post("{:U('Home/Ajax/lahei')}",{touid:touid,fromuid:fromuid},function(data){
+		if(data.status==1){
+			$(".lahei").text(data.info);
+		}
+	},'json')
+	
+  }
+ 
+ function get_lt_list(touid,fromuid){
+		$.post("{:U('Home/Ajax/get_lt_list')}",{touid:touid,fromuid:fromuid},function(data){
+		if(data.status==1){
+			$.each(data.info,function(index,val){
+				$(".liaotian1").append('<div class="left cb"><img src="{$info.avatar|default="__PUBLIC__/img/mrtx.jpg"}" class="touxiang fl"><p class="fl">'+val.content+'</p></div>');
+			})
+			test();	
+			newtext('您有新的消息！请注意查收！！！');			
+		}else{
+			
+		}
+		},'json')
+}
+ 
+ 
+ 
+	function gz(touid,fromuid){
+  	$.post("{:U('Home/Ajax/guanzhu')}",{touid:touid,fromuid:fromuid},function(data){
+		if(data.status==1){
+			$(".gz").html("已关注");
+		}
+	},'json')
+	
+  }
+  
+    var remsg = '';
+  var sending = false;
+  function sendmsg(touid,fromuid){
+  	var kfname  ='{$kflogarr.adminname}';
+  	var kflogid  ='{$kflogarr.id}';
+  	var content = $("#content").val();
+	if(content==""){
+		alert("请输入要提交的文字。");
+		return false;
+	}
+    var index = $.inArray(content, replylist);
+	
+	if(index>-1){
+		content =	contentlist[index];
+	} 
+
+  	if(sending) return false;
+	sending = true;	
+  	$.post("{:U('Home/Ajax/sendmsg')}",{touid:touid,content:content,fromuid:fromuid,kfname:kfname,kflogid:kflogid},function(data){
+		sending = false;
+		if(data.status==1){
+			$("#content").val('');
+			$(".liaotian1").append('<div class="right cb"><img src="{$uinfo.avatar}" class="touxiang fr"><p class="fr">'+content+'</p></div>');
+			var reshtime = Number('{$config.reshtime}')+3;
+			remsg = setInterval("get_lt_list('"+touid+"','"+fromuid+"')",reshtime*1000);			
+			//window.location.reload();
+		}else{
+			alert(data.info);
+		}
+	},'json')
+  }
+  
+</script>
+<script language="JavaScript"> 
+var deftitle = '{$media.title}';
+function test(){
+ $("#cscsc").animate({scrollTop:800000000000000000});
+ var content = $("#content").val();
+  if(content==""){
+    $(".siliao_footer1>div a").removeClass("hot");
+  }
+   clearTimeout(timerID);
+document.title=deftitle;
+//document.getElementById("content").focus();//取得焦点
+
+} 
+
+
+function suianbian(){
+	clearInterval(remsg);	
+    $(".siliao_footer1>div a").addClass("hot");
+  }
+function test222(){ 
+    $(".siliao_footer1>div a").removeClass("hot");
+}
+
+var timerID='';
+var text='';
+function newtext(msg) {
+	if(msg) text = msg;                
+            document.title=text.substring(1,text.length)+text.substring(0,1)
+            text=document.title.substring(0,text.length)
+            timerID = setTimeout("newtext()",500)
+}
+</script> 
+<script>
+   $('#chongzhi').click(function(){
+	   var moeny = prompt();
+	   var uid = '{$uinfo.id}';
+	   var ymoney =Number('{$uinfo.money}');
+	   var o =$('.ymoney');
+	   if(moeny){
+		   var data = {mtype:2,type:10,moeny:moeny,desc:'后台操作',uid:uid};
+		   $.post('{:U("Admin/User/sendaccount")}',data,function(data){
+			  
+			   if(data=="操作成功！"){
+				 o.text(ymoney+Number(moeny)) ; 
+			   }else{
+				   alert(data);  
+			   } 
+			  
+		   })
+	   }
+	   
+	   
+   })
+   $("#jinyan").click(function(){
+   	  var content = prompt('输入禁言天数');
+   	  var uid = '{$info.id}';
+	  if(content){
+		$.post('{:U("Admin/Compose/setjy")}',{uid:uid,content:content},function(data){
+			  if(data.status==1){
+				  $('.jinyan').text(data.info);
+			  }else{
+				  alert(data.info);
+			  } 
+			
+		},'json')    
+	
+	  }
+   });
+   
+   $('#addReply').click(function(){
+	   var content = prompt('请输入内容');
+	   var kj_set = '';
+	   var type =$('input[name="type"]:checked').val();
+	   if(type==1){
+		  kj_set = prompt('请设置自定义快捷键，不填则使用默认快捷键');
+	   }
+	   var o = $('.Reply');
+	   if(content){
+		   var data = {content:content,type:type,kj_set:kj_set,q:1};
+		   $.post('{:U("addReply")}',data,function(msg){
+			   if(msg.status==1){
+				   var html ='<p dataid="'+msg.info+'" datacontent="'+content+'">'+msg.info+':'+content+'</p>';
+				   o.append(html);
+				   getReplylist();
+			   }else{
+				   alert(msg.info);  
+			   } 
+			  
+		   },'json')
+	   }
+	   
+	   
+   })
+   
+   
+
+
+</script>	
+		
+
+</body>
+</html>

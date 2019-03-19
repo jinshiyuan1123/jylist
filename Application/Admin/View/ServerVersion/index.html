@@ -1,0 +1,25 @@
+<h3>版本记录列表</h3>
+<admin:panel >
+	<admin:tabletool filter="false" keyword="{$keyword}"></admin:tabletool>
+
+	<admin:table id="table" show="编号|80,包名,版本号,版本说明,安装时间,操作|130">
+	  <foreach name="list" item="vo">
+		<tr>
+		  <td>{$vo.id}</td>
+		  <td>{$vo.package_name}</td>
+		  <td>{$vo.version_num}</td>
+		  <td>{$vo.version_intro}</td>
+		  <td>{$vo.pub_time|date="Y-m-d H:i:s",###}</td>
+		  <td><a class="u-btn u-btn-primary u-btn-small" href="{:U('edit',array('id'=>$vo['id']))}">修改</a> <a class="u-btn u-btn-danger u-btn-small del" href="javascript:;" data="{$vo.id}">删除</a></td>
+		</tr>
+	  </foreach>
+	</admin:table>
+	<admin:tablefoot action="false" />
+</admin:panel>
+<script>
+Do.ready('base',function() {
+	$('#table').duxTable({
+		deleteUrl: "{:U('del')}"
+	});
+});
+</script>

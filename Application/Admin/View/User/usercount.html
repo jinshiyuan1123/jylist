@@ -1,0 +1,38 @@
+<h3>用户统计</h3>
+<admin:form url="{:U()}" method="post" id="form">
+  <div class="g-main-body">
+  
+  <include file="header" />
+  
+    <div class=" m-form-horizontal">
+      <admin:panel >
+        <admin:formrow title="邀请人数" tip="邀请注册人数（粉丝）"  >
+         {$count.fensi|default='0'}
+       </admin:formrow>
+       
+         <admin:formrow title="粉丝充值数" tip="粉丝充值数"  >
+           {$count.cz|default='0'}
+       </admin:formrow>
+        
+        <admin:formrow title="粉丝充值金额" tip="粉丝充值金额数"  >
+          {$count.czmoney|default='0'}
+       </admin:formrow>
+	   
+	   
+	   <admin:formrow title="粉丝购买VIP" tip="粉丝购买VIP数"  >
+       {$count.vip|default='0'}
+       </admin:formrow>
+	   
+         <admin:formrow title="粉丝购买VIP" tip="粉丝购买VIP总金额"  >
+       {$count.vipmoney|default='0'}
+       </admin:formrow>
+	   
+	   <admin:formrow title="粉丝提交订单" tip="粉丝提交充值/VIP订单未付款数"  >
+       {$count.nopay|default='0'}
+       </admin:formrow>
+       
+      </admin:panel>
+    </div>
+  </div>
+  <admin:text name="uid" type="hidden" value="{$info.id}" />
+</admin:form>

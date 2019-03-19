@@ -1,0 +1,17 @@
+<h3>编辑亲密度</h3>
+<admin:panel >
+  <admin:form url="{:U()}" method="post" id="form"  class="m-form-horizontal" >
+    
+    <admin:formrow title="亲密度值" tip="设置用户与好友的亲密度值"  >
+      <admin:text name="qmd" len="20" value="{$qmd}" datatype="*"  />
+    </admin:formrow>
+   
+    <admin:formsubmit/>
+    <admin:text name="id" type="hidden"  value="{$id}"  />
+  </admin:form>
+</admin:panel>
+<script>
+	Do.ready('base',function() {
+		$('#form').duxForm();
+	});
+</script> 

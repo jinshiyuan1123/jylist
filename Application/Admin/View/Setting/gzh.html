@@ -1,0 +1,102 @@
+<h3>公众号设置</h3>
+<admin:panel >
+  <admin:form url="{:U('site')}" method="post" id="form" class="m-form-horizontal" >
+   
+	
+	 <admin:formrow title="公众号" tip="公众号英文如 lxphp" >
+      <admin:text name="gzhcode"  value="{$info.gzhcode}" len="250" />
+    </admin:formrow>
+
+	<admin:formrow title="二维码图片" tip="公众号二维码图片,通过代理推广过来的用户，可以刷此二维码关注公众号" >
+	  <img id="img_gzhqrimg" width="200" src="<if condition="empty($info['gzhqrimg'])">__PUBLIC__/admin/images/placeholder.jpg<else/>{$info.gzhqrimg}</if>" /><br>
+      <admin:text id="gzhqrimg" name="gzhqrimg"  value="{$info.gzhqrimg}" len="250" />
+	  <a class="u-btn u-btn-primary" data="image" href="javascript:;" id="upload">上传</a>
+    </admin:formrow>
+    
+	 <admin:formrow title="管理员OPENID" tip="重要通知发送到管理员微信号！" >
+      <admin:text name="adminopenid"  value="{$info.adminopenid}" len="250" />
+    </admin:formrow>
+    
+   
+
+    <admin:formrow title="自定义token" tip="微信后台token接口，默认为 lxphpweixin 。备注：token网址为：http://{$info.site_url}{:U('Home/Weixin/index')}" >
+      <admin:text name="wxtoken"  value="{$info.wxtoken}" len="250" />
+    </admin:formrow>
+    
+    
+    
+	<admin:formrow title="APPID" tip="主微信APPID，一般有微信支付的服务号" >
+      <admin:text name="APPID"  value="{$info.APPID}" len="250" />
+    </admin:formrow>
+	
+	<admin:formrow title="SCRETID" tip="微信AppSecret" >
+      <admin:text name="SCRETID"  value="{$info.SCRETID}" len="250" />
+    </admin:formrow>
+	
+
+   
+    
+  <!--  <admin:formrow title="APPID_jsapi" tip="当分享接口失效时。应急分享接口appid" >
+      <admin:text name="APPID_jsapi"  value="{$info.APPID_jsapi}" len="250" />
+    </admin:formrow>
+	
+	<admin:formrow title="SCRETID_jsapi" tip="当分享接口失效时。应急分享接口AppSecret" >
+      <admin:text name="SCRETID_jsapi"  value="{$info.SCRETID_jsapi}" len="250" />
+    </admin:formrow>
+    -->
+	<admin:formrow title="引导关注URL" tip="引导关注URL" >
+      <admin:text name="newsubscribeurl"  value="{$info.newsubscribeurl}" len="" />
+    </admin:formrow>
+    
+    <h3>公众号通知</h3>
+	
+	
+	<admin:formrow title="个人消息通知ID" tip="个人消息通知模板id，配置教程：http://www.yueai.me/help/weimsg.html" >
+     <admin:text name="moneymb"  value="{$info.moneymb}" len="250" />
+    </admin:formrow>
+    
+	
+    
+     <admin:formrow title="自定义关注回复（男）。" tip="自定义关注回复,不填则不回复。" >
+      <admin:textarea name="diygzhf" rows="5" >{$info.diygzhf}</admin:textarea>
+    </admin:formrow>
+	
+	<admin:formrow title="自定义关注回复（女）。" tip="自定义关注回复,不填则不回复。" >
+      <admin:textarea name="diygzhfnv" rows="5" >{$info.diygzhfnv}</admin:textarea>
+    </admin:formrow>
+	
+	  <admin:formrow title="关注推送" tip="关注推送异性资料图文消息" >	 
+    <admin:radio name="gztstw"  item="是,否" value="1,0" checked="$info['gztstw']" />
+    </admin:formrow>
+	
+	<admin:formrow title="收到礼物" tip="收到的礼物价值({$config.money_name})大于以上设置时通知给对方。" >
+     <admin:text name="giftnotice"  value="{$info.giftnotice}" len="250" />
+    </admin:formrow>
+	
+	<!--
+	<admin:formrow title="未读私信" tip="未读私信数量大于以上设置时通知到微信。" >
+     <admin:text name="wdsxnotice"  value="{$info.wdsxnotice}" len="250" />
+    </admin:formrow>
+	-->
+       
+	 <admin:formrow title="个人主页被访问" tip="个人主页被访问通知,默认30分钟通知一次，配置文件可修改频率，源*码/由-折*翼/天-使*资/源*社-区*提/供" >	 
+    <admin:radio name="homehit"  item="通知男,通知女,全部通知,关闭" value="1,2,3,0" checked="$info['homehit']" />
+    </admin:formrow>
+    
+    <admin:formsubmit/>
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base', function() {
+	$('#form').duxForm();
+
+	//上传缩略图
+	$('#upload').duxFileUpload({
+		type: 'jpg,png,gif,bmp',
+		complete: function (data) {
+			$('#gzhqrimg').get(0).value = data.url;
+			$('#img_gzhqrimg').attr('src', data.url);
+		}
+	});
+});
+</script> 

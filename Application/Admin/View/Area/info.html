@@ -1,0 +1,24 @@
+<h3>{$name}用户</h3>
+<admin:panel >
+  <admin:form url="{:U()}" method="post" id="form"  class="m-form-horizontal" >
+    <admin:formrow title="父级行政区" tip="填写父级行政区的Id"  >
+      <admin:text name="rootid"  value="{$info.rootid}" len="20" datatype="*"  />
+    </admin:formrow>
+    <admin:formrow title="行政区名称" tip="行政区名称"  >
+      <admin:text name="areaname"  value="{$info.areaname}" len="20" datatype="*"  />
+    </admin:formrow>
+    <admin:formrow title="排序" tip="行政区显示顺序,数值小的排在前面"  >
+      <admin:text name="orders"  value="{$info.orders}" len="250" datatype="*"  />
+    </admin:formrow>
+	<admin:formrow title="行政区级别名称" tip="行政区级别名称"  >
+      <admin:text name="spreadname"  value="{$info.spreadname}" len="20" datatype="*"  />
+    </admin:formrow>
+    <admin:formsubmit/>
+    <admin:text name="areaid" type="hidden"  value="{$info.areaid}"  />
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base',function() {
+	$('#form').duxForm();
+});
+</script> 

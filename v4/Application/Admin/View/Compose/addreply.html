@@ -1,0 +1,61 @@
+<h3>{$name}用户</h3>
+<admin:panel >
+  <admin:form url="{:U()}" method="post" id="form"  class="m-form-horizontal" >
+  
+    <admin:formrow title="状态" tip="公开显示或只是自己才显示"  >
+       <select  name="type" id="changeType">
+        <option value="0" <eq name="info['type']" value="0">selected</eq> > 公有</option>
+        <option value="1" <eq name="info['type']" value="1">selected</eq> > 私有</option>
+        <select/>
+
+    </admin:formrow>
+    
+    <admin:formrow title="内容" tip="回复内容"  >
+      <admin:text name="content"  value="{$info.content}"  datatype="*"  />
+    </admin:formrow>
+  
+    <div class="kj_set"  style="display:none;" >
+      <admin:formrow title="自定义快捷键" tip="不填则使用默认快捷键,快捷键不可重复!"  >
+      <admin:text name="kj_set"  value="{$info.kj_set}"   />
+    </admin:formrow>
+   </div>
+    
+   
+  
+
+    <admin:formsubmit/>
+    <admin:text name="id" type="hidden"  value="{$info.id}"  />
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base',function() {
+	$('#form').duxForm();
+});
+
+<eq name="info['type']" value="1">
+    $('.kj_set').css('display','block');
+</eq>
+
+$(function(){
+	$('#changeType').change(function(){
+		var val =    $(this).val();
+		if(val==1){
+			$('.kj_set').show();
+		}else{
+			$('.kj_set').hide();
+		var id =  $('input[name="id"]').val();
+		  if(id){
+			  $('input[name="kj_set"]').val('#G'+id); 
+		  }
+		}
+		
+	})
+	
+	
+})
+
+
+
+
+
+</script> 

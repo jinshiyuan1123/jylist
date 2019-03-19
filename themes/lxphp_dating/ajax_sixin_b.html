@@ -1,0 +1,16 @@
+	 
+	 <!--{if condition="$list"}-->
+
+	  <!--{foreach name="list" item="vo" }-->
+           <li class="cb" onclick="window.location.href='{:U('Show/index',array('uid'=>$vo[idmd5]))}'">
+             <div class="fl"><img src="{$vo.avatar|default='__PUBLIC__/img/mrtx.jpg'}" alt=""></div>
+             <div class="fl">
+               <p class="<!--{if condition="$vo.user_rank gt 0"}-->huiyuan_vip<!--{else /}-->huiyuan<!--{/if}-->">{$vo.user_nicename|default="昵称未填"}<!--{if condition="$vo.user_rank gt 0"}--><span>VIP{$vo.user_rank}</span><!--{/if}--><i>{$vo.time|date="m-d H:i",###}</i></p>
+               <p class="sixin_pl_b">{$vo.user_nicename|default="昵称未填"}开始关注你了</p>
+             </div>
+           </li>
+		   <!--{/foreach}-->
+		      <!--{else/}-->
+  <li class="cb zanwu"  >
+			 </li>
+<!--{/if}-->

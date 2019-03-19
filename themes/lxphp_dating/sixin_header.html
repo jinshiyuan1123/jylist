@@ -1,0 +1,9 @@
+<div class="sixin_header">
+         <ul class="cb">
+           <li <!--{if condition="$nav2 eq 'sixin_a'"}-->class="hot"<!--{/if}--> ><a href="{:U('Wechat/sixin')}">私信</a><!--{if condition="$user_count.wdsxnum gt 0"}--><span>{$user_count.wdsxnum}</span><!--{/if}--></li>
+		   
+           <li <!--{if condition="$nav2 eq 'sixin_b'"}-->class="hot"<!--{/if}-->><a href="{:U('Wechat/subscribe')}">关注</a><!--{if condition="$user_count.wdgznum gt 0"}--><span>{$user_count.wdgznum}</span><!--{/if}--></li>
+           <li <!--{if condition="$nav2 eq 'sixin_c'"}-->class="hot"<!--{/if}-->><a href="{:U('Gift/giftlist')}">收礼</a><!--{if condition="$user_count.wdgiftnum gt 0"}--><span>{$user_count.wdgiftnum}</span><!--{/if}--></li>
+           <li <!--{if condition="$nav2 eq 'sixin_d'"}-->class="hot"<!--{/if}-->><a href="{:U('Wechat/system')}">系统</a><!--{if condition="$user_count.wdsysnum gt 0"}--><span>{$user_count.wdsysnum}</span><!--{/if}--></li>
+         </ul>
+      </div>

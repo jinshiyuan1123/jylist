@@ -1,0 +1,61 @@
+
+			<!-- 新手任务 -->
+			<!--{if condition="$love neq 1" }-->
+		 		<a  class="shangchen shangchen1 kai_new_shou" style="top: 20%;  display: block;"><img src="themes/<?php echo C('TPL_NAME'); ?>/images/rw_nav.png" alt=""></a>
+            	<div class="new_shou">
+                	<div  class="new_shou_hepin"></div>
+                	<div class="new_shou_center">
+               		<div class=" cb new_shou_cb"><a class="qiandao_guanbi"><img src="themes/<?php echo C('TPL_NAME'); ?>/images/xx.png"></a></div>
+					<img src="{$uinfo.avatar|default='__PUBLIC__/img/mrtx.jpg'}" alt="" class="rw_touxian">
+					<br>
+					<p class="rw_mz_vip">{$uinfo.user_nicename|default='昵称未填写'} <!--<span class="vip_logo"></span>--> <img src="themes/<?php echo C('TPL_NAME'); ?>/images/rank/1.png" alt=""></p>
+					<p class="new_shou_p"><?php echo C("site_title");?>新手任务有<img src="themes/<?php echo C('TPL_NAME'); ?>/images/rw_a.png">啦。<i><!--{if condition="$uinfo['sex'] eq 2" }-->星币可提现！<!--{/if}--></i></p>
+					<p class="new_shou_b">1.头像上传任务，奖励{$config.newbe1}<img src="themes/<?php echo C('TPL_NAME'); ?>/images/rw_b.png">
+						<!--{if condition="$task['have_avatar'] neq 1" }-->
+							<a href="{:U('Home/User/saveAvatarList')}">去做任务</a>
+						<!--{else /}-->
+							<i>已完成</i>
+					 	<!--{/if}-->
+					</p>
+					<p class="new_shou_b">2.完善个人资料，奖励{$config.newbe2}<img src="themes/<?php echo C('TPL_NAME'); ?>/images/rw_b.png">
+						<!--{if condition="$task['have_basedata'] neq 1" }-->
+							<a href="{:U('Home/User/basedata')}">去做任务</a>
+						<!--{else /}-->
+							<i>已完成</i>
+						<!--{/if}-->
+					</p>
+					<p class="new_shou_b">3.上传照片任务，有奖励
+						<!--{if condition="$task['have_photo'] neq 1" }-->
+							<a href="{:U('Home/User/UpPhoto')}">去做任务</a>
+						<!--{else /}-->
+							<i>已完成</i>
+						<!--{/if}-->
+					</p>
+					<!--{if condition="$task['renwu1'] gt 0" }-->
+						<div class="yiwangchang">完成新手任务</div>
+					<!--{else /}-->
+						<div class="jinxingzhong">{$task.msg|default="新手任务进行中"}</div>
+					<!--{/if}-->
+               </div>	
+			   </div>	
+               <!--{/if}-->
+         	<!-- 新手任务 -->
+			
+			
+			<script>
+				  var new_shouwidth =$(".new_shou_center").width();
+          var new_shouwidth2 =new_shouwidth/2
+          $(".new_shou_center").css('margin-left',-new_shouwidth2)
+            $(".new_shou_cb .qiandao_guanbi,.yiwangchang").click(function(){
+          	$(".new_shou").hide(100);
+          })
+          $(".kai_new_shou").click(function(){
+          	$(".new_shou").show(100);
+          	var new_shouwidth =$(".new_shou_center").width();
+          var new_shouwidth2 =new_shouwidth/2
+          $(".new_shou_center").css('margin-left',-new_shouwidth2)
+          })
+		  $(".yiwangchang").click(function(){
+		  	$.get('{:U("Home/Ajax/newrw")}')
+		  })				
+			</script>

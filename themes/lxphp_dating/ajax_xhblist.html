@@ -1,0 +1,25 @@
+
+     <!--{foreach name="list" item="vo"}-->
+           <li class="cb">
+             <div class="fl"><a href="{:U('Home/Show/index',array('uid'=>$vo['idmd5']))}"><img src="{$vo.avatar|default='__PUBLIC__/img/mrtx.jpg'}" alt=""></a></div>
+             <div class="fl">
+              <!--{if condition="$vo['user_rank']"}-->
+               <p class="huiyuan_vip">{$vo.user_nicename|default='昵称未定义'}<span>VIP</span>
+               <!--{else/}-->
+                <p class="huiyuan">
+               {$vo.user_nicename|default='昵称未定义'}
+               <!--{/if}-->
+                 <!--{if condition="in_array($vo['id'],$touidlist)"}-->
+                  <span class="hot">已关注</span>
+                <!--{else/}-->
+                
+                <span data="{$vo.id}" class="gzu"><img src="themes/lxphp_dating/images/jia.png"  alt="">关注</span>
+                  <!--{/if}-->
+               </p><!-- 这个是没有vip的字体显示黑色 -->
+               <p class="wodefenxi_b">注册时间:{$vo.create_time|date="Y-m-d",###}</p>
+             </div>
+           </li>
+          <!--{/foreach}-->
+          
+      
+          

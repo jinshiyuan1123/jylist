@@ -1,0 +1,47 @@
+<h3>系统消息列表</h3>
+<admin:panel >
+	<admin:tabletool filter="true" keyword="{$pageMaps.keyword}">
+	<input name="keyword" type="hidden" value="{$pageMaps.keyword}"/>	
+		<admin:select name="msg_type" item="==类型==,送礼,邀请,礼物返利,粉丝买VIP,邀请好友,粉丝充值,私密照支出,私密照收入,上传照片,后台添加,提现,{$config.jifen_name}/{$config.jifen_name_nv},{$config.money_name},签到,充值,亲密度" value="0,1,2,3,4,5,6,7,8,9,10,101,201,301,3301,401,501" selected="$pageMaps['msg_type']" />
+	</admin:tabletool>
+	<admin:table id="table" show="选择,编号,用户id|250,消息内容|500,消息类型,阅读状态,时间,操作|120" class="m-table-border">
+		<foreach name="list" item="vo">
+			<tr>
+				<td><input type="checkbox" name="id[]" value="{$vo.msg_id}" /></td>
+				<td>{$vo.msg_id}</td>
+				<td>{$vo.uid}</td>
+				<td>{$vo.msg_content}</td>
+				<td>
+				{$msgtype[$vo['msg_type']]}
+					
+				</td>
+				<td>
+					<if condition="$vo['msg_status'] eq 0" ><span style="color: red;"> 未阅读 </span>
+					<elseif condition="$vo['msg_status'] eq 1" />已阅读
+					</if>
+				</td>
+				<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+				<td>
+					<a class="u-btn u-btn-danger  u-btn-small del" href="javascript:;" data="{$vo.msg_id}">删除</a>
+				</td>
+			</tr>
+		</foreach>
+	</admin:table>
+	<admin:tablefoot action="true" item="删除" value="1" />
+</admin:panel>
+<script>
+	Do.ready('base',function() {
+		//左下角的选择操作      
+		$('#selectAction').change(function() {
+			var type = $(this).val();
+		});
+		//表格处理
+		$('#table').duxTable({
+			actionUrl : "{:U('batchAction')}",//批量操作
+			deleteUrl: "{:U('del')}",
+			actionParameter : function(){
+				return {'class_id' : $('#selectAction').next('#class_id').val()};
+			}
+		});
+	});
+</script>

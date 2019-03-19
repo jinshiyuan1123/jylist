@@ -1,0 +1,16 @@
+
+<h3>{$name}列表</h3>
+<admin:panel>
+	<include file="header" />
+	<admin:table id="table" show="编号|500,昵称,亲密度值,操作|120" class="m-table-border">
+		<foreach name="list" item="vo">
+			<tr>		
+				<td>{$vo.id}</td>
+				<td><a href="{:U('Admin/User/index',array('keyword'=>$vo['fuid']))}" style="color: #35B3EE;" >{$res[$vo['fuid']]}</a></td>
+				<td>{$vo.qmd}</td>			
+				<td><a class="u-btn u-btn-primary  u-btn-small" href="{:U('editQmd',array('id'=>$vo['id'],'qmd'=>$vo['qmd']))}">编辑</a></td>
+			</tr>
+		</foreach>
+	</admin:table>
+	<admin:tablefoot/>
+</admin:panel>

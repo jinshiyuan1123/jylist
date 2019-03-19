@@ -1,0 +1,19 @@
+<h3>详情</h3>
+<admin:form url="{:U()}" method="post" id="form">
+  <div class="g-main-body">
+    <div class="g-main-content m-form-horizontal">
+      <admin:panel >
+   	<div style="font-size: 18px">
+   	付款金额：{$fee}元<br>
+   	付款描述：{$desc}<br>
+   	付款时效：{$yxq}分钟<br>
+   	以下是付款二维码<br>
+   	付款成功后页面会自动跳转<br>
+      </div>
+       <img src="{$ewmpay}">
+       
+      </admin:panel>
+    </div>
+  </div>
+  <admin:text name="id" type="hidden" value="{$info.id}" />
+</admin:form>

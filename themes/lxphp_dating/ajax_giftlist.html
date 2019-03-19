@@ -1,0 +1,19 @@
+<!--{if condition="$giftlist"}-->
+	<!--{foreach name="giftlist" key="key" item="vo" }-->
+		<li class="cb">
+			<div class="fl"><a href="{:U('Show/index', array('uid' =>$result[$vo['fromuid']]['idmd5']))}"><img src="{$result[$vo['fromuid']]['avatar']|default='__PUBLIC__/img/mrtx.jpg'}"></a></div>
+			<div class="fl">
+				<!--{if condition="$result[$vo['fromuid']]['user_rank'] eq 1"}-->
+					<p>{$result[$vo['fromuid']]['user_nicename']}      <span class="vip_logo"></span></p>					
+				<!--{else/}-->	
+					<p class="no_vip">{$result[$vo['fromuid']]['user_nicename']}</p>
+				<!--{/if}-->
+				<p><img src="{$jibie[$vo['fromuid']]['rank_icon']}">{$jibie[$vo['fromuid']]['rank_name']}</p>
+				<p><img src="themes/<?php echo C('TPL_NAME'); ?>/images/xiaohaojinbi.png" alt="">消费{$vo.gift_price}{$config.money_name}</p>
+			</div>
+			<div class="fr po-re"><img src="{$vo.gift_image}" alt=""><span class="shulian_a">×{$vo.giftnum}</span></div>
+		</li>
+	<!--{/foreach}-->
+<!--{else/}-->
+	<p class="pinglue_new">暂无，ta很期待你的礼物哦~</p>
+<!--{/if}-->

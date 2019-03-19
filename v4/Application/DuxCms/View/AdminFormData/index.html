@@ -1,0 +1,58 @@
+<h3>{$formInfo.name}列表</h3>
+<admin:panel >
+ <if condition="$formInfo['name'] eq '提现申请'">
+<admin:tabletool filter="true" url="{$url}" keyword="{$keyword}">
+<admin:select name="status"  item="==状态==,通过,未审" value="0,1,2" selected="$pageMaps['status']" />
+
+</admin:tabletool>
+</if>
+	<table id="table" class="m-table ">
+	
+    	<thead>
+    	<th width="30">选择</th>
+        <th width="50">编号</th>
+        <foreach name="tableTh" item="vo">
+        <th>{$vo}</th>
+        </foreach>
+        <th width="120">操作</th>
+        </thead>
+        <tbody>
+    <foreach name="list" item="vo">
+      <tr>
+      <td><input type="checkbox" name="id[]" value="{$vo.data_id}" /></td>
+      	<td>{$vo.data_id}</td>
+        <foreach name="fieldList" item="val">
+        <if condition="$val['show']"> 
+        <td><?php echo D('DuxCms/FieldData')->showListField($vo[$val['field']],$val['type'],$val['config']); ?></td>
+        </if>
+        </foreach>
+        <td>
+        <a class="u-btn u-btn-primary u-btn-small" href="{:U('edit',array('data_id'=>$vo['data_id'],'fieldset_id'=>$formInfo['fieldset_id']))}">修改</a>
+        <a class="u-btn u-btn-danger u-btn-small del" href="javascript:;" url="{:U('del',array('fieldset_id'=>$formInfo['fieldset_id']))}" data="{$vo.data_id}">删除</a>
+        </td>
+      </tr>
+    </foreach>
+    </tbody>
+    </table>
+    <if condition="$val['show']"></if>
+   <if condition="$formInfo['name'] eq '提现申请'">
+   <admin:tablefoot action="true" item="通过,未通过" value="1,2"  />
+   </else>
+   <admin:tablefoot action="false"/>
+   </if>    
+  
+
+</admin:panel>
+<script>
+Do.ready('base',function() {
+
+	//表格处理
+	$('#table').duxTable({
+		actionUrl : "{:U('edit',array('fieldset_id'=>$formInfo['fieldset_id']))}",
+//		deleteUrl: "{:U('del')}",
+		actionParameter : function(){
+			return {'class_id' : $('#selectAction').next('#class_id').val()};
+		}
+	});
+});
+</script> 

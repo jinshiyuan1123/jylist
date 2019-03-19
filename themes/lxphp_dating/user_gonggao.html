@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+		<title>{$media.title}</title>
+		<link rel="stylesheet" type="text/css" href="css/css.css">
+		<script src="js/jquery-1.8.0.min.js"></script>
+	</head>
+	 <style type="text/css">
+           .fx_header {
+              position: fixed;
+              top: 0px;
+                }
+ 
+     </style>
+
+	<body>
+	
+		<div class="hd_main">
+		<div style="height:40px;display:none ;" class="appdiv fx_header_new"></div>
+  <!--#include file="app_share.html"-->
+		   
+
+ <div class="fujinderen_header">
+				系统公告
+				<a href="javascript:history.go(-1);" class="fl" id="ddd"><img src="/themes/lxphp_dating/images/zuojian.png" style="width:11px;">返回</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			
+		
+		
+			
+			<!--{volist name="lists" id="vo"}-->
+				<div class="t2">
+					<div class="item" id="vo{$vo.content_id}">
+					<a name="{$vo.content_id}"></a>
+						<div class="head">
+							<span class="tit">{$vo.title}</span>
+						</div>
+						<div class="body hide">
+						{$vo.time|date="Y-m-d H:i",###}
+							<p>{$vo.content}</p>							
+						</div>
+					</div>
+			<!--{/volist}--> 
+				
+				<div class="pages">	{$page}</div>
+				
+			</div>
+<!--#include file="footer.html"-->
+			
+
+			<script>
+			var id ='<?php echo I("get.id"); ?>';
+			$("#vo"+id).find('.head').addClass('active');
+			$("#vo"+id).find('.body').removeClass('hide');
+				$('.item .head').click(function() {
+					if ($(this).hasClass('active')) {
+						$(this).removeClass('active');
+						$(this).parent().find('.body').addClass('hide');
+					} else {
+						$(this).addClass('active');
+						$(this).parent().find('.body').removeClass('hide');
+					}
+				});
+			</script>
+			<!--左右滚动-->
+		</div>
+	</body>
+</html>

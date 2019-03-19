@@ -1,0 +1,46 @@
+<h3>{$name}列表</h3>
+<admin:panel >	
+	<input type="button" class="u-btn" value="添加" onclick="showdiv()"/>
+
+	<admin:table id="table" show="编号,类型,关键字,回复内容,操作" class="m-table-border">
+		<foreach name="res" item="vo">
+			<tr>	
+				<td>{$vo.id}</td>
+				<td><if condition="$vo.type eq 1">文字<else/>语音</if></td>
+				<td>{$vo.code}</td>
+				<td>{$vo.reply}</td>
+				<td>
+		         <a class="u-btn u-btn-danger  u-btn-small del" href="javascript:;" data-id="{$vo.id}">删除</a>
+				</td>
+			</tr>
+		</foreach>
+	</admin:table >
+	<admin:tablefoot />
+</admin:panel>
+<div style="z-index:999; position:absolute; top:15%; left:30%; width:450px; height:300px; text-align:center; background:#999; display:none" id="adddiv">
+	<form action="{:U('addcodereply')}" method="post">
+	关键词:&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"  name="mcode" style="width:300px;height:20px; margin-top:10%"/><br /><br />
+    &nbsp;&nbsp;&nbsp;回复:&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"  name="mreply" style="width:300px;height:20px"/><br /><br />
+    类型:&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"  name="mtype" value="1" checked="checked"/>文字&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"  name="mtype" value="2"/>语音<br /><br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="提交" style="width:300px;height:25px"/><br /><br />
+    <a href="#" style="width:300px;height:25px; background:#0FF;padding:5px 15px;" onclick="qux()">取消</a>
+    </form>
+    <form action="{:U('delReplycode')}" method="post" id="delform">
+    	<input type="hidden" name="delid" value="" id="delid"/>
+    </form>
+</div>
+
+<script>
+	$(function(){
+		$('.del').click(function(){
+			$('#delid').val($(this).data('id'));
+			$('#delform').submit();
+			})
+		})
+	function qux(){
+		$('#adddiv').hide();
+		}
+	function showdiv(){
+		$('#adddiv').show();
+		}
+</script>

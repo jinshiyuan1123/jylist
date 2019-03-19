@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>{$media.title}</title>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+</head>
+
+<body>
+  
+  <div class="hd_main">
+     <a href="" class="shangchen"><img src="images/shangcenruk.png" alt=""></a>          
+	<div class="qingmidu_header" style="height: 80px;">
+		<a href="{:U('Home/Ranking/Charmlist',array('type' => 4))}" <!--{if condition = "$type == 4"}--> class="hot" <!--{/if}--> >周魅力榜</a>
+		<a href="{:U('Home/Ranking/Charmlist',array('type' => 3))}" <!--{if condition = "$type == 3"}--> class="hot" <!--{/if}--> >周财富榜</a>
+		<a href="{:U('Home/Ranking/Charmlist',array('type' => 2))}" <!--{if condition = "$type == 2"}--> class="hot" <!--{/if}--> >魅力榜</a>
+		<a href="{:U('Home/Ranking/Charmlist',array('type' => 1))}" <!--{if condition = "$type == 1"}--> class="hot" <!--{/if}--> >财富榜</a>
+		<a href="{:U('Home/Ranking/qinmibang')}" <!--{if condition = "!$type"}--> class="hot" <!--{/if}--> >亲密榜</a>
+		<img src="images/xialajiantou.png" alt="" class="zhangkai daojian">
+	</div>	
+	
+	<script>
+		var hanggao = 0;
+		$(".zhangkai").click(function(){
+			if( hanggao <= 0 ){
+				$(".qingmidu_header").css('height',40);
+				$(".zhangkai").removeClass('daojian');
+				hanggao++
+			}else{
+      	$(".qingmidu_header").css('height',80);
+      	$(".zhangkai").addClass('daojian');
+        hanggao--
+			}	
+		})
+	</script>
+
+   <div class="paihang_new">
+    <ul>
+    	<li class="cb">
+    	   <div class="jin fl paihang_yi"><img src="images/paihan_03.png" alt=""></div>
+    	   <div class="fl  paihang_er">
+    	     <div class="fl paihang_er_touxian"><img src="images/renwumoban_06.jpg" alt=""></div>
+             <div class="fl">
+                <p class="name_vip cb"><i class="fl">姑凉 .为我一笑倾城</i><span  class="fl vip_logo"></span><img src="images/rank/1.png" alt=""  class="fl name_vip_dengji"></p>
+                <div class="paihang_er_iok" ><img src="images/caifuzhi.png" alt="">995万&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/user_03_11.png" alt="">25000</div>
+             </div>
+    	     </div>
+    	   <a href="" class="fr paihang_a"><img src="images/youjianhei.png"></a>
+    	</li>
+    	<li class="cb">
+    	   <div class="jin fl paihang_yi"><img src="images/paihan_06.png" alt=""></div>
+    	   <div class="fl  paihang_er">
+    	     <div class="fl paihang_er_touxian"><img src="images/renwumoban_06.jpg" alt=""></div>
+             <div class="fl">
+                <p class="name_vip_no cb"><i class="fl">冰箱少男、</i><img src="images/rank/1.png" alt=""  class="fl name_vip_dengji"></p>
+                <div class="paihang_er_iok" ><img src="images/caifuzhi.png" alt="">995万&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/user_03_11.png" alt="">25000</div>
+             </div>
+    	     </div>
+    	   <a href="" class="fr paihang_a"><img src="images/youjianhei.png"></a>
+    	</li>
+    	<li class="cb">
+    	   <div class="jin fl paihang_yi"><img src="images/paihan_09.png" alt=""></div>
+    	   <div class="fl  paihang_er">
+    	     <div class="fl paihang_er_touxian"><img src="images/renwumoban_06.jpg" alt=""></div>
+             <div class="fl">
+                <p class="name_vip_no cb"><i class="fl">冰箱少男、</i><img src="images/rank/1.png" alt=""  class="fl name_vip_dengji"></p>
+                <div class="paihang_er_iok" ><img src="images/caifuzhi.png" alt="">995万&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/user_03_11.png" alt="">25000</div>
+             </div>
+    	     </div>
+    	   <a href="" class="fr paihang_a"><img src="images/youjianhei.png"></a>
+    	</li>
+    	<li class="cb">
+    	   <div class="jin fl paihang_yi">4</div>
+    	   <div class="fl  paihang_er">
+    	     <div class="fl paihang_er_touxian"><img src="images/renwumoban_06.jpg" alt=""></div>
+             <div class="fl">
+                <p class="name_vip_no cb"><i class="fl">冰箱少男、</i><img src="images/rank/1.png" alt=""  class="fl name_vip_dengji"></p>
+                <div class="paihang_er_iok" ><img src="images/caifuzhi.png" alt="">995万&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/user_03_11.png" alt="">25000</div>
+             </div>
+    	     </div>
+    	   <a href="" class="fr paihang_a"><img src="images/youjianhei.png"></a>
+    	</li>
+    	<li class="cb">
+    	   <div class="jin fl paihang_yi">5</div>
+    	   <div class="fl  paihang_er">
+    	     <div class="fl paihang_er_touxian"><img src="images/renwumoban_06.jpg" alt=""></div>
+             <div class="fl">
+                <p class="name_vip_no cb"><i class="fl">冰箱少男、</i><img src="images/rank/1.png" alt=""  class="fl name_vip_dengji"></p>
+                <div class="paihang_er_iok" ><img src="images/caifuzhi.png" alt="">995万&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/user_03_11.png" alt="">25000</div>
+             </div>
+    	     </div>
+    	   <a href="" class="fr paihang_a"><img src="images/youjianhei.png"></a>
+    	</li>
+    	<li class="cb">
+    	   <div class="jin fl paihang_yi">6</div>
+    	   <div class="fl  paihang_er">
+    	     <div class="fl paihang_er_touxian"><img src="images/renwumoban_06.jpg" alt=""></div>
+             <div class="fl">
+                <p class="name_vip_no cb"><i class="fl">冰箱少男、</i><img src="images/rank/1.png" alt=""  class="fl name_vip_dengji"></p>
+                <div class="paihang_er_iok" ><img src="images/caifuzhi.png" alt="">995万&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/user_03_11.png" alt="">25000</div>
+             </div>
+    	     </div>
+    	   <a href="" class="fr paihang_a"><img src="images/youjianhei.png"></a>
+    	</li>
+    	<li class="cb">
+    	   <div class="jin fl paihang_yi">7</div>
+    	   <div class="fl  paihang_er">
+    	     <div class="fl paihang_er_touxian"><img src="images/renwumoban_06.jpg" alt=""></div>
+             <div class="fl">
+                <p class="name_vip_no cb"><i class="fl">冰箱少男、</i><img src="images/rank/1.png" alt=""  class="fl name_vip_dengji"></p>
+                <div class="paihang_er_iok" ><img src="images/caifuzhi.png" alt="">995万&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/user_03_11.png" alt="">25000</div>
+             </div>
+    	     </div>
+    	   <a href="" class="fr paihang_a"><img src="images/youjianhei.png"></a>
+    	</li>
+    	<li class="cb">
+    	   <div class="jin fl paihang_yi">8</div>
+    	   <div class="fl  paihang_er">
+    	     <div class="fl paihang_er_touxian"><img src="images/renwumoban_06.jpg" alt=""></div>
+             <div class="fl">
+                <p class="name_vip_no cb"><i class="fl">冰箱少男、</i><img src="images/rank/1.png" alt=""  class="fl name_vip_dengji"></p>
+                <div class="paihang_er_iok" ><img src="images/caifuzhi.png" alt="">995万&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/user_03_11.png" alt="">25000</div>
+             </div>
+    	     </div>
+    	   <a href="" class="fr paihang_a"><img src="images/youjianhei.png"></a>
+    	</li>
+    </ul>
+   	
+   </div>
+	<!--#include file="footer.html"-->      
+  </div>
+
+
+</body>
+
+</html>

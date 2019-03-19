@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>{$media.title}</title>
+<link rel="stylesheet" type="text/css" href="css/css.css?11 ">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+
+</head>
+<style type="text/css">
+	.barrage .screen{width:100%;height:100%;position:absolute;top:0px;right:0px;}
+.barrage .screen .s_close{z-index:2;top:20px;right:20px;position:absolute;text-decoration:none;width:40px;height:40px;border-radius:20px;text-align:center;color:#fff;background:#000;line-height:40px;display:none;}
+.barrage{display:none;width:100%;height:100%;}
+.barrage .screen .mask div{position:absolute;font-size:20px;font-weight:bold;white-space:nowrap;line-height:40px;z-index:40;}
+.barrage .send{z-index:1;width:100%;height:55px;background:#000;position:absolute;bottom:0px;text-align:center;}
+.barrage .send .s_text{width:600px;height:40px;line-height:10px;font-size:20px;font-family:"微软雅黑";}
+.barrage .send .s_btn{width:105px;height:40px;background:#22B14C;color:#fff;}
+</style>
+
+<body>
+  <div class="hd_main">
+  <!-- 轮播开始 -->
+     <div class="m-body" style="clear:both;position: relative;">
+        <div class="main_visual">
+        <div class="new_dangmu">
+        	<div class="barrage" style="display: none;">
+				<div class="screen">
+							<div class="mask">
+							<!--{foreach name="commentList" item="vo"  key="key" }-->
+							 <div>{$vo.content}</div>
+							 <!--{/foreach}-->							
+							<!--内容在这里显示-->
+							</div>
+				</div>
+         </div>
+
+        
+          <div class="main_image">
+            <img src="{$photo.uploadfiles}" class="m-body-hide" style="overflow: visible; min-height:300px;" id="wimg">
+			<!--{if condition="$ltphoto"}-->
+            <a href="{:U('photo',array('pid'=>$ltphoto[idmd5]))}" id="btn_prev"></a>
+         <!--{/if}-->
+		     <!--{if condition="$gtphoto"}-->
+		    <a href="{:U('photo',array('pid'=>$gtphoto[idmd5]))}" id="btn_next"></a>
+			<!--{/if}-->
+			
+        </div>
+      </div>
+
+
+      <!-- 弹幕开关开始 -->
+  <div class="dangmu">
+      <div class="kaiqi" id="kaiguanyi"  style="display:none">
+        <span class="wwww1"></span><span>弹幕</span>
+      </div>
+      <div class="kaiqi_a  s_btn"  id="kaiguaner">
+        <span class="wwww1"></span><span>弹幕</span>
+      </div> 
+    </div>
+     <!-- 弹幕开关结束 -->
+
+     <!-- 亲密度 -->
+     <!-- <div class="qingmidu_photo">
+        <img src="images/qingmiduxin.png">
+        <span>30</span>
+      </div>
+-->
+
+     <!-- 亲密度 -->
+
+     <!-- 举报开始 -->
+   <div class="jubao">举报</div>
+				<div class="lxzizhu_shop_dc" hidden="hidden">
+					<div class="lxzizhu_shop_hei"></div>
+					<div class="jubao_div">
+						<div class=" cb"><a class="qiandao_guanbi"><img src="images/xx.png" ></a></div>
+						<p class="jubao_yaunyi" style="margin-top: -10px;">举报原因</p>
+						<div class="jubao_shuaxuan">
+							<select id="giftnum">
+								<!--<option value="0" >请选择</option>-->
+								<!--{foreach name="report" key="k" item="vo" }-->							
+		            	<option value="{$vo}" >{$vo}</option>  
+		            <!--{/foreach}-->
+     					</select>
+						</div>
+						<p class="jubao_yaunyi">举报说明</p>
+						<div class=" jubao_shuru">
+							<textarea name="textarea" id="TextArea1" cols="45" rows="5" onkeyup="words_deal();" placeholder="举报内容，不超过50个字…"></textarea>
+							<span id="textCount">50</span>
+						</div>
+						<p class="jubao_yaunyi"> <input type="button" name="" onclick="jubao()" id="tijiao" value="提交举报" class="jubaotijiao" style="margin-top: 15px;"></p>
+					</div>
+				</div>
+				
+				<script type="text/javascript">
+					$(".jubao").click(function() {
+						$(".lxzizhu_shop_dc").show();
+					})
+					$(".qiandao_guanbi").click(function() {
+						$(".lxzizhu_shop_dc").hide();
+					})
+				</script>
+				<script type="text/javascript">
+					function words_deal() {
+						var curLength = $("#TextArea1").val().length;
+						if (curLength > 50) {
+							var num = $("#TextArea1").val().substr(0, 50);
+							$("#TextArea1").val(num);
+							alertbox("超过字数限制，多出的字将被截断！");
+						} else {
+							$("#textCount").text(50 - $("#TextArea1").val().length);
+						}
+					}
+					
+					function jubao(){
+						var type = $("#giftnum").val();
+						var jbdesc = $("#TextArea1").val();
+						var	touid  = '{$info.id}';
+											
+						$.ajax({
+							type:"post",
+							url:"{:U('Home/Ajax/Report')}",
+							data:{type:type,jbdesc:jbdesc,touid:touid},
+							dataType:"json",
+							success:function(msg){
+								alertbox(msg);
+								$(".lxzizhu_shop_dc").hide();
+							}
+						});
+						
+					}					
+				</script>
+
+     <!-- 举报结束 -->
+
+     <!-- 送花开始 -->
+     <a href="{:U('Gift/index',array('uid'=>$info['idmd5']))}" class="sonhua">
+       <img src="images/songh.png" alt="">
+       <div>送礼</div>
+     </a>
+     <!-- 送花结束 -->
+
+      <!-- 点赞开始 -->
+     <a href="javascript:;" class="dianzan" onclick="dozan(this,'{$photo.idmd5}');">
+       &nbsp;<img src="images/aixin.gif" alt=""><img src="images/zan.png" alt="" class="hide" id="xiaoguo" style="position: absolute;left: 8px;top: 10px;">&nbsp;<span class="zan">{$photo.hits}</span>
+     </a>
+     <script type="text/javascript">
+           var shuji = 0;
+           $(".dianzan").click(function(){
+           	if(shuji > 0){
+           		alertmsg("只能对同一作品点赞一次")
+           		
+           	}else{
+           		$("#xiaoguo").addClass("zoomOutUp");
+           		shuji++
+           	}
+           })
+     </script>
+     <!-- 点赞结束 -->
+    </div>
+     <!-- 轮播结束 -->
+     <div class="uesr_xiangqing">
+         <div class="uesr_xiangqing_a cb">
+           <div style="margin-right: 2%;"><a href="{:U('Show/index', array('uid' => $info['idmd5']))}"><img src="{$info.avatar|default='__PUBLIC__/img/mrtx.jpg'}" alt=""></a></div>
+           <div style="    width: 48%;">
+             <p><a href="{:U('Show/index', array('uid' => $info['idmd5']))}" style="color: #f61a24" class="color000">{$info.user_nicename}</a> <span class="vip_logo"></span></p>
+             <p><img src="{$info.rank_icon}">{$info.rank_name}<!-- <a href="{:U('Show/index', array('uid' => $info['idmd5']))}">私密资料</a> --></p>
+             <p><img src="images/user_03.png" alt=""><span class="gznum">{$userCount.fansnum|default='0'}</span>个粉丝<a href="javascript:gz('{$info.id}');" class="gz"><?php if($User_subscribe==1) echo '已关注'; elseif($User_subscribe==2) echo '相互关注'; else echo '关注TA';?></a></p>
+           </div>
+           <div style="float: right;"><a href="{:U('Wechat/index',array('uid'=>$info[idmd5]))}"><img src="images/user_04.png" alt="">聊天</a></div>
+         </div>
+         <div class="uesr_xiangqing_b">
+		  <!--{if condition="$photo.title neq ''"}-->
+         {$photo.title}
+		 <!--{else/}-->	
+		 {$monolog|default='没有描述'}		 
+		  <!--{/if}-->
+         </div>
+         <div class="uesr_xiangqing_c cb">
+            <div class="fl">{$photo.timeline|date="m月d日 H:i",###}</div>
+             <div class="fr"> <img src="images/uesr_xiangqing_c_09.png" >{$userCount.sumgift} <img src="images/uesr_xiangqing_c_11.png" alt="">{$userCount.comment} </div>
+         </div>
+     </div>
+
+     <!-- 评论开始-->
+     <div class="pinglun">
+       <div class="pinglun_a"><input type="text" name="content" placeholder="请输入你的评论..."><!--a href=""><img src="images/biaopqi.png" ></a--></div>
+       <div class="pinglun_b"> <a href="javascript:addComment({$photo.photoid});">发送</a></div>
+        
+     </div>
+     <div  style="background: #fff;">
+          <div class="pinglun_kaiguan"><span class="hot">礼物列表</span><span data="pl">所有评论</span></div>
+          <div class="kaiguan_qiehuandiv"  >
+         
+            <ul class="guibing">
+           
+			  <!--#include file="ajax_giftlist.html"--> 			
+            </ul>
+          </div>
+          <div class="kaiguan_qiehuandiv" style="display:none">
+             <ul class="pl">
+            <!--#include file="ajax_comment.html"--> 	
+           </ul>
+          </div>
+
+
+        </div>
+
+
+
+<script type="text/javascript">
+  $(".kaiqi").click(function(){
+    $(".kaiqi,.barrage").hide();
+    $(".kaiqi_a").show();
+
+  })
+   $(".kaiqi_a").click(function(){
+    $(".kaiqi_a").hide();
+    $(".kaiqi,.barrage").show();
+    init_barrage();
+  })
+    var jz = false;
+  $(function(){
+	  $(".pinglun_kaiguan span").click(function(){
+		     var index= $(this).index();
+		    $(".pinglun_kaiguan span").removeClass("hot").eq(index).addClass("hot"); 
+		    $(".kaiguan_qiehuandiv").hide().eq(index).show();
+		    <!--{if condition="$commentList"}-->  
+		    if($(this).attr('data')=='pl'){
+		    	  jz = true;
+		      }else{
+		    	  jz = false; 
+		      }
+		    <!--{/if}-->
+		  })
+	 $('.dzan').live('click',function(){
+		 var cid = $(this).attr('data');
+		 var  o = $(this).parent().find('em');
+		 $.post('{:U("Home/Ajax/commentZan")}',{cid:cid},function(data){
+			    if(data.status==1){
+			    	o.text(data.info);
+			    }else{
+			    	alertbox(data.info);
+			    }  
+		  },'json');
+
+
+	 })  
+	  
+  })
+
+
+  function addComment(photoid){
+	  $(".pinglun_kaiguan span").eq(1).click();
+	  
+	  var content = $('input[name="content"]').val();
+	  var flag = '{$config.comment_flag}';
+	  var  o  = $('.pl');
+	  var obj = $('input[name="content"]');
+      if(content==""||content==null){
+    	  alertmsg('请输入评论内容！');
+    	  return false;
+      }
+      obj.val('');
+	  $.post('{:U("comment")}',{photoid:photoid,content:content},function(data){
+		    if(flag==0){
+		    	o.html(data.info);
+		    }else{
+		    	alertbox(data.info);
+		    }  
+	  },'json');
+	
+  }
+ 
+  var totalheight = 0;
+	var body = '';			
+	var main = $(".pl"); //主体元素  
+	var range = 10; //距下边界长度/单位px  
+	var elemt = 500; //插入元素高度/单位px  
+	var maxnum = 200; //设置加载最多次数  
+	var num = 2;
+	
+	var photoid = '{$photo.photoid}';
+$(window).scroll(function() {
+
+if(jz==false) return false;
+		var srollPos = $(window).scrollTop(); //滚动条距顶部距离(页面超出窗口的高度) 					
+		totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+		if (($(document).height() - range) <= totalheight && num != maxnum) {
+			//$("#loading").show();
+			$.getJSON("{:U('commentList')}", {
+				p: num,
+				ajax: 1,
+				photoid: photoid,
+			}, function(data) {
+				$("#loading").hide();
+				jz = false;
+				if(data.status!=1) return false;				
+				main.append(data.info);	
+				jz = true;
+			}, 'json');
+			num++;
+	
+		}
+	});	
+</script>
+      <script>
+//提交评论
+//初始化弹幕技术
+function init_barrage(){
+var _top = 0;
+$(".mask div").show().each(function(){
+var _left = $(window).width()-$(this).width();//浏览器最大宽度，作为定位left的值
+var _height = $(window).height();//浏览器最大高度
+var _top =(Math.random()*(300-0));
+var _left =(Math.random()*(500-0));
+$(this).css({left:_left,top:_top,color:getRandomColor()});
+//定时弹出文字
+var time = 10000;
+if($(this).index() % 2 == 0){
+time = 15000;
+}
+$(this).animate({left:"-"+_left+"px"},time,function(){
+// $(this).remove();
+});
+}
+);
+}
+//获取随机颜色
+function getRandomColor(){
+return '#' + (function(h){
+return new Array(7 - h.length).join("0") + h
+}
+) ((Math.random() * 0x1000000 << 0).toString(16))
+}
+</script>
+
+
+
+
+
+
+
+
+<!--#include file="footer.html"-->
+
+
+
+  </div>
+
+
+
+</body>
+
+</html>

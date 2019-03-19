@@ -1,0 +1,112 @@
+<h1>虚拟货币逻辑计费设置</h1>
+<admin:panel >
+  <admin:form url="{:U('site')}" method="post" id="form" class="m-form-horizontal" >
+  
+  <h3>亲密度</h3>
+  
+   <admin:formrow title="送礼获得" tip="礼物没有设置亲密度值则按照此设置（固定值/个礼物）"  >
+       <admin:text name="gift_qmd"  value="{$info.gift_qmd}" len="50" />
+       </admin:formrow>
+  
+        <admin:formrow title="相互关注获得" tip="相互关注获得亲密度（固定值）"  >
+       <admin:text name="qmd_qi"  value="{$info.qmd_qi}" len="50" />
+       </admin:formrow> 
+	   
+	    <admin:formrow title="聊天获得" tip="聊天获得亲密度，每相互聊天多少条数获得1亲密度（固定值）"  >
+       <admin:text name="qmd_lt"  value="{$info.qmd_lt}" len="50" />
+       </admin:formrow> 	   
+	   
+	    <admin:formrow title="查看私密相册默认" tip="男查看女私密相册需要亲密度(男)（固定值）"  >
+       <admin:text name="check_simi_moren"  value="{$info.check_simi_moren}" len="50" />
+       </admin:formrow>
+	   
+	     <h3>{$config.jifen_name_nv}/{$config.jifen_name}</h3>
+	   
+   
+         <admin:formrow title="送礼默认" tip="礼物没有设置{$config.jifen_name_nv}/{$config.jifen_name}值则按照此设置（礼物金额的%/个礼物)"  >
+       <admin:text name="gift_def"  value="{$info.gift_def}" len="50" />
+       </admin:formrow>
+	   
+	    <admin:formrow title="购买VIP获得" tip="购买VIP获得{$config.jifen_name_nv}/{$config.jifen_name}（固定值）"  >
+       <admin:text name="buy_vip_jifen"  value="{$info.buy_vip_jifen}" len="50" />
+       </admin:formrow>
+	   
+	   <admin:formrow title="充值获得" tip="充值获得{$config.jifen_name_nv}/{$config.jifen_name}（充值{$config.money_name}的%）"  >
+       <admin:text name="buy_cz_jifen"  value="{$info.buy_cz_jifen}" len="50" />
+       </admin:formrow>
+	   
+	    <admin:formrow title="被关注得{$config.jifen_name_nv}（女)" tip="被关注获得{$config.jifen_name_nv}（女）（固定值）"  >
+       <admin:text name="gz_jifen_nv"  value="{$info.gz_jifen_nv}" len="50" />
+       </admin:formrow>
+	   
+	     <admin:formrow title="邀请好友(男)" tip="邀请好友获得{$config.jifen_name}(男)（固定值）"  >
+       <admin:text name="gz_jifen"  value="{$info.gz_jifen}" len="50" />
+       </admin:formrow>
+	   
+       
+       
+	 
+       
+	   
+	     <h3>{$config.money_name}获得</h3>	 
+		 <admin:formrow title="注册赠送" tip="注册赠送{$config.money_name}（固定值）"  >
+       <admin:text name="reg_send"  value="{$info.reg_send}" len="50" />
+       </admin:formrow>
+	<admin:formrow title="上传公开照获得" tip="每天上传一张公开照获得{$config.money_name}（固定值）"  >
+       <admin:text name="up_photo_gk"  value="{$info.up_photo_gk}" len="50" />
+       </admin:formrow>
+	<admin:formrow title="公开照前N张上传" tip="每天上传公开照的前N张才有给{$config.money_name}，超过此设置不给钱（固定值）"  >
+       <admin:text name="up_photo_gk_num"  value="{$info.up_photo_gk_num}" len="50" />
+       </admin:formrow>
+	   
+	   <admin:formrow title="上传私密照获得(女)" tip="每天上传一张私密照获得{$config.money_name}（固定值）"  >
+       <admin:text name="up_photo_sm"  value="{$info.up_photo_sm}" len="50" />
+       </admin:formrow>
+	<admin:formrow title="私密照前N张上传(女)" tip="每天上传私密照的前N张才有给{$config.money_name}，超过此设置不给钱（固定值）"  >
+       <admin:text name="up_photo_sm_num"  value="{$info.up_photo_sm_num}" len="50" />
+       </admin:formrow>
+	   
+	    <admin:formrow title="邀请好友" tip="邀请好友获得{$config.money_name}（固定值，多级好友使用逗号隔开，如设置为：500,400,300,200,100。则你邀请一级粉丝获得500，二级粉丝获得400，三级获得300……）"  >
+       <admin:text name="gz_money"  value="{$info.gz_money}" len="50" />
+       </admin:formrow>
+	   
+	    <admin:formrow title="邀请好友购买vip" tip="邀请好友第一次购买vip获得{$config.money_name}返利（百分比%，多级好友使用逗号隔开）"  >
+       <admin:text name="gz_money_vip"  value="{$info.gz_money_vip}" len="50" /> %
+       </admin:formrow>
+	   
+	    <admin:formrow title="邀请好友充值" tip="邀请好友每次充值后获得{$config.money_name}返利（充值{$config.money_name}%，多级好友使用逗号隔开）"  >
+       <admin:text name="gz_money_cz"  value="{$info.gz_money_cz}" len="50" /> %
+       </admin:formrow>
+	   
+	     <admin:formrow title="送礼默认返利（女）" tip="礼物没有设置返利点值则按照此设置（礼物金额的%)"  >
+       <admin:text name="gift_fld_nv"  value="{$info.gift_fld_nv}" len="50" />
+       </admin:formrow>
+	   
+     <admin:formrow title="聊天返利（女）" tip="单条聊天记录金额的百分比（%)。当前聊天单条金额设置为：{$info.lt_zc_money}"  >
+       <admin:text name="lt_fld_nv"  value="{$info.lt_fld_nv}" len="50" />
+       </admin:formrow>
+       
+      <admin:formrow title="查看私密相册默认" tip="男查看女私密相册需要支付{$config.money_name}(男)（固定值）"  >
+       <admin:text name="sphoto_default"  value="{$info.sphoto_default}" len="50" />
+       </admin:formrow>
+       
+       <admin:formrow title="查看私密照返利%（女）" tip="当男方付费查看女方私密照，女获得的{$config.money_name}返利"  >
+       <admin:text name="sphoto_fld_nv"  value="{$info.sphoto_fld_nv}" len="50" />
+       </admin:formrow>
+       
+     <h3>{$config.money_name}支出</h3>
+	 
+	    <admin:formrow title="聊天支付" tip="男和女聊天每条聊天需要支付N{$config.money_name}(男)（固定值）"  >
+       <admin:text name="lt_zc_money"  value="{$info.lt_zc_money}" len="50" />
+       </admin:formrow>
+	   
+	   
+	 
+    <admin:formsubmit/>
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base', function() {
+	$('#form').duxForm();
+});
+</script> 

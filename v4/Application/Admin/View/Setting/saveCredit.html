@@ -1,0 +1,51 @@
+<h3>修改/添加设置</h3>
+
+<admin:form url="{:U()}" method="post" id="form">
+  <div class="g-main-body">
+    <include file="header" />
+  
+  
+  
+  
+    <div class=" m-form-horizontal">
+  
+      <admin:panel >
+        <a class="u-btn u-btn-primary  u-btn-small" href="{:U('credit',array('type'=>$type))}">设置列表</a>
+        <if condition="!$type">
+      <admin:formrow title="充值钱数" tip="用户充值钱数"  >
+        <admin:text name="money" value="{$info.money}"   width="small" />
+       </admin:formrow>
+       
+        <admin:formrow title="赠送钱数" tip="充值赠送钱数"  >
+        <admin:text name="zmoney" value="{$info.zmoney}"  datatype="n"  width="small" />
+       </admin:formrow>
+   
+          <else/>
+            <admin:formrow title="vip天数" tip="用户购买vip天数"  >
+        <admin:text name="day" value="{$info.day}"  datatype="n"  width="small" />
+       </admin:formrow>
+        <admin:formrow title="原价" tip="vip原价"  >
+        <admin:text name="original" value="{$info.original}"  datatype="n"  width="small" />
+       </admin:formrow>
+         <admin:formrow title="现价" tip="vip现价"  >
+        <admin:text name="price" value="{$info.price}"    width="small" />
+       </admin:formrow>
+            </if>
+        <admin:formsubmit/>
+      </admin:panel>
+    </div>
+
+    
+  
+  </div>
+  <admin:text name="type" type="hidden" value="{$type}" />
+  <admin:text name="id" type="hidden" value="{$info.id}" />
+</admin:form>
+<script>
+Do.ready('base', function () {
+    //表单综合处理
+    $('#form').duxFormPage();
+    
+    })
+
+</script>

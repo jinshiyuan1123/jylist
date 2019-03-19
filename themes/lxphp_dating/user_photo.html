@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>{$media.title}</title>
+<link rel="stylesheet" type="text/css" href="css/css.css">
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+
+</head>
+<style type="text/css">
+       .fx_header {
+              position: fixed;
+              top: 0px;
+                }
+  </style>
+
+<body>
+
+  
+  <div class="hd_main">
+  <div style="height:40px;display:none ;" class="appdiv fx_header_new"></div>
+  <!--#include file="app_share.html"-->
+     <div class="siliao_header">
+         我的相册
+         <div class="fl" id="ddd" onclick="history.go(-1);" ><img src="images/zuojian.png"  style="width:11px;">返回</div>
+         <a href="{:U('UpPhoto')}"  class="fr"><img src="images/shangchuan.png" style="width: 25px;    padding-right: 0px;"></a>
+      </div>
+
+      <div class="wodexiangce">
+        <div class="fl">
+        	<a href="{:U('Home/User/photolist',array('phototype' => 1 ))}" class="w_dengyu_h"><img src="{$sinfo|default='__PUBLIC__/img/pic-none.png'}" ></a>
+        	<span class="wodexiangce_shizhi">设置</span>
+        	<p class="cb"><span class="fl">私密照相册</span><span class="fr">{$sphoto}</span></p>
+        </div>
+        
+        
+        <div class="fr">
+          <a href="{:U('Home/User/photolist',array('phototype' => 0 ))}" class="w_dengyu_h"><img src="{$cinfo|default='__PUBLIC__/img/pic-none.png'}" ><p class="cb"><span class="fl">公开相册</span><span class="fr">{$cphoto}</span></p></a></div>
+      </div>
+     <script type="text/javascript">
+     //设置图片正方形
+      var img_width  = $(".w_dengyu_h img").width();
+      var img_higdt = img_width;
+      $(".w_dengyu_h img").css("height",img_higdt)
+      </script>
+
+
+	   <!--#include file="footer.html"-->
+
+
+       <div class="heipin heipin1"></div>
+       <div class="wodexiangce_shangchun">
+         <p class="simi_xc">私密照谁能看见<span>（任一满足即可查看）</span></p>
+         <div class="kuangkuang">
+           <div>亲密度：<input type="text" name="qmd" value="{$photo_config.0}"  placeholder="设置可看私密照(不填默认{$config['check_simi_moren']})"></div>
+           <div>{$config.money_name}：<input type="text" name="jifen"  value="{$photo_config.1}"  placeholder="花费多少可看（不填则默认{$config['sphoto_default']}）"></div>
+         </div>
+		 <!--{if condition="$uinfo.sex eq 2"}-->
+         <p style="margin-top: 7px;">&nbsp;*设置{$config.money_name}：可获{$config.sphoto_fld_nv}%返利</p>
+		 <!--{/if}-->
+         <div style="margin-top: 10px;" class="kuangkuang_kaiguan">
+            <a href="javascript:;" class="guangbi_be">取消</a><a href="javascript:addPhotoConfig();">保存</a>
+         </div>
+
+
+       </div>
+        
+    
+	  
+	  
+	  
+	  
+<script type="text/javascript">
+      $(".wodexiangce_shizhi").click(function(){
+        $(".heipin").show();
+
+        $(".wodexiangce_shangchun").slideToggle(500);
+      })
+       $(".guangbi_be").click(function(){
+        $(".heipin").hide();
+        $(".wodexiangce_shangchun").slideToggle(500);
+        
+     
+      })
+     
+      function addPhotoConfig(){
+    	  var qmd  = $('input[name="qmd"]').val();
+    	  var jifen  = $('input[name="jifen"]').val();
+    	  var o = $(".guangbi_be");
+    	 	if(qmd==''&&jifen==''){
+    	 		o.click(); 
+    			alertmsg('请填写完整！');
+    		 	return false;
+    	 	}
+    	 	
+    	  if(qmd=='{$photo_config.0}'&&jifen=='{$photo_config.1}'){
+    		  o.click(); 
+    		  return false;
+    	  }
+    	 	
+    	  $.post('{:U("setPhotoConfig")}',{qmd:qmd,jifen:jifen},function(data){
+    		  if(data.status == 1){
+    		    o.click(); 
+    		  }else{
+    		    alertmsg(data.msg);
+    		  }   		   
+    	  },'json');	  
+      }
+     
+      
+</script>
+
+
+
+</body>
+
+</html>

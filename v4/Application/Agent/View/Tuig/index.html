@@ -1,0 +1,43 @@
+<h3>{$name}列表</h3>
+<style type="text/css">
+#tuiguang{width:98%;overflow:hidden;}
+#tuiguang img{max-width:210px; width:80%}
+</style>
+<admin:panel >
+	<div id="tuiguang">
+		<h5>我的专属推广链接	:</h5>
+		<p><a herf="javascript:;">{$url}</a></p>
+		<h5>我的专属推广二维码:	</h5>
+		<p><img src="{$ewmimg}" /></p>
+	</div>
+
+  <admin:tablefoot action="false" />
+</admin:panel>
+<script type="text/javascript" charset="utf-8">
+	Do.ready('base',function() {
+		//移动操作
+		$('#selectAction').change(function() {
+			var type = $(this).val();
+			if(type == 3){
+				$(this).after($('#class_id').clone());
+			}else{
+				$(this).nextAll('select').hide();
+			}
+		});
+		//表格处理
+		$('#table').duxTable({
+			actionUrl : "{:U('batchAction')}",
+			deleteUrl: "{:U('del')}",
+			actionParameter : function(){
+				return {'class_id' : $('#selectAction').next('#class_id').val()};
+			}
+		});
+	});
+	
+	
+</script>
+
+
+
+
+

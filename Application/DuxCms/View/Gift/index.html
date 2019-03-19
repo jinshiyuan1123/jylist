@@ -1,0 +1,30 @@
+<h3>虚拟礼物列表</h3>
+<admin:panel >
+  <admin:table id="table" show="编号,名称|250,图片|180,价格({$config.money_name}),返利点（女）,{$config.jifen_name}/{$config.jifen_name_nv},亲密度,上架状态,创建时间,操作|120"  class="m-table-border">
+    <foreach name="list" item="vo">
+      <tr>
+      	<td>{$vo.gift_id}</td>
+        <td>{$vo.gift_name}</td>
+        <td><img src="{$vo.images}" style="width: 90px;height: 60px;border: none;" /></td>
+        <td>{$vo.price}</td>
+        <td>{$vo.rebate}</td>
+        <td>{$vo.jifen}</td>
+        <td>{$vo.qmd}</td>
+        <td><if condition="$vo['status'] eq 0"> <span style="color: red;">已下架</span> <else /> <span style="color: darkgreen">上架中</span> </if></td>
+        <td>{$vo.create_time|date="Y-m-d H:i:s",###}</td>
+        <td>
+	        <a class="u-btn u-btn-primary u-btn-small"     href="{:U('edit',array('gift_id'=>$vo['gift_id']))}">修改</a>
+	        <a class="u-btn u-btn-danger  u-btn-small del" href="javascript:;" data="{$vo.gift_id}" >删除</a>        	
+        </td>
+      </tr>
+    </foreach>
+  </admin:table>
+  <admin:tablefoot  />
+</admin:panel>
+<script>
+Do.ready('base',function() {
+	$('#table').duxTable({
+		deleteUrl: "{:U('del')}",
+	});
+});
+</script> 

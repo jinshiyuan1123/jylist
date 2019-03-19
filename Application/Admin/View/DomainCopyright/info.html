@@ -1,0 +1,24 @@
+<h3>{$name}用户</h3>
+<admin:panel >
+  <admin:form url="{:U()}" method="post" id="form"  class="m-form-horizontal" >
+    <admin:formrow title="域名" tip="网站域名"  >
+      <admin:text name="domain"  value="{$info.domain}" len="20" datatype="*"  />
+    </admin:formrow>
+    <admin:formrow title="IP" tip="网站IP"  >
+      <admin:text name="ip"  value="{$info.ip}" len="250" datatype="*"  />
+    </admin:formrow>
+    <admin:formrow title="QQ" tip="用户QQ"  >
+      <admin:text name="qq" value="{$info.qq}" len="250" datatype="*" />
+    </admin:formrow>
+	<admin:formrow title="手机" tip="用户手机"  >
+      <admin:text name="mobile" value="{$info.mobile}" len="250" datatype="*" />
+    </admin:formrow>
+    <admin:formsubmit/>
+    <admin:text name="id" type="hidden"  value="{$info.id}"  />
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base',function() {
+	$('#form').duxForm();
+});
+</script> 

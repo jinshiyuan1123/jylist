@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head id="head">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0;minimum-scale=1.0; maximum-scale=1.0; user-scalable=yes;">
+    <title>{$config.site_title}</title>
+    <meta content="{$config.site_title}" name="description">
+    <meta content="{$config.site_title}下载" name="keywords">
+    <link href="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/css/index.css" rel="stylesheet" type="text/css">
+    <link type="text/css" rel="stylesheet" href="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/css/layer.css" id="skinlayercss">
+    <script src="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/css/jquery-1.7.2.min.js"></script>
+    <link type="image/x-icon" rel="shortcut icon" href="http://www.bangbbs.com/AppSite/0020/favicon.ico">
+
+    </head>
+    <body>
+<!--微信qq提示-->
+<div class="abodytips" id="alltip" style="display: none;">
+      <div class="tips_center"><img src="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/Images/androidtips.png" id="androidtips" style="display:none;"><img src="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/Images/iostips.png" id="iostips"><img src="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/Images/tip2.png" id="tips3" style="display:none;"></div>
+      <div class="tips_bottom">
+    <div class="tips_bottom_2"><a href="javascript:;" id="iknown"><img src="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/Images/zhi.png"></a></div>
+  </div>
+    </div>
+<!--微信qq提示-->
+<div class="shanshan">
+<div class="xiazai_top">
+      <div class="xiazai_top_xq">
+    <div class="tubao_ming"> <img src="__PUBLIC__/img/logo.jpg"><span>{$config.site_title}</span></div>
+    <div class="banben_m"> 版本号：2.0.0            应用介绍：{$config.site_subtitle}</div>
+    <div style="clear: both"> </div>
+  </div>
+    </div>
+<div class="xiazai_center">
+      <div class="xiazai_center_nav">
+    <div class="xiazai_shouji"> <img src="__PUBLIC__/img/default.png"></div>
+    <div class="xiazai_xuanze">
+          <h2> <img src="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/Images/xz_1.png"></h2>
+          <div class="xiazai_xuanze_sj">
+        <div class="xiazai_xuanze_sj_zuo"> </div>
+        <div class="xiazai_xuanze_sj_you">
+              <div class="btn-wrap">
+            <div class="wrap"> <a class="btn-ios" id="download_android" href="{$config.app_url2}"  target="_blank"><i class="icon-clitw ictw-ios"></i><span>iPhone版下载</span> <em>版本：2.0.0</em> </a><a id="download_ios" class="btn-android" href="{$config.app_url}" target="_blank"><i class="icon-clitw ictw-android"></i><span>Android版下载</span> <em>版本：2.0.0</em> </a> </div>
+            
+          </div>
+            </div>
+        <div style="clear: both"> </div>
+      </div>
+        </div>
+    <div style="clear: both"> </div>
+  </div>
+    </div>
+<div class="xiazai_jieshao">
+      <h3> <img src="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/Images/xz_3.png"></h3>
+      <ul>
+    <li> <img src="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/Images/xz_a.png">
+          <p> <span>一键生成</span><br>
+        一个网址就能生成一个应用</p>
+        </li>
+    <li> <img src="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/Images/xz_b.png">
+          <p> <span>功能自选</span><br>
+        多功能供用户进行选择和配置</p>
+        </li>
+    <li> <img src="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/Images/xz_c.png">
+          <p> <span>兼容多屏</span><br>
+        应用可兼容各种型号的手机</p>
+        </li>
+    <li style="margin-right: 0px;"> <img src="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/Images/xz_d.png">
+          <p> <span>开放式开发</span><br>
+        更开放更快速更完美</p>
+        </li>
+    <div style="clear: both"> </div>
+  </ul>
+    </div>
+<div class="shuru_xian" style="margin-top: 92px; margin-bottom: 0px;"></div>
+<div class="footer">
+      <div class="footer_nav">
+    <div class="footer_zuo">
+          <h3> 联系</h3>
+          <ul>
+        <li><a href="http://bbs.52jscn.com" target="_blank">联系我们</a></li>
+      </ul>
+       
+        
+        </div>  
+    <div style="clear: both"> </div>
+  </div>
+    </div>
+</div>
+   
+    
+    
+<div class="Download_content">
+      <div class="tubiao"> <img src="__PUBLIC__/img/logo.jpg">
+    <p class="dns">{$config.site_title}</p>
+    <p class="banben">版本号：2.0.0</p>
+  </div>
+      <div class="fenlsid"> <a href="{$config.app_url2}" >
+        <div class="fenlsid_ios"><img src="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/Images/ios.png">
+        <div class="ios_2">
+            <p class="iphone">iPhone版下载</p>
+            <p class="size">大小：15.22M</p>
+          </div>
+        <div style="clear:both"></div>
+      </div>
+        </a> <a href="{$config.app_url}">
+        <div class="fenlsid_and"><img src="themes/<?php echo C('TPL_NAME'); ?>/appxiazai/Images/and.png">
+          <div class="and_2">
+            <p class="and">Andriod版下载</p>
+            <p class="size2">大小：3.77M</p>
+          </div>
+          <div style="clear:both"></div>
+        </div>
+        </a> </div>
+      <div class="miaoshu">
+   
+  </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+
+<!--{if condition="!$list" }-->	
+	<li class="cb zanwu"></li>
+<!--{else /}-->		
+	<!--{foreach name="list" item="vo"  key="key" }-->
+		<li class="cb">
+		    <div class="fl"><p class="vip_chouzhiqulu">{$vo.info}</p><p class="vip_date">{$vo.time|date="Y-m-d",###}</p></div>
+		    <div class="fr vip_money">{$vo.status}</div>
+		</li>
+	<!--{/foreach}-->
+<!--{/if}-->	
+<script type="text/javascript" src="js/common.js"></script>
+<script>
+	zhuanwu();
+</script>

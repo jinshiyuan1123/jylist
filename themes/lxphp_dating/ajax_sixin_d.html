@@ -1,0 +1,16 @@
+<!--{if condition="$list"}-->
+	<!--{foreach name="list" item="vo" }-->
+	<li class="cb">
+		<div class="fl"><img src="__PUBLIC__/img/morentouxian_03.jpg" alt=""></div>
+		<div class="fl">
+			<p class="huiyuan">{$vo.type}<i>{$vo.time|date="m-d H:i",###}</i></p>
+			<p class="sixin_pl_b">{$vo.msg_content}
+				<!--{if condition="$idsinfo[$vo['touid']]['user_nicename']"}-->(<a href="{:U('Home/Show/index',array('uid'=>$idsinfo[$vo['touid']]['idmd5']))}">{$idsinfo[$vo['touid']]['user_nicename']}</a>)
+				<!--{/if}-->
+			</p>
+		</div>
+	</li>
+	<!--{/foreach}-->
+<!--{else/}-->
+	<li class="cb zanwu"></li>
+<!--{/if}-->

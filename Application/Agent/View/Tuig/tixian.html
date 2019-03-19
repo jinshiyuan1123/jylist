@@ -1,0 +1,239 @@
+<script type="text/javascript" src="/themes/lxphp_dating/js/common.js"></script>
+<style type="text/css">
+	.tixianqundao a.hot {
+		border: 2px solid #f03b57;
+		padding: 5px;
+	}
+	.tixianqundao a {
+		border: 2px solid #fff;
+		border-radius: 5px;
+		display: block;
+		float: left;
+		margin-right: 42px;
+		overflow: hidden;
+		padding: 5px;
+		position: relative;
+		text-align: center;
+		color: #666;
+		text-decoration: none;
+	}
+	.huaifei{
+		width:300px;
+		height:130px;
+		clear:both;
+	}
+	.huaifei ul li {
+		border: 1px solid #8f8f8f;
+		border-radius: 3px;
+		color: #000;
+		float: left;
+		font-size: 12px;
+		height: 33px;
+		line-height: 35px;
+		margin-right: 4%;
+		margin-top: 10px;
+		text-align: center;
+		width: 30%;
+	}
+
+	ol, ul, li {
+		list-style: outside none none;
+	}
+
+	.huaifei ul li.hot {
+		background: rgba(0, 0, 0, 0) url("/themes/lxphp_dating/images/hot.png") no-repeat scroll -1px -1px / 20px 20px;
+		border: 1px solid #f03b57;
+	}
+
+	.input_button_new {
+		background: #f03b57 none repeat scroll 0 0;
+		border: medium none;
+		border-radius: 5px;
+		color: #fff;
+		display: block;
+		font-family: "微软雅黑";
+		font-size: 16px;
+		height: 45px;
+		line-height: 45px;
+		margin-bottom: 15px;
+		margin-top: 30px;
+		outline: medium none;
+		text-align: center;
+		width: 40%;
+		
+	}
+</style>
+<h3>申请提现</h3>
+<admin:panel >
+  <admin:table id="table" show="主题,内容">
+   
+      <tr>
+        <td>
+        余额: 
+        </td>
+        <td><span>{$info.tmoney|default="0"}</span> 元</td>
+      </tr>
+      <tr>
+        <td>
+        	最低提现金额:
+        </td>
+        <td><span>{$config.tx_qt_money}</span>元(1元={$config.moneyBL}{$config.money_name})</td>
+      </tr>
+	  <tr>
+        <td>
+        	提现方式:
+        </td>
+        <td>
+			<div class="tixianqundao">
+				<if condition="$config['open_tx_wx'] eq 1">
+				<a data="1"><img src="/themes/lxphp_dating/images/wxzf.png" alt=""></a>
+				</if>
+			</div>
+		</td>
+      </tr>
+	  <tr>	
+	    <td>&nbsp;</td>
+        <td>
+        	
+			<!-- 切换 -->
+			<div>
+				<if condition="$config['open_tx_wx'] eq 1">
+				<div class="tixianqundao_nav" style="display:none">
+					<p class="tishi1">系统会自动发红包到您的微信，请注意查收</p>
+					<input type="text" id="dog1" name="money" class="form-element input_tixian" placeholder="可提现金额{$info.tmoney}元">
+					<input type="button"   class="input_button_new mtb10" onclick="tixian(1)" value="申请提现">
+				</div>
+				</if>
+				<!--
+				<if condition="$config['open_tx_zfb'] eq 1">
+				<div class="tixianqundao_nav" style="display:none">
+					<p class="tishi1">请正确填写支付宝账号，避免提现出现问题</p>
+					<input type="text"  class="form-element input_tixian" name="zfb_account" value="{$zfbInfo.zfb_account}" placeholder="请输入支付宝账号">
+					<input type="text"  class="form-element input_tixian mt10" name="zfb_lxr" value="{$zfbInfo.zfb_lxr}" placeholder="请输入收款人姓名">
+					<input type="text"   class="form-element input_tixian mt10" name="zfb_money" placeholder="可提现金额{$info.tmoney}元">
+					<input type="button" class="input_button_new mtb10" onclick="tixian(2)" value="申请提现">
+				</div>
+				</if>
+				
+				<if condition="$config['open_tx_hf'] eq 1">
+				<div class="tixianqundao_nav" style="display:none">
+					<p class="tishi1">请正确填写手机号码，避免话费充值出现问题</p>
+					<input type="text" class="form-element input_tixian" name="mob" value="{$MobInfo}" placeholder="请输入需要充值的手机号码">
+					<div class="huaifei">
+						<ul class="cb">
+							<li class="hot" data="30"><span>30</span>元</li>
+							<li data="50"><span>50</span>元</li>
+							<li data="100"><span>100</span>元</li>
+							<li data="200"><span>200</span>元</li>
+							<li data="300"><span>300</span>元</li>
+							<li data="500"><span>500</span>元</li>
+						</ul>
+					</div>
+					<input type="button" class="input_button_new mtb10" onclick="tixian(3)" value="充值话费">
+				</div>
+				</if>
+				-->
+			</div>
+			<!-- 切换 -->
+
+        </td>
+      </tr>
+ 
+  </admin:table>
+  <admin:tablefoot action="false" />
+</admin:panel>
+<script type="text/javascript">
+	$(".tixianqundao a").click(function() {
+		var index = $(this).index();
+		$(".tixianqundao a").removeClass("hot").eq(index).addClass("hot");
+		$(".tixianqundao_nav").hide().eq(index).show();
+		$('input[name="type"]').val($(this).attr('data'));
+	})
+
+	$(".huaifei ul li").click(function() {
+		var index = $(this).index();
+		$(".huaifei ul li").removeClass("hot").eq(index).addClass("hot");
+	})
+	
+	$(function(){
+		$(".tixianqundao a").eq(0).addClass("hot");
+		
+		$('.tixianqundao_nav').eq(0).css('display','block');
+		
+	})
+
+	function tixian(type){
+		var cantx = Number('{$info.money|default = "0"}'); //用户能提现的金额(钱包里的钱) 
+		var menkan = Number('{$config.tx_qt_money}'); //提现的最低门槛
+		var o_money = $('.tixianyuer span');
+		var b_money = Number('{$config.moneyBL}');
+
+		var data = {type:type};
+		if(type==0){
+			alert('请选择提现方式！');
+			return false;
+		}
+
+		switch(type){
+		  case 1:
+		  var money = parseInt($('input[name="money"]').val()); //用户想提现的金额
+		   break;
+		   case 2:
+		   var money = parseInt($('input[name="zfb_money"]').val()); //用户想提现的金额
+		   var zfb_account = $('input[name="zfb_account"]').val();
+		   var zfb_lxr = $('input[name="zfb_lxr"]').val();
+		   if(zfb_account==""||zfb_account==null){
+			   alert('请输入支付宝账号');
+			   return false;
+		   }
+		   if(zfb_lxr==""||zfb_lxr==null){
+				 alert('请输入收款人');
+			   return false;
+		   }
+		   data.zfb_account = zfb_account;
+		   data.zfb_lxr = zfb_lxr;
+		   break;
+		   case 3:
+		   var money = parseInt($('.huaifei ul li.hot').attr('data'));
+		   var mob = $('input[name="mob"]').val();
+		   if(mob==""||mob==null){
+			 alert('请输入手机号码');
+			   return false;
+		   }
+		   if(!isDigit(mob)) {
+				alert('请输入正确手机号');
+				return false;
+			} 
+		   data.mob = mob;
+		   break;
+		}
+		data.money = money;
+
+		 if(money >= menkan){  // 能提现的金额大于想提现的金额					
+			if(money > cantx){
+					alert("您的余额不足");
+					return false;
+				}
+				setDisabled($(".input_button_new"),'提交中');
+
+					$.ajax({
+						type:"post",
+						url:"{:U('Home/User/tixian')}",
+						data:data,
+						dataType:"json",
+						success:function(data){
+							unDisabled($('.input_button_new'),'申请提现');
+							if(data.status==1){
+							var ye = cantx -(money*b_money);
+							o_money.text(ye);
+							}
+							alert(data.info);
+							//window.location.href="{:U('Home/User/tixian')}";
+						}
+					});
+			}else{
+				alert("提现金额必须大于起提金额"+ menkan +"元");
+				return false;											
+			}
+	}
+</script>

@@ -1,0 +1,46 @@
+<h3>{$name}列表</h3>
+<admin:panel >	
+	<admin:tabletool filter="true" keyword="{$pageMaps.keyword}">
+		<input type="hidden" name="keyword" value="{$pageMaps.keyword}" />
+			
+  	</admin:tabletool>
+
+	<admin:table id="table" show="编号,类型,内容,快捷键,添加时间,操作" class="m-table-border">
+		<foreach name="list" item="vo">
+			<tr>	
+				<td>{$vo.id}</td>
+				<td><if condition="$vo['type'] eq 0" >公有
+					<elseif condition="$vo['type'] eq 1" />私有
+					</if></td>
+				<td>{$vo.content}</td>
+				<td>{$vo.kj_set}</td>
+				<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+				<td>
+				 <a class="u-btn u-btn-primary  u-btn-small" href="{:U('addReply',array('id'=>$vo['id']))}">修改</a>
+		         <a class="u-btn u-btn-danger  u-btn-small del" href="javascript:;" data="{$vo.id}">删除</a>
+				</td>
+			</tr>
+		</foreach>
+	</admin:table >
+	<admin:tablefoot />
+</admin:panel>
+
+
+<script>
+	Do.ready('base',function() {
+		//左下角的选择操作      
+		$('#selectAction').change(function() {
+			var type = $(this).val();
+		});
+		
+		$('#table').duxTable({
+//			actionUrl: "{:U('Admin/Audit/batchAction')}", //批量操作
+			deleteUrl: "{:U('delReply')}", //单条删除
+			actionParameter: function() {
+				return {
+					'class_id': $('#selectAction').next('#class_id').val()
+				};
+			}
+		});
+	});
+</script>

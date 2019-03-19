@@ -1,0 +1,25 @@
+<h1>佣金提成设置</h1>
+<admin:panel >
+  <admin:form url="{:U('Admin/Tuig/tichensetting')}" method="post" id="form" class="m-form-horizontal" >
+	<h3>提成(以人民币结算，单位:元)</h3>	 
+	<admin:formrow title="邀请注册(固定值)" tip="被邀请者注册成功后，可获得金钱（固定值，多级好友使用逗号隔开，如设置为：30,20,10。则你邀请一级粉丝获得30，二级粉丝获得20，三级获得10……）"  >
+	<admin:text name="gz_money"  value="{$info.gz_money}" len="50" />
+	</admin:formrow>
+
+	<admin:formrow title="购买VIP(百分比)" tip="被邀请者第一次购买vip获得提成(元)（百分比，多级好友使用逗号隔开）"  >
+	<admin:text name="gz_money_vip"  value="{$info.gz_money_vip}" len="50" width="mini" />%
+	</admin:formrow>
+
+	<admin:formrow title="聊币充值(百分比)" tip="被邀请者每次充值后获得{$config.money_name}返利（充值{$config.money_name}%，多级好友使用逗号隔开）"  >
+	<admin:text name="gz_money_cz"  value="{$info.gz_money_cz}" len="50" width="mini" /> %
+	</admin:formrow>
+	 
+    <admin:formsubmit/>
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base', function() {
+	$('#form').duxForm();
+});
+</script> 
+

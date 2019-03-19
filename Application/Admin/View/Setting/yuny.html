@@ -1,0 +1,122 @@
+<h3>运营设置</h3>
+<admin:panel >
+  <admin:form url="{:U('site')}" method="post" id="form" class="m-form-horizontal" >
+  
+    <admin:formrow title="只在微信内打开" tip="是否只允许前台网站只在微信内打开" >
+     <admin:radio name="onlywx"  item="是,否" value="1,0" checked="$info['onlywx']" />
+    </admin:formrow>
+	
+ <admin:formrow title="下级好友称呼" tip="下级好友称呼,默认(粉丝)"  >
+       <admin:text name="fansName"  value="{$info.fansName}" len="50" />
+       </admin:formrow> 
+  
+        <admin:formrow title="男性积分名称" tip="积分名称,默认(财富值)"  >
+       <admin:text name="jifen_name"  value="{$info.jifen_name}" len="50" />
+       </admin:formrow> 
+	   <admin:formrow title="女性积分名称" tip="积分名称,默认(魅力值)"  >
+       <admin:text name="jifen_name_nv"  value="{$info.jifen_name_nv}" len="50" />
+       </admin:formrow>
+       
+       <admin:formrow title="金钱名称" tip="金钱名称,默认(消费点)"  >
+       <admin:text name="money_name"  value="{$info.money_name}" len="50" />
+       </admin:formrow>
+       
+       <admin:formrow title="{$info.money_name}比例  " tip="设置{$info.money_name}比例  列如 1:1000 则 1元=1000{$info.money_name}"  >
+       1：<admin:text name="moneyBL"  value="{$info.moneyBL}" len="50" />
+       </admin:formrow>
+	   
+	     <admin:formrow title="VIP购买礼物折扣 " tip="如果会员是VIP，则购买礼物可享受折扣，没优惠则写10折"  >
+      <admin:text name="vipgiftzhe"  value="{$info.vipgiftzhe}" len="50" />
+       </admin:formrow>
+	   
+	   
+	    <admin:formrow title="新手任务 " tip="新手任务上传头像任务获得{$info.money_name}"  >
+      <admin:text name="newbe1"  value="{$info.newbe1}" len="50" />
+       </admin:formrow>
+	   
+	    <admin:formrow title="新手任务 " tip="新手任务完善资料任务获得{$info.money_name}"  >
+      <admin:text name="newbe2"  value="{$info.newbe2}" len="50" />
+       </admin:formrow>
+	   	   
+	   
+	   
+	    <admin:formrow title="VIP签到 " tip="VIP签到{$info.money_name}多+以上固定值"  >
+      <admin:text name="vipqd"  value="{$info.vipqd}" len="50" />
+       </admin:formrow>
+	   
+	   
+	   <admin:formrow title="非VIP聊天人 " tip="男，非VIP聊天人数限制（默认100），VIP不限制"  >
+      <admin:text name="viltren"  value="{$info.viltren}" len="50" />
+       </admin:formrow>
+	   
+	    <admin:formrow title="非VIP聊天条数 " tip="男，非VIP和单人的总（双方。）聊天条数（默认1000），VIP不限制"  >
+      <admin:text name="viltnum"  value="{$info.viltnum}" len="50" />
+       </admin:formrow>
+       
+         <admin:formrow title="非VIP打招呼数 " tip="男，非VIP打招呼人数限制（默认100），VIP不限制"  >
+      <admin:text name="viltda"  value="{$info.viltda}" len="50" />
+       </admin:formrow>
+       
+       	   <admin:formrow title="VIP邀请好友 " tip="VIP邀请好友{$info.money_name}多+以上固定值(只有上级).0关闭"  >
+      <admin:text name="vipyq"  value="{$info.vipyq}" len="50" />
+       </admin:formrow>
+       
+       
+        <admin:formrow title="审核昵称" tip="用户修改昵称是否需要后台审核"  >
+         <admin:radio name="nickname_flag"  item="是,否" value="1,0" checked="$info['nickname_flag']" />
+       </admin:formrow>
+       
+        <admin:formrow title="审核头像" tip="用户设置头像是否需要后台审核"  >
+         <admin:radio name="avatar_flag"  item="是,否" value="1,0" checked="$info['avatar_flag']" />
+       </admin:formrow>
+       
+          <admin:formrow title="内心独白审核" tip="用户填写内心独白是否需要后台审核"  >
+         <admin:radio name="monolog_flag"  item="是,否" value="1,0" checked="$info['monolog_flag']" />
+       </admin:formrow>
+        <admin:formrow title="相册审核" tip="上传照片是否需要后台审核，关闭，则上传后前台直接显示。"  >
+         <admin:radio name="photo_flag"  item="开启,关闭" value="1,0" checked="$info['photo_flag']" />
+       </admin:formrow>
+       
+           <admin:formrow title="评论审核" tip="评论照片的内容是否需要后台审核"  >
+         <admin:radio name="comment_flag"  item="是,否" value="1,0" checked="$info['comment_flag']" />
+       </admin:formrow>
+       
+       
+        <admin:formrow title="签到设置" tip="签到设置，0表示关闭，多个请用,号隔开，例如 :20,40,60,80,90,100,120 表示连续签到 1天送20金币，2天送40,3天送60..."   >
+        <admin:text name="qd_config"  value="{$info.qd_config}" />
+       </admin:formrow>
+       
+       
+        <admin:formrow title="字符过滤" tip="过滤敏感字符,用**代替，多个请用,号隔开" >
+      <admin:textarea name="string_config" rows="5" >{$info.string_config}</admin:textarea>
+    </admin:formrow>
+          
+        <admin:formrow title="照片上传随机标题" tip="上传照片随机标题，字数不可超过50个一行，多个请回车" >
+      <admin:textarea name="upPhoto_title" rows="10" width="full">{$info.upPhoto_title}</admin:textarea>
+    </admin:formrow>
+       
+       <admin:formrow title="打招呼随机" tip="打招呼随机内容，字数不可超过50个一行，多个请回车" >
+      <admin:textarea name="upPhoto_zh" rows="10" width="full">{$info.upPhoto_zh}</admin:textarea>
+    </admin:formrow>
+    
+	
+	 <admin:formrow title="内心独白随机" tip="内心独白随机内容，字数不可超过50个一行，多个请回车" >
+      <admin:textarea name="nxdbsj" rows="10" width="full">{$info.nxdbsj}</admin:textarea>
+    </admin:formrow>
+    
+    <admin:formrow title="不回复消息随机" tip="不回复消息随机内容，字数不可超过50个一行，多个请回车" >
+      <admin:textarea name="noreply" rows="10" width="full">{$info.noreply}</admin:textarea>
+    </admin:formrow>
+    
+	<admin:formrow title="马甲昵称" tip="马甲昵称按顺序，多个请回车" >
+      <admin:textarea name="name_arr" rows="10" width="full">{$info.name_arr}</admin:textarea>
+    </admin:formrow>
+    
+    <admin:formsubmit/>
+  </admin:form>
+</admin:panel>
+<script>
+Do.ready('base', function() {
+	$('#form').duxForm();
+});
+</script> 

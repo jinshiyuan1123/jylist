@@ -1,0 +1,33 @@
+<h3>{$name}系统消息</h3>
+<admin:panel >
+<admin:form url="{:U()}" method="post" id="form">
+	<div class="g-main-body">
+		<div class="g-main-content m-form-horizontal">
+			<admin:panel>
+				
+				<admin:formrow title="消息内容" tip="要发送给用户的消息内容">
+					<admin:text name="msg_content" len="250" datatype="*"  width="large" />
+				</admin:formrow>
+								
+				<admin:formrow title="用户ID" tip="接收该条信息的用户的id(身份证)">
+					<admin:text name="uid" value="{$uid}" len="250" datatype="*" width="large" />
+				</admin:formrow>
+				
+				<admin:formrow title="消息类型" tip="该消息所属的类型">				
+					<admin:radio name="msg_type" item="金额变动,其他" value="1,2" checked="$info['msg_type']" isset="2" />					
+				</admin:formrow>
+								
+				<admin:formsubmit/>
+			</admin:panel>
+		</div>
+	</div>
+	
+</admin:form>
+</admin:panel>
+<script>
+	Do.ready('base', function() {
+		//表单综合处理
+		$('#form').duxFormPage();
+		//上传缩略图		
+	});
+</script>

@@ -1,0 +1,16 @@
+<h3>签到记录列表</h3>
+<admin:panel >	
+	<admin:tabletool keyword="{$pageMaps.keyword}"></admin:tabletool>	
+	<admin:table id="table" show="编号,用户id,用户昵称,最后签到时间,连续签到天数" class="m-table-border">
+		<foreach name="list" item="vo">
+			<tr>	
+				<td>{$vo.id}</td>
+				<td>{$vo.uid}</td>
+				<td>{$niceName[$vo['uid']]}</td>
+				<td>{$vo.last_time|date="Y-m-d H:i:s",###}</td>
+				<td>{$vo.continue_days}</td>
+			</tr>
+		</foreach>
+	</admin:table >
+	<admin:tablefoot />
+</admin:panel>
